@@ -1,0 +1,497 @@
+/* 
+ * Stars Doors - Custom CSS
+ * Styles personnalisés pour la plateforme de location
+ */
+
+/* Variables CSS */
+:root {
+    --primary-color: #2c5aa0;
+    --secondary-color: #f8c146;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.5;
+    
+    --border-radius: 0.375rem;
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    
+    --transition: all 0.15s ease-in-out;
+}
+
+/* Reset et base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    color: var(--dark-color);
+    background-color: #ffffff;
+}
+
+/* Liens */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: #1e3a6f;
+    text-decoration: underline;
+}
+
+/* Boutons personnalisés */
+.btn {
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #1e3a6f;
+    border-color: #1e3a6f;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.btn-secondary:hover {
+    background-color: #e6ad3d;
+    border-color: #e6ad3d;
+    color: var(--dark-color);
+}
+
+/* Navigation */
+.navbar {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Cartes */
+.card {
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--box-shadow-lg);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    background-color: var(--light-color);
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+}
+
+/* Cartes de logements */
+.listing-card {
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.listing-image {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.listing-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.listing-card:hover .listing-image img {
+    transform: scale(1.05);
+}
+
+.listing-features {
+    font-size: 0.875rem;
+}
+
+.price {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+/* Hero section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a6f 100%);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Formulaires */
+.form-control {
+    border-radius: var(--border-radius);
+    border: 1px solid #ced4da;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+}
+
+.form-select {
+    border-radius: var(--border-radius);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Validation des formulaires */
+.was-validated .form-control:valid,
+.form-control.is-valid {
+    border-color: var(--success-color);
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    border-color: var(--danger-color);
+}
+
+/* Alertes */
+.alert {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--box-shadow);
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.75rem;
+}
+
+/* Messages flash */
+.flash-messages-container {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 350px;
+}
+
+.flash-messages-container .alert {
+    margin-bottom: 0.5rem;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Pagination */
+.pagination .page-link {
+    color: var(--primary-color);
+    border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.pagination .page-link:hover {
+    color: #1e3a6f;
+    background-color: #e9ecef;
+}
+
+/* Tables */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+footer h5,
+footer h6 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+footer .social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+footer .social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Bouton scroll to top */
+#scrollTopBtn {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Images responsives */
+.listing-main-image {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+/* Rating stars */
+.rating {
+    color: var(--warning-color);
+}
+
+.rating .fa-star-o {
+    color: #dee2e6;
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Dashboard */
+.dashboard-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.dashboard-card.success {
+    border-left-color: var(--success-color);
+}
+
+.dashboard-card.warning {
+    border-left-color: var(--warning-color);
+}
+
+.dashboard-card.danger {
+    border-left-color: var(--danger-color);
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 300px;
+        text-align: center;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .listing-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .flash-messages-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .hero-section .form-control {
+        margin-bottom: 0.5rem;
+    }
+    
+    .btn-block {
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    footer,
+    .btn,
+    #scrollTopBtn {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+    
+    a {
+        color: #000 !important;
+        text-decoration: underline;
+    }
+}
+
+/* Accessibilité */
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Focus visible pour l'accessibilité */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Styles pour les formulaires de recherche avancée */
+.search-filters {
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.search-filters .form-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+/* Styles pour les images en carousel */
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Animations subtiles */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* États de chargement */
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary-color);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

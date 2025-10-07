@@ -1,0 +1,25 @@
+# Sécurité uploads - Version simple et compatible
+
+# Désactiver l'exécution de PHP
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Bloquer les fichiers PHP
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|cgi|pl|exe|asp|aspx|shtml|shtm|fcgi|jar)$">
+    Require all denied
+</FilesMatch>
+
+# Désactiver l'affichage des dossiers
+Options -Indexes
+
+# Headers de sécurité pour les images
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+        Header set X-Content-Type-Options "nosniff"
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>

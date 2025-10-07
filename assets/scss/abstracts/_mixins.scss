@@ -1,0 +1,379 @@
+// ===================================================================
+// MIXINS SASS - STARS DOORS
+// Mixins réutilisables pour le projet
+// ===================================================================
+
+// === RESPONSIVE DESIGN ===
+// Mixin pour les media queries responsive
+@mixin media-breakpoint-up($name, $breakpoints: $breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name, $breakpoints: $breakpoints) {
+  $max: map-get($breakpoints, $name) - 0.02;
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $breakpoints) {
+  $min: map-get($breakpoints, $lower);
+  $max: map-get($breakpoints, $upper) - 0.02;
+  
+  @if $min != 0 and $max != 0 {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == 0 {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == 0 {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// === UTILITAIRES DE MISE EN FORME ===
+// Centrage flexbox
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flexbox avec direction
+@mixin flex($direction: row, $wrap: nowrap, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Grid CSS
+@mixin grid($columns: 1, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Positionnement absolu centré
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// === TYPOGRAPHIE ===
+// Mixin pour les titres
+@mixin heading($size: h2, $weight: $font-weight-bold, $line-height: 1.2) {
+  $font-sizes: (
+    h1: $h1-font-size,
+    h2: $h2-font-size,
+    h3: $h3-font-size,
+    h4: $h4-font-size,
+    h5: $h5-font-size,
+    h6: $h6-font-size
+  );
+  
+  font-size: map-get($font-sizes, $size);
+  font-weight: $weight;
+  line-height: $line-height;
+  margin-bottom: $spacer;
+}
+
+// Truncation de texte
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Texte avec nombre de lignes limité
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// === BOUTONS ===
+// Mixin pour créer des variants de boutons
+@mixin button-variant($background, $border: $background, $color: $white, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $hover-color: $color) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  transition: $transition-base;
+
+  &:hover {
+    color: $hover-color;
+    background-color: $hover-background;
+    border-color: $hover-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba($background, 0.5);
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+// Bouton avec outline
+@mixin button-outline-variant($color, $color-hover: $white, $background-hover: $color) {
+  color: $color;
+  border-color: $color;
+  background-color: transparent;
+
+  &:hover {
+    color: $color-hover;
+    background-color: $background-hover;
+    border-color: $background-hover;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
+  }
+}
+
+// === CARTES ===
+// Mixin pour les cartes
+@mixin card($padding: $card-spacer-y $card-spacer-x, $border: $card-border-width solid $card-border-color, $radius: $card-border-radius) {
+  background-color: $white;
+  border: $border;
+  border-radius: $radius;
+  padding: $padding;
+  box-shadow: $box-shadow-sm;
+  transition: $transition-base;
+}
+
+// Effet hover pour les cartes
+@mixin card-hover($shadow: $box-shadow-lg, $transform: translateY(-2px)) {
+  &:hover {
+    box-shadow: $shadow;
+    transform: $transform;
+  }
+}
+
+// === FORMULAIRES ===
+// Mixin pour les inputs
+@mixin form-control($padding: $input-padding-y $input-padding-x, $font-size: $input-font-size, $border-radius: $input-border-radius) {
+  display: block;
+  width: 100%;
+  padding: $padding;
+  font-size: $font-size;
+  font-weight: $font-weight-normal;
+  line-height: $input-line-height;
+  color: $dark-color;
+  background-color: $white;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus {
+    color: $dark-color;
+    background-color: $white;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($input-focus-border-color, 0.25);
+  }
+
+  &::placeholder {
+    color: $gray-600;
+    opacity: 1;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: $gray-200;
+    opacity: 1;
+  }
+}
+
+// États de validation
+@mixin form-validation-state($color) {
+  .form-control {
+    border-color: $color;
+
+    &:focus {
+      border-color: $color;
+      box-shadow: 0 0 0 0.2rem rgba($color, 0.25);
+    }
+  }
+
+  .invalid-feedback,
+  .valid-feedback {
+    color: $color;
+  }
+}
+
+// === ANIMATIONS ===
+// Fade in
+@mixin fade-in($duration: $animation-duration-base) {
+  animation: fadeIn $duration ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Slide up
+@mixin slide-up($duration: $animation-duration-base, $distance: 20px) {
+  animation: slideUp $duration ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY($distance);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Spin (pour les loaders)
+@mixin spin($duration: 1s) {
+  animation: spin $duration linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// === UTILITAIRES VISUELS ===
+// Mixin pour les dégradés
+@mixin gradient($direction: to right, $color-start: $primary-color, $color-end: $primary-dark) {
+  background: linear-gradient($direction, $color-start, $color-end);
+}
+
+// Overlay sombre
+@mixin overlay($opacity: 0.5, $color: $black) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color, $opacity);
+    z-index: 1;
+  }
+}
+
+// Aspect ratio (pour les images responsive)
+@mixin aspect-ratio($width: 16, $height: 9) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: percentage($height / $width);
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// === COMPOSANTS SPÉCIFIQUES ===
+// Badge/Étiquette
+@mixin badge($background: $primary-color, $color: $white, $font-size: 0.75rem) {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: $font-size;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  color: $color;
+  background-color: $background;
+  border-radius: $border-radius-sm;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+// Avatar circulaire
+@mixin avatar($size: 40px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid $white;
+  box-shadow: $box-shadow-sm;
+}
+
+// Loading spinner
+@mixin spinner($size: 1rem, $border-width: 2px, $color: $primary-color) {
+  width: $size;
+  height: $size;
+  border: $border-width solid rgba($color, 0.25);
+  border-top: $border-width solid $color;
+  border-radius: 50%;
+  @include spin();
+}
+
+// === UTILITAIRES DE DÉVELOPPEMENT ===
+// Debug outline (pour le développement)
+@mixin debug-outline($color: red) {
+  outline: 1px solid $color !important;
+}
+
+// Mixin pour générer des classes utilitaires
+@mixin generate-utility($property, $class-name, $values) {
+  @each $key, $value in $values {
+    .#{$class-name}-#{$key} {
+      #{$property}: #{$value} !important;
+    }
+  }
+}
+
+// === PRÉFIXES VENDOR ===
+// Transform
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+
+// Transition
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  transition: $transition;
+}
+
+// Box shadow
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
