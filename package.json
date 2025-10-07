@@ -1,0 +1,16 @@
+{
+  "name": "stars-doors",
+  "version": "1.0.0",
+  "description": "Plateforme intergalactique de réservation",
+  "scripts": {
+    "sass": "sass assets/scss/main.scss assets/css/style.css",
+    "sass:watch": "sass assets/scss/main.scss assets/css/style.css --watch",
+    "sass:build": "sass assets/scss/main.scss assets/css/style.css --style compressed --no-source-map"
+  },
+  "keywords": ["sass", "scss", "css"],
+  "author": "Stars Doors Team",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}
