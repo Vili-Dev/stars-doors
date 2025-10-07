@@ -4,12 +4,13 @@
 // ===================================================================
 
 // === TITRES ===
+// Les titres héritent la couleur du parent par défaut
+// Ajouter .text-dark ou .text-white si besoin
 h1, .h1 {
   font-size: $h1-font-size;
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 h2, .h2 {
@@ -17,7 +18,6 @@ h2, .h2 {
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 h3, .h3 {
@@ -25,7 +25,6 @@ h3, .h3 {
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 h4, .h4 {
@@ -33,7 +32,6 @@ h4, .h4 {
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 h5, .h5 {
@@ -41,7 +39,6 @@ h5, .h5 {
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 h6, .h6 {
@@ -49,7 +46,6 @@ h6, .h6 {
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin-bottom: $spacer;
-  color: $dark-color;
 }
 
 // === PARAGRAPHES ===
