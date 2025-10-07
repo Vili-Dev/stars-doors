@@ -368,8 +368,30 @@ a {
 }
 
 a:hover {
-  color: rgb(27.5, 56.25, 100);
+  color: #1f4270;
   text-decoration: underline;
+}
+
+.bg-dark a,
+.bg-primary a,
+.hero-section a,
+a.link-light {
+  color: #ffffff;
+}
+
+.bg-dark a:hover,
+.bg-primary a:hover,
+.hero-section a:hover,
+a.link-light:hover {
+  color: #f8c146;
+}
+
+a.link-white {
+  color: #ffffff;
+}
+
+a.link-white:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media (min-width: 768px) {

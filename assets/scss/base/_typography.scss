@@ -126,6 +126,7 @@ li:last-child {
 .text-muted { color: $gray-600; }
 
 // === LIENS ===
+// Liens sur fond clair (par défaut)
 a {
   color: $primary-color;
   text-decoration: none;
@@ -133,8 +134,32 @@ a {
 }
 
 a:hover {
-  color: darken($primary-color, 15%);
+  color: #1f4270;  // Bleu plus foncé
   text-decoration: underline;
+}
+
+// Liens sur fond sombre - utiliser .bg-dark ou ajouter .link-light aux liens
+.bg-dark a,
+.bg-primary a,
+.hero-section a,
+a.link-light {
+  color: $white;
+}
+
+.bg-dark a:hover,
+.bg-primary a:hover,
+.hero-section a:hover,
+a.link-light:hover {
+  color: $secondary-color;  // Jaune au survol
+}
+
+// Lien explicitement blanc
+a.link-white {
+  color: $white;
+}
+
+a.link-white:hover {
+  color: rgba($white, 0.8);
 }
 
 // === RESPONSIVE TYPOGRAPHY ===
