@@ -3,15 +3,17 @@
 // Toutes les variables globales du projet
 // ===================================================================
 
+@use "sass:color";
+
 // === COULEURS ===
 // Palette principale
 $primary-color: #2c5aa0;
-$primary-light: lighten($primary-color, 15%);
-$primary-dark: darken($primary-color, 15%);
+$primary-light: color.adjust($primary-color, $lightness: 15%);
+$primary-dark: color.adjust($primary-color, $lightness: -15%);
 
 $secondary-color: #f8c146;
-$secondary-light: lighten($secondary-color, 15%);
-$secondary-dark: darken($secondary-color, 15%);
+$secondary-light: color.adjust($secondary-color, $lightness: 15%);
+$secondary-dark: color.adjust($secondary-color, $lightness: -15%);
 
 // Couleurs fonctionnelles
 $success-color: #28a745;

@@ -271,7 +271,7 @@
 
 @keyframes slideUp {
   from {
-    transform: translateY($distance);
+    transform: translateY(20px);
     opacity: 0;
   }
   to {
