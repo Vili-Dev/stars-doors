@@ -1,0 +1,217 @@
+# ===================================
+# Stars Doors - Fichiers à ignorer
+# ===================================
+
+# =====================================
+# SÉCURITÉ - FICHIERS SENSIBLES
+# =====================================
+
+# Fichiers de configuration avec mots de passe/secrets
+config/.env
+.env
+.env.local
+.env.production
+*.secret
+secrets.php
+credentials.php
+
+# Clés d'API et tokens
+*.key
+*.pem
+*.p12
+api_keys.php
+
+# Fichiers de backup de base de données (peuvent contenir des données sensibles)
+*.sql
+*.sql.gz
+*.sql.zip
+database/backups/
+backups/
+
+# Fichiers de dump MySQL
+*.dump
+
+# =====================================
+# UPLOADS UTILISATEURS
+# =====================================
+
+# Tous les fichiers uploadés par les utilisateurs
+uploads/*
+!uploads/.htaccess
+!uploads/index.php
+
+# Garder la structure des dossiers mais pas le contenu
+uploads/annonces/*
+!uploads/annonces/.gitkeep
+uploads/avatars/*
+!uploads/avatars/.gitkeep
+uploads/listings/*
+!uploads/listings/.gitkeep
+
+# =====================================
+# LOGS & CACHE
+# =====================================
+
+# Fichiers de logs
+logs/
+*.log
+error_log
+debug.log
+access.log
+
+# Cache
+cache/
+*.cache
+tmp/
+temp/
+
+# Sessions PHP
+sessions/
+tmp/sessions/
+
+# =====================================
+# FICHIERS TEMPORAIRES & TEST
+# =====================================
+
+# Fichiers de test temporaires
+test_*.php
+debug_*.php
+_test.php
+_debug.php
+TODO.txt
+NOTES.txt
+
+# =====================================
+# DÉPENDANCES & PACKAGES
+# =====================================
+
+# Composer (si utilisé)
+/vendor/
+composer.phar
+composer.lock
+
+# NPM (si utilisé)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Bower
+bower_components/
+
+# =====================================
+# IDE & ÉDITEURS
+# =====================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+# Eclipse
+.buildpath
+.project
+.settings/
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# =====================================
+# SYSTÈME D'EXPLOITATION
+# =====================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# =====================================
+# PHP & FRAMEWORKS
+# =====================================
+
+# PHP-CS-Fixer
+.php_cs
+.php_cs.cache
+.php-cs-fixer.cache
+
+# PHPUnit
+.phpunit.result.cache
+phpunit.xml
+
+# SASS/SCSS compilés (si vous voulez ignorer les CSS générés)
+# Décommentez si nécessaire
+# assets/css/style.css
+# assets/css/style.css.map
+
+# =====================================
+# VERSION CONTROL
+# =====================================
+
+# Git
+.git/
+*.orig
+
+# SVN
+.svn/
+
+# Mercurial
+.hg/
+.hgignore
+
+# =====================================
+# AUTRES
+# =====================================
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Documentation temporaire (garder les README officiels)
+scratch/
+draft/
