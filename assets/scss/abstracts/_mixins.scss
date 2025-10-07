@@ -3,6 +3,8 @@
 // Mixins réutilisables pour le projet
 // ===================================================================
 
+@import "_variables.scss";
+
 // === RESPONSIVE DESIGN ===
 // Mixin pour les media queries responsive
 @mixin media-breakpoint-up($name, $breakpoints: $breakpoints) {
@@ -26,7 +28,7 @@
 @mixin media-breakpoint-between($lower, $upper, $breakpoints: $breakpoints) {
   $min: map-get($breakpoints, $lower);
   $max: map-get($breakpoints, $upper) - 0.02;
-  
+
   @if $min != 0 and $max != 0 {
     @media (min-width: $min) and (max-width: $max) {
       @content;
@@ -51,7 +53,12 @@
 }
 
 // Flexbox avec direction
-@mixin flex($direction: row, $wrap: nowrap, $justify: flex-start, $align: stretch) {
+@mixin flex(
+  $direction: row,
+  $wrap: nowrap,
+  $justify: flex-start,
+  $align: stretch
+) {
   display: flex;
   flex-direction: $direction;
   flex-wrap: $wrap;
@@ -83,9 +90,9 @@
     h3: $h3-font-size,
     h4: $h4-font-size,
     h5: $h5-font-size,
-    h6: $h6-font-size
+    h6: $h6-font-size,
   );
-  
+
   font-size: map-get($font-sizes, $size);
   font-weight: $weight;
   line-height: $line-height;
@@ -109,7 +116,14 @@
 
 // === BOUTONS ===
 // Mixin pour créer des variants de boutons
-@mixin button-variant($background, $border: $background, $color: $white, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $hover-color: $color) {
+@mixin button-variant(
+  $background,
+  $border: $background,
+  $color: $white,
+  $hover-background: darken($background, 7.5%),
+  $hover-border: darken($border, 10%),
+  $hover-color: $color
+) {
   color: $color;
   background-color: $background;
   border-color: $border;
@@ -134,7 +148,11 @@
 }
 
 // Bouton avec outline
-@mixin button-outline-variant($color, $color-hover: $white, $background-hover: $color) {
+@mixin button-outline-variant(
+  $color,
+  $color-hover: $white,
+  $background-hover: $color
+) {
   color: $color;
   border-color: $color;
   background-color: transparent;
@@ -153,7 +171,11 @@
 
 // === CARTES ===
 // Mixin pour les cartes
-@mixin card($padding: $card-spacer-y $card-spacer-x, $border: $card-border-width solid $card-border-color, $radius: $card-border-radius) {
+@mixin card(
+  $padding: $card-spacer-y $card-spacer-x,
+  $border: $card-border-width solid $card-border-color,
+  $radius: $card-border-radius
+) {
   background-color: $white;
   border: $border;
   border-radius: $radius;
@@ -172,7 +194,11 @@
 
 // === FORMULAIRES ===
 // Mixin pour les inputs
-@mixin form-control($padding: $input-padding-y $input-padding-x, $font-size: $input-font-size, $border-radius: $input-border-radius) {
+@mixin form-control(
+  $padding: $input-padding-y $input-padding-x,
+  $font-size: $input-font-size,
+  $border-radius: $input-border-radius
+) {
   display: block;
   width: 100%;
   padding: $padding;
@@ -230,8 +256,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 // Slide up
@@ -256,13 +286,21 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 // === UTILITAIRES VISUELS ===
 // Mixin pour les dégradés
-@mixin gradient($direction: to right, $color-start: $primary-color, $color-end: $primary-dark) {
+@mixin gradient(
+  $direction: to right,
+  $color-start: $primary-color,
+  $color-end: $primary-dark
+) {
   background: linear-gradient($direction, $color-start, $color-end);
 }
 
@@ -271,7 +309,7 @@
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -285,14 +323,14 @@
 // Aspect ratio (pour les images responsive)
 @mixin aspect-ratio($width: 16, $height: 9) {
   position: relative;
-  
+
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     padding-top: percentage($height / $width);
   }
-  
+
   > * {
     position: absolute;
     top: 0;

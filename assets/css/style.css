@@ -1,9 +1,9 @@
-/* Error: Undefined variable.
+/* Error: Plain CSS functions don't support keyword arguments.
  *     ,
- * 244 |     transform: translateY($distance);
- *     |                           ^^^^^^^^^
+ * 274 |     transform: translateY($distance: 20px);
+ *     |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *     '
- *   assets\scss\abstracts\_mixins.scss 244:27  @import
+ *   assets\scss\abstracts\_mixins.scss 274:16  @import
  *   assets\scss\main.scss 10:9                 root stylesheet */
 
 body::before {
@@ -14,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a     \2577 \a 244 \2502      transform: translateY($distance);\a     \2502                            ^^^^^^^^^\a     \2575 \a   assets\\scss\\abstracts\\_mixins.scss 244:27  @import\a   assets\\scss\\main.scss 10:9                 root stylesheet";
+  content: "Error: Plain CSS functions don't support keyword arguments.\a     \2577 \a 274 \2502      transform: translateY($distance: 20px);\d\a     \2502                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\a     \2575 \a   assets\\scss\\abstracts\\_mixins.scss 274:16  @import\a   assets\\scss\\main.scss 10:9                 root stylesheet";
 }
