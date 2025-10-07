@@ -81,6 +81,9 @@ _debug.php
 TODO.txt
 NOTES.txt
 
+# Fichier d'installation (à supprimer après installation)
+install.php
+
 # =====================================
 # DÉPENDANCES & PACKAGES
 # =====================================
