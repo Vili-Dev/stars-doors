@@ -1,19 +1,12 @@
 // ===================================================================
-// VARIABLES SASS - STARS DOORS
-// Toutes les variables globales du projet
+// VARIABLES SASS - STARS DOORS (Version simplifiée)
+// Variables de base pour le projet
 // ===================================================================
 
-@use "sass:color";
-
 // === COULEURS ===
-// Palette principale
+// Couleurs principales
 $primary-color: #2c5aa0;
-$primary-light: color.adjust($primary-color, $lightness: 15%);
-$primary-dark: color.adjust($primary-color, $lightness: -15%);
-
 $secondary-color: #f8c146;
-$secondary-light: color.adjust($secondary-color, $lightness: 15%);
-$secondary-dark: color.adjust($secondary-color, $lightness: -15%);
 
 // Couleurs fonctionnelles
 $success-color: #28a745;
@@ -26,6 +19,7 @@ $dark-color: #343a40;
 // Couleurs neutres
 $white: #ffffff;
 $black: #000000;
+$gray-50: #fafbfc;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -39,7 +33,6 @@ $gray-900: #212529;
 // === TYPOGRAPHIE ===
 // Polices
 $font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$font-family-heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $font-family-mono: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
 
 // Tailles de police
@@ -56,12 +49,11 @@ $h4-font-size: 1.5rem;
 $h5-font-size: 1.25rem;
 $h6-font-size: 1rem;
 
-// Épaisseurs de police
+// Poids de police
 $font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
-$font-weight-black: 900;
 
 // Hauteur de ligne
 $line-height-base: 1.5;
@@ -69,40 +61,7 @@ $line-height-sm: 1.25;
 $line-height-lg: 2;
 
 // === ESPACEMENTS ===
-// Système d'espacement basé sur rem
 $spacer: 1rem;
-
-$spacers: (
-  0: 0,
-  1: ($spacer * 0.25),   // 4px
-  2: ($spacer * 0.5),    // 8px
-  3: $spacer,            // 16px
-  4: ($spacer * 1.5),    // 24px
-  5: ($spacer * 3),      // 48px
-  6: ($spacer * 4),      // 64px
-  7: ($spacer * 5),      // 80px
-  8: ($spacer * 6)       // 96px
-);
-
-// === TAILLES ===
-// Largeurs de conteneurs
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
-);
-
-// Points de rupture responsive
-$breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
 
 // === BORDURES ===
 $border-width: 1px;
@@ -110,40 +69,21 @@ $border-color: $gray-300;
 $border-radius: 0.375rem;
 $border-radius-sm: 0.25rem;
 $border-radius-lg: 0.5rem;
-$border-radius-xl: 1rem;
-$border-radius-pill: 50rem;
 
 // === OMBRES ===
 $box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
 $box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
 $box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
-$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
 
 // === TRANSITIONS ===
 $transition-base: all 0.15s ease-in-out;
-$transition-fade: opacity 0.15s linear;
-$transition-collapse: height 0.35s ease;
 
-// Durées d'animation
-$animation-duration-fast: 0.15s;
-$animation-duration-base: 0.3s;
-$animation-duration-slow: 0.6s;
-
-// === COMPOSANTS SPÉCIFIQUES ===
+// === COMPOSANTS ===
 // Navigation
 $navbar-height: 60px;
-$navbar-padding-y: 0.75rem;
-$navbar-padding-x: 1rem;
-$navbar-brand-font-size: 1.5rem;
-
-// Footer
-$footer-bg: $dark-color;
-$footer-color: $light-color;
-$footer-padding-y: 3rem;
 
 // Cartes
-$card-spacer-y: 1rem;
-$card-spacer-x: 1rem;
+$card-spacer: 1rem;
 $card-border-width: $border-width;
 $card-border-color: $border-color;
 $card-border-radius: $border-radius;
@@ -152,70 +92,22 @@ $card-border-radius: $border-radius;
 $btn-padding-y: 0.5rem;
 $btn-padding-x: 1rem;
 $btn-font-size: $font-size-base;
-$btn-line-height: $line-height-base;
 $btn-border-radius: $border-radius;
 
 // Formulaires
 $input-padding-y: 0.5rem;
 $input-padding-x: 0.75rem;
-$input-font-size: $font-size-base;
-$input-line-height: $line-height-base;
 $input-border-width: $border-width;
 $input-border-color: $gray-400;
 $input-border-radius: $border-radius;
 $input-focus-border-color: $primary-color;
 
-// === Z-INDEX ===
-$zindex-dropdown: 1000;
-$zindex-sticky: 1020;
-$zindex-fixed: 1030;
-$zindex-modal-backdrop: 1040;
-$zindex-modal: 1050;
-$zindex-popover: 1060;
-$zindex-tooltip: 1070;
-$zindex-toast: 1080;
+// === BREAKPOINTS (valeurs simples) ===
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
 
-// === VARIABLES SPÉCIFIQUES AU PROJET ===
-// Listings/Annonces
+// === PROJET STARS DOORS ===
 $listing-card-height: 400px;
 $listing-image-height: 200px;
-$listing-card-hover-transform: translateY(-5px);
-
-// Hero section
-$hero-min-height: 400px;
-$hero-padding: 5rem 0;
-$hero-gradient: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
-
-// Sidebar
-$sidebar-width: 250px;
-$sidebar-width-collapsed: 70px;
-
-// Messages flash
-$flash-messages-width: 350px;
-$flash-messages-position-top: 70px;
-$flash-messages-position-right: 20px;
-
-// Upload
-$upload-max-size: 5242880; // 5MB
-$upload-border-style: 2px dashed $gray-400;
-
-// === COULEURS THÉMATIQUES ===
-// Status des réservations
-$status-pending: $warning-color;
-$status-confirmed: $success-color;
-$status-cancelled: $danger-color;
-$status-completed: $info-color;
-
-// Notes/Ratings
-$rating-color: $warning-color;
-$rating-empty-color: $gray-300;
-
-// === VARIABLES SCSS SPÉCIALES ===
-// Flag pour inclure les utilitaires
-$enable-responsive-font-sizes: true;
-$enable-shadows: true;
-$enable-gradients: true;
-$enable-transitions: true;
-$enable-reduced-motion: true;
-$enable-grid-classes: true;
-$enable-cssgrid: true;
