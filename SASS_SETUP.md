@@ -1,5 +1,12 @@
 # 🎨 Configuration SASS - Stars Doors
 
+## ✅ Simplification terminée !
+
+Les fichiers `compile-prod.bat` et `compile-watch.bat` ont été supprimés.
+Utilise maintenant les méthodes ci-dessous.
+
+---
+
 ## 📦 Option 1 : npm sass (Recommandé)
 
 ### Installation
