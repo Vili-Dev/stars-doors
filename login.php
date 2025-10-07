@@ -117,6 +117,9 @@ include 'includes/nav.php';
                     </form>
 
                     <div class="text-center">
+                        <p class="mb-0">Mot de passe oublié ?
+                            <a href="newPassword.php">Réinitialiser</a>
+                        </p>
                         <p class="mb-0">Pas encore de compte ? 
                             <a href="register.php">Créer un compte</a>
                         </p>

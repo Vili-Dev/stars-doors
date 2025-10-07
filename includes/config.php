@@ -17,33 +17,36 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Chargement des constantes
-require_once __DIR__ . '/../config/constants.php';
-
-// Chargement des variables d'environnement depuis .env si le fichier existe
+// Chargement des variables d'environnement depuis .env AVANT les constantes
 $env_file = __DIR__ . '/../config/.env';
 if (file_exists($env_file)) {
     $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue; // Ignorer les commentaires
-        
-        list($name, $value) = explode('=', $line, 2);
-        $name = trim($name);
-        $value = trim($value);
-        
+        $trimmed = trim($line);
+        if ($trimmed === '' || strpos($trimmed, '#') === 0) continue; // Ignorer vides et commentaires
+
+        $parts = explode('=', $line, 2);
+        if (count($parts) !== 2) continue; // Ligne invalide
+
+        $name = trim($parts[0]);
+        $value = trim($parts[1]);
+
         // Supprimer les guillemets si présents
         if (preg_match('/^"(.*)"$/', $value, $matches)) {
             $value = $matches[1];
         } elseif (preg_match("/^'(.*)'$/", $value, $matches)) {
             $value = $matches[1];
         }
-        
-        if (!array_key_exists($name, $_ENV)) {
+
+        if ($name !== '') {
             $_ENV[$name] = $value;
             putenv("$name=$value");
         }
     }
 }
+
+// Charger les constantes après l'initialisation de $_ENV
+require_once __DIR__ . '/../config/constants.php';
 
 // Configuration des erreurs selon l'environnement
 if (ENVIRONMENT === 'development') {

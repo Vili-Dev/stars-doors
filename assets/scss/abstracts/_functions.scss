@@ -23,6 +23,7 @@
 // Fonction pour obtenir une couleur grise
 @function gray($key) {
   $grays: (
+    50: $gray-50,
     100: $gray-100,
     200: $gray-200,
     300: $gray-300,
