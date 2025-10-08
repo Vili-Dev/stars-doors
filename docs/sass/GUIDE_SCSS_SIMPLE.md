@@ -314,7 +314,6 @@ $ma-couleur: #ff0000;
 ### Fichiers importants
 
 - `SASS_SIMPLIFICATION.md` - Plan de simplification détaillé
-- `SASS_SETUP.md` - Configuration initiale
 - `SASS_WARNINGS.md` - Warnings non bloquants
 
 ---
