@@ -94,7 +94,7 @@ include '../includes/header.php';
                 <label class="form-label">Role</label>
                 <select name="role" class="form-select" required>
                     <?php foreach(['locataire','proprietaire','admin'] as $role): ?>
-                        <option value="<?= $role ?>"> <?=(($user['role'] ?? '')=== $role)?'selected':''?>><?= ucfirst($role) ?></option>
+                        <option value="<?= $role ?>" <?=(($user['role'] ?? '')=== $role)?'selected':''?>><?= ucfirst($role) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
