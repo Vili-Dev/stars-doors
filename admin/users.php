@@ -108,16 +108,19 @@ include '../includes/header.php';
 
 <main class="container py-4">
     <div class="row">
-        <div class="col-12 mb-4">
+    <div class="col-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>Gestion des utilisateurs</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Administration</a></li>
-                    <li class="breadcrumb-item active">Utilisateurs</li>
-                </ol>
-            </nav>
+            <a href="user_edit.php" class="btn btn-success">+ Nouvel utilisateur</a>
         </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Administration</a></li>
+                <li class="breadcrumb-item active">Utilisateurs</li>
+            </ol>
+        </nav>
     </div>
+</div>
     <form class="card mb-3" method="get" action="users.php">
         <div class="card-body row g-2">
             <div class="col-md-3">
@@ -164,6 +167,7 @@ include '../includes/header.php';
                         <th>Rôle</th>
                         <th>Statut</th>
                         <th>Dernière connexion</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -197,6 +201,17 @@ include '../includes/header.php';
                                     <?php else: ?>-
                                 <?php endif; ?>
                             </td>
+                            <td>
+    <a href="user_edit.php?id=<?= $u['id_user'] ?>" class="btn btn-sm btn-primary" title="Modifier">
+        ✏️ Modifier
+    </a>
+    <a href="user_delete.php?id=<?= $u['id_user'] ?>" 
+       class="btn btn-sm btn-danger" 
+       title="Supprimer"
+       onclick="return confirm('Voulez-vous vraiment supprimer <?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?> ?')">
+        🗑️ Supprimer
+    </a>
+</td>
                         </tr>  
                     <?php endforeach; ?> 
                 </tbody>
