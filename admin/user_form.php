@@ -31,7 +31,7 @@ if (!function_exists('csrf_token')) {
 
 $title = 'Gestion des utilisateurs - Administration';
 
-$id = isset($_Get['id']) ? (int)$_GET['id'] : null;
+$id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 $user = null;
 
@@ -84,17 +84,17 @@ include '../includes/header.php';
             </div>
             <div class="col-md-6">
                 <label class="form-label">Téléphone</label>
-                <input  name="telephone" class="form-control" value="<?= htmlspecialchars($user['telephone'] ?? '') ?>" required>
+                 <input type="tel" name="telephone" class="form-control" value="<?= htmlspecialchars($user['telephone'] ?? '') ?>" required>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Date de naissance</label>
-                <input name="date_de_naissance" class="form-control" placeholder="YYYY-MM-DD" value="<?= htmlspecialchars($user['date_de_naissance'] ?? '') ?>">
+                <input type="date" name="date_de_naissance" class="form-control" placeholder="YYYY-MM-DD" value="<?= htmlspecialchars($user['date_de_naissance'] ?? '') ?>">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Role</label>
                 <select name="role" class="form-select" required>
                     <?php foreach(['locataire','proprietaire','admin'] as $role): ?>
-                        <option value="<? $role ?>" <?=(($user['role'] ?? '')=== $role)?'selected':''?>><?= ucfirst($role) ?></option>
+                        <option value="<?= $role ?>"> <?=(($user['role'] ?? '')=== $role)?'selected':''?>><?= ucfirst($role) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -112,8 +112,10 @@ include '../includes/header.php';
                 <label class="form-label">Description</label>
                 <textarea name="bio" class="form-control" rows="3"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
             </div>
+            </div>
             <div class="card-footer d-flex justify-content-between">
-                <button class="btn btn-primary" type="submit">Enregister</button>
+                 <!-- <a href="users.php" class="btn btn-secondary">Retour</a> -->
+                <button class="btn btn-primary" type="submit">Enregistrer</button>
             </div>
         </form>
 </main>
