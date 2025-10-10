@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $annonce_id = $pdo->lastInsertId();
 
-                // Traiter l'upload des images
+                // Traiter l'upload des images (maximum 6 images)
                 $upload_errors = [];
                 if (isset($_FILES['photos']) && !empty($_FILES['photos']['name'][0])) {
                     $upload_dir = 'uploads/annonces/';
@@ -147,12 +147,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
 
-                    $uploaded_count = 0;
-                    foreach ($_FILES['photos']['name'] as $key => $filename) {
-                        $upload_errors[] = "Fichier: $filename, Erreur: " . $_FILES['photos']['error'][$key];
+                    // Limiter à 6 images maximum
+                    $max_images = 6;
+                    $files_count = count($_FILES['photos']['name']);
+                    if ($files_count > $max_images) {
+                        $errors[] = "Vous ne pouvez pas uploader plus de $max_images images.";
+                        $files_count = $max_images;
+                    }
 
+                    $uploaded_count = 0;
+                    for ($key = 0; $key < $files_count; $key++) {
                         if ($_FILES['photos']['error'][$key] === UPLOAD_ERR_OK) {
                             $tmp_name = $_FILES['photos']['tmp_name'][$key];
+                            $filename = $_FILES['photos']['name'][$key];
                             $file_size = $_FILES['photos']['size'][$key];
 
                             // Vérifier le type de fichier
@@ -162,36 +169,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             finfo_close($finfo);
 
                             if (!in_array($mime_type, $allowed_types)) {
+                                $upload_errors[] = "Format non supporté pour $filename";
                                 continue;
                             }
 
-                            // Vérifier la taille (max 2MB)
-                            if ($file_size > 2 * 1024 * 1024) {
-                                error_log("Fichier trop gros: $filename - " . $file_size . " bytes");
+                            // Vérifier la taille (max 5MB)
+                            if ($file_size > 5 * 1024 * 1024) {
+                                $upload_errors[] = "Image trop volumineuse: $filename (max 5MB)";
+                                continue;
+                            }
+
+                            // Redimensionner et optimiser l'image
+                            $resize_result = resizeAndOptimizeImage($tmp_name, $filename);
+                            if (!$resize_result['success']) {
+                                $upload_errors[] = "Erreur redimensionnement: " . $resize_result['error'];
                                 continue;
                             }
 
                             // Générer un nom unique
-                            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+                            $extension = 'jpg'; // Standardisé en JPG
                             $new_filename = uniqid('img_' . $annonce_id . '_') . '.' . $extension;
                             $filepath = $upload_dir . $new_filename;
 
-                            if (move_uploaded_file($tmp_name, $filepath)) {
+                            if (move_uploaded_file($resize_result['tmp_file'], $filepath)) {
                                 // Insérer dans la base
                                 $photo_principale = ($uploaded_count === 0) ? 1 : 0;
                                 $stmt_photo = $pdo->prepare("INSERT INTO photo (id_annonce, nom_fichier, chemin, description, ordre, photo_principale) VALUES (?, ?, ?, ?, ?, ?)");
                                 $stmt_photo->execute([$annonce_id, $new_filename, $filepath, '', $uploaded_count, $photo_principale]);
                                 $uploaded_count++;
-                                $upload_errors[] = "SUCCESS: Image uploadée $filepath";
+                                $upload_errors[] = "SUCCESS: Image uploadée et optimisée: $new_filename";
                             } else {
-                                $upload_errors[] = "ERREUR: Échec de move_uploaded_file de $tmp_name vers $filepath";
+                                $upload_errors[] = "ERREUR: Échec de sauvegarde pour $filename";
                             }
-                        } else {
-                            $upload_errors[] = "SKIP: Type mime invalide ou fichier trop gros pour $filename";
+
+                            // Nettoyer le fichier temporaire
+                            if (file_exists($resize_result['tmp_file'])) {
+                                unlink($resize_result['tmp_file']);
+                            }
                         }
                     }
-                } else {
-                    $upload_errors[] = "Aucune photo uploadée ou tableau vide";
                 }
 
                 // Afficher les erreurs d'upload en debug
@@ -582,12 +598,15 @@ include 'includes/nav.php';
                         <div class="mb-3">
                             <label for="photos" class="form-label">Télécharger des photos *</label>
                             <input type="file" class="form-control" id="photos" name="photos[]"
-                                   accept="image/jpeg,image/jpg,image/png,image/webp" multiple required>
+                                   accept="image/jpeg,image/jpg,image/png,image/webp" multiple required
+                                   maxlength="6" data-max-files="6">
                             <div class="form-text">
                                 <i class="fas fa-info-circle"></i>
-                                Formats acceptés : JPG, PNG, WEBP. Taille max : 2 MB par image.
+                                <strong>Maximum 6 images</strong> - Formats : JPG, PNG, WEBP - Taille max : 5 MB par image.
+                                Les images seront automatiquement redimensionnées et optimisées (1200x800px).
                                 La première image sera la photo principale.
                             </div>
+                            <div id="file-count" class="text-muted small mt-1"></div>
                         </div>
                         <div id="photo-preview" class="row g-2"></div>
                     </div>
@@ -660,6 +679,62 @@ document.getElementById('photos').addEventListener('change', function(e) {
             reader.readAsDataURL(file);
         }
     });
+});
+
+// Gestion des images avec limitation à 6
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('photos');
+    const fileCount = document.getElementById('file-count');
+    const preview = document.getElementById('photo-preview');
+    
+    if (fileInput && fileCount && preview) {
+        fileInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            const maxFiles = 6;
+            
+            // Limiter à 6 fichiers
+            if (files.length > maxFiles) {
+                alert(`Vous ne pouvez sélectionner que ${maxFiles} images maximum.`);
+                // Garder seulement les 6 premiers fichiers
+                const fileList = new DataTransfer();
+                for (let i = 0; i < maxFiles; i++) {
+                    fileList.items.add(files[i]);
+                }
+                fileInput.files = fileList.files;
+                files.splice(maxFiles);
+            }
+            
+            // Afficher le compteur
+            fileCount.textContent = `${files.length} image(s) sélectionnée(s)`;
+            
+            // Afficher l'aperçu
+            preview.innerHTML = '';
+            files.forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const col = document.createElement('div');
+                        col.className = 'col-md-4 col-sm-6 mb-2';
+                        col.innerHTML = `
+                            <div class="card">
+                                <img src="${e.target.result}" class="card-img-top" style="height: 120px; object-fit: cover;" alt="Aperçu ${index + 1}">
+                                <div class="card-body p-2">
+                                    <small class="text-muted">
+                                        ${index === 0 ? '<i class="fas fa-star text-warning"></i> ' : ''}
+                                        ${file.name}
+                                        <br>
+                                        <span class="badge bg-primary">${Math.round(file.size / 1024)} KB</span>
+                                    </small>
+                                </div>
+                            </div>
+                        `;
+                        preview.appendChild(col);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    }
 });
 </script>
 

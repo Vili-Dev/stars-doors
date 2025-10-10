@@ -166,49 +166,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $disponible, $id_annonce, getCurrentUserId()
                 ]);
 
-                // Traiter l'upload de nouvelles images
+                // Traiter l'upload de nouvelles images (maximum 6 au total)
                 if (isset($_FILES['photos']) && !empty($_FILES['photos']['name'][0])) {
                     $upload_dir = 'uploads/annonces/';
                     if (!is_dir($upload_dir)) {
                         mkdir($upload_dir, 0755, true);
                     }
 
-                    // Récupérer l'ordre max actuel
-                    $stmt_max = $pdo->prepare("SELECT MAX(ordre) as max_ordre FROM photo WHERE id_annonce = ?");
-                    $stmt_max->execute([$id_annonce]);
-                    $max_ordre = $stmt_max->fetch(PDO::FETCH_ASSOC)['max_ordre'] ?? 0;
+                    // Compter les images existantes
+                    $stmt_count = $pdo->prepare("SELECT COUNT(*) as count FROM photo WHERE id_annonce = ?");
+                    $stmt_count->execute([$id_annonce]);
+                    $existing_count = $stmt_count->fetch(PDO::FETCH_ASSOC)['count'];
 
-                    $uploaded_count = $max_ordre + 1;
-                    foreach ($_FILES['photos']['name'] as $key => $filename) {
-                        if ($_FILES['photos']['error'][$key] === UPLOAD_ERR_OK) {
-                            $tmp_name = $_FILES['photos']['tmp_name'][$key];
-                            $file_size = $_FILES['photos']['size'][$key];
+                    $max_images = 6;
+                    $files_count = count($_FILES['photos']['name']);
+                    
+                    // Vérifier la limite totale
+                    if ($existing_count + $files_count > $max_images) {
+                        $errors[] = "Vous ne pouvez pas avoir plus de $max_images images au total. Vous avez déjà $existing_count images.";
+                    } else {
+                        // Récupérer l'ordre max actuel
+                        $stmt_max = $pdo->prepare("SELECT MAX(ordre) as max_ordre FROM photo WHERE id_annonce = ?");
+                        $stmt_max->execute([$id_annonce]);
+                        $max_ordre = $stmt_max->fetch(PDO::FETCH_ASSOC)['max_ordre'] ?? 0;
 
-                            // Vérifier le type de fichier
-                            $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-                            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                            $mime_type = finfo_file($finfo, $tmp_name);
-                            finfo_close($finfo);
+                        $uploaded_count = $max_ordre + 1;
+                        foreach ($_FILES['photos']['name'] as $key => $filename) {
+                            if ($_FILES['photos']['error'][$key] === UPLOAD_ERR_OK) {
+                                $tmp_name = $_FILES['photos']['tmp_name'][$key];
+                                $file_size = $_FILES['photos']['size'][$key];
 
-                            if (!in_array($mime_type, $allowed_types)) {
-                                continue;
-                            }
+                                // Vérifier le type de fichier
+                                $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+                                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                $mime_type = finfo_file($finfo, $tmp_name);
+                                finfo_close($finfo);
 
-                            // Vérifier la taille (max 5MB)
-                            if ($file_size > 5 * 1024 * 1024) {
-                                continue;
-                            }
+                                if (!in_array($mime_type, $allowed_types)) {
+                                    continue;
+                                }
 
-                            // Générer un nom unique
-                            $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                            $new_filename = uniqid('img_' . $id_annonce . '_') . '.' . $extension;
-                            $filepath = $upload_dir . $new_filename;
+                                // Vérifier la taille (max 5MB)
+                                if ($file_size > 5 * 1024 * 1024) {
+                                    continue;
+                                }
 
-                            if (move_uploaded_file($tmp_name, $filepath)) {
-                                // Insérer dans la base (pas de photo principale si déjà existante)
-                                $stmt_photo = $pdo->prepare("INSERT INTO photo (id_annonce, nom_fichier, chemin, description, ordre, photo_principale) VALUES (?, ?, ?, ?, ?, 0)");
-                                $stmt_photo->execute([$id_annonce, $new_filename, $filepath, '', $uploaded_count]);
-                                $uploaded_count++;
+                                // Redimensionner et optimiser l'image
+                                $resize_result = resizeAndOptimizeImage($tmp_name, $filename);
+                                if (!$resize_result['success']) {
+                                    continue;
+                                }
+
+                                // Générer un nom unique (standardisé en JPG)
+                                $new_filename = uniqid('img_' . $id_annonce . '_') . '.jpg';
+                                $filepath = $upload_dir . $new_filename;
+
+                                if (move_uploaded_file($resize_result['tmp_file'], $filepath)) {
+                                    // Insérer dans la base (pas de photo principale si déjà existante)
+                                    $stmt_photo = $pdo->prepare("INSERT INTO photo (id_annonce, nom_fichier, chemin, description, ordre, photo_principale) VALUES (?, ?, ?, ?, ?, 0)");
+                                    $stmt_photo->execute([$id_annonce, $new_filename, $filepath, '', $uploaded_count]);
+                                    $uploaded_count++;
+                                }
+
+                                // Nettoyer le fichier temporaire
+                                if (file_exists($resize_result['tmp_file'])) {
+                                    unlink($resize_result['tmp_file']);
+                                }
                             }
                         }
                     }
