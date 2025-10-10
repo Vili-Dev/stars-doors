@@ -40,6 +40,7 @@ include 'includes/nav.php';
                     <h1 class="display-4 mb-3">
                         <i class="fas fa-rocket"></i> Bienvenue chez Stars Doors
                     </h1>
+                    
                     <p class="lead mb-4">🌌 Explorez la galaxie et trouvez votre logement parfait sur des milliers de planètes</p>
 
                     <!-- Barre de recherche -->
