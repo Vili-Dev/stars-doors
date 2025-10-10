@@ -107,6 +107,53 @@ include '../includes/header.php';
 </nav>
 
 <main class="container py-4">
+
+<main class="container py-4">
+    
+    <?php
+    // Messages de succès
+    if (isset($_GET['success'])):
+        if ($_GET['success'] === '1'): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ✅ Utilisateur enregistré avec succès !
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['success'] === 'deleted'): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ✅ Utilisateur supprimé avec succès !
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif;
+    endif;
+    
+    // Messages d'erreur
+    if (isset($_GET['error'])):
+        if ($_GET['error'] === '1'): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ❌ Erreur lors de l'enregistrement.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['error'] === 'delete_failed'): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ❌ Erreur lors de la suppression.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['error'] === 'cannot_delete_self'): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ⚠️ Vous ne pouvez pas supprimer votre propre compte !
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['error'] === 'user_not_found'): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ❌ Utilisateur introuvable.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif;
+    endif;
+    ?>
+    
+    <div class="row">
+    <div class="col-12 mb-4">
     <div class="row">
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
