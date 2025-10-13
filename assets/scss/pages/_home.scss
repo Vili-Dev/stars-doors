@@ -5,11 +5,7 @@
 
 // === HERO SECTION ===
 .hero-section {
-  background: linear-gradient(
-      135deg,
-      rgba(44, 90, 160, 0.8) 0%,
-      rgba(27.5, 56.25, 100, 0.8) 100%
-    ),
+  background:
     url("../images/bg.jpeg") center center/cover no-repeat;
   position: relative;
   min-height: 400px;
