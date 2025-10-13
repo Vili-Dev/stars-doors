@@ -44,6 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($user && password_verify($password, $user['mot_de_passe'])) {
                     // Connexion réussie
+
+                    // Mise à jour de la dernière connexion
+    try {
+        $updateStmt = $pdo->prepare("UPDATE users SET derniere_connexion = NOW() WHERE id_user = :id");
+        $updateStmt->execute([':id' => $user['id_user']]);
+    } catch (PDOException $e) {
+        error_log("Erreur mise à jour derniere_connexion: " . $e->getMessage());
+    }
                     $_SESSION['user_id'] = $user['id_user'];
                     $_SESSION['user_email'] = $user['email'];
                     $_SESSION['user_role'] = $user['role'];
