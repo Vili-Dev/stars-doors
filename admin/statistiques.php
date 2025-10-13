@@ -12,4 +12,4 @@ session database
 session auth
 
 loggedin
-is admin
+is admin 
