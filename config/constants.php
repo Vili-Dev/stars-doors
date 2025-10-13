@@ -46,6 +46,22 @@ define('MAIL_PASSWORD', $_ENV['MAIL_PASSWORD'] ?? '');
 define('MAIL_ENCRYPTION', $_ENV['MAIL_ENCRYPTION'] ?? 'tls');
 define('MAIL_FROM_ADDRESS', $_ENV['MAIL_FROM_ADDRESS'] ?? 'noreply@starsdoors.com');
 define('MAIL_FROM_NAME', $_ENV['MAIL_FROM_NAME'] ?? 'Stars Doors');
+define('MAIL_AUTH_TYPE', $_ENV['MAIL_AUTH_TYPE'] ?? '');
+define('MAIL_SMTP_AUTOTLS', filter_var($_ENV['MAIL_SMTP_AUTOTLS'] ?? true, FILTER_VALIDATE_BOOLEAN));
+define('MAIL_SMTPAUTH', filter_var($_ENV['MAIL_SMTPAUTH'] ?? true, FILTER_VALIDATE_BOOLEAN));
+define('MAIL_FALLBACK_ENABLED', filter_var($_ENV['MAIL_FALLBACK_ENABLED'] ?? false, FILTER_VALIDATE_BOOLEAN));
+// Debug for mail (PHPMailer SMTP transcript in development)
+define('MAIL_DEBUG', filter_var($_ENV['MAIL_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
+// EmailJS configuration
+define('EMAILJS_SERVICE_ID', $_ENV['EMAILJS_SERVICE_ID'] ?? '');
+define('EMAILJS_TEMPLATE_ID', $_ENV['EMAILJS_TEMPLATE_ID'] ?? '');
+define('EMAILJS_PUBLIC_KEY', $_ENV['EMAILJS_PUBLIC_KEY'] ?? '');
+define('EMAILJS_PRIVATE_KEY', $_ENV['EMAILJS_PRIVATE_KEY'] ?? '');
+define('EMAILJS_API_URL', $_ENV['EMAILJS_API_URL'] ?? 'https://api.emailjs.com/api/v1.0/email/send');
+// cURL/SSL configuration
+define('CURL_CAINFO_PATH', $_ENV['CURL_CAINFO_PATH'] ?? '');
+define('RELAX_SSL_VERIFY', filter_var($_ENV['RELAX_SSL_VERIFY'] ?? false, FILTER_VALIDATE_BOOLEAN));
+define('HTTP_PROXY', $_ENV['HTTP_PROXY'] ?? '');
 
 // Configuration business
 define('DEFAULT_COMMISSION_RATE', (float)($_ENV['DEFAULT_COMMISSION_RATE'] ?? 5.0));
