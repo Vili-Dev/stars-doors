@@ -140,7 +140,7 @@ include '../includes/header.php';
                     <i class="fas fa-home fa-3x text-success mb-3"></i>
                     <h5>Gestion des annonces</h5>
                     <p class="text-muted">Modérer et gérer les annonces de logements</p>
-                    <a href="listings.php" class="btn btn-success">Accéder</a>
+                    <a href="annonces.php" class="btn btn-success">Accéder</a>
                 </div>
             </div>
         </div>

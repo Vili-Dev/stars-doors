@@ -23,14 +23,14 @@ $title = 'Modération des annonces - Administration';
 // Paramètres de filtrage
 $statut = $_GET['statut'] ?? '';
 $type = $_GET['type'] ?? '';
-$sort = $_GET['sort'] ?? 'created_at';
+$sort = $_GET['sort'] ?? 'date_creation';
 $dir = strtolower($_GET['dir'] ?? 'desc') === 'asc' ? 'ASC' : 'DESC';
 $page = max(1, (int)($_GET['page'] ?? 1));
 $limit = max(5, min(50, (int)($_GET['limit'] ?? 10)));
 $offset = ($page - 1) * $limit;
 
-$allowSort = ['created_at', 'updated_at', 'titre', 'prix_nuit', 'ville'];
-if (!in_array($sort, $allowSort, true)) $sort = 'created_at';
+$allowSort = ['date_creation', 'date_modification', 'titre', 'prix_nuit', 'ville'];
+if (!in_array($sort, $allowSort, true)) $sort = 'date_creation';
 
 // Construction WHERE
 $where = [];
@@ -62,7 +62,7 @@ try {
 $rows = [];
 try {
     $sql = "SELECT a.id_annonce, a.titre, a.type_logement, a.prix_nuit, a.ville, 
-                   a.statut, a.created_at, a.updated_at,
+                   a.statut, a.date_creation, a.date_modification,
                    u.prenom, u.nom, u.email
             FROM annonces a
             LEFT JOIN users u ON a.id_user = u.id_user
@@ -81,6 +81,7 @@ try {
 } catch (PDOException $e) {
     error_log("Erreur fetch annonces: " . $e->getMessage());
 }
+
 
 $totalPages = max(1, (int)ceil($total / $limit));
 
@@ -279,7 +280,7 @@ include '../includes/header.php';
                                     'rejete' => 'danger'
                                 ];
                                 $label = [
-                                    'en_attente' => '⏳ En attente',
+                                    'en_attente' => '<i class="bi bi-hourglass-split"></i>En attente',
                                     'approuve' => '✅ Approuvée',
                                     'rejete' => '❌ Rejetée'
                                 ];
@@ -289,12 +290,12 @@ include '../includes/header.php';
                                 </span>
                             </td>
                             <td>
-                                <small><?= date('d/m/Y', strtotime($annonce['created_at'])) ?></small>
+                                <small><?= date('d/m/Y', strtotime($annonce['date_creation'])) ?></small>
                             </td>
                             <td>
                                 <a href="annonce_view.php?id=<?= $annonce['id_annonce'] ?>" 
                                    class="btn btn-sm btn-info" title="Voir détails">
-                                    👁️
+                                    <i class="bi bi-eye"></i>
                                 </a>
                                 
                                 <?php if ($annonce['statut'] === 'en_attente'): ?>
@@ -313,7 +314,7 @@ include '../includes/header.php';
                                 <a href="annonce_delete.php?id=<?= $annonce['id_annonce'] ?>" 
                                    class="btn btn-sm btn-danger" title="Supprimer"
                                    onclick="return confirm('Supprimer définitivement cette annonce ?')">
-                                    🗑️
+                                    <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
                         </tr>
