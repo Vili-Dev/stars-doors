@@ -434,7 +434,7 @@ a.link-white:hover {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: inherit;
-  color: rgba(44, 90, 160, 0.3333333333);
+  color: rgb(108, 120, 129) !important;
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 }
