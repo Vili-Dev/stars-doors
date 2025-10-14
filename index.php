@@ -10,7 +10,7 @@ $current_page = 'home';
 
 // Récupération des annonces en vedette
 try {
-    $stmt = $pdo->prepare("SELECT a.*, u.prenom, u.nom,
+    $stmt = $pdo->prepare("SELECT a.*, u.prenom, u.nom, u.avatar, u.race,
                           pl.nom as planete_nom, pl.galaxie, pl.image_planete,
                           p.chemin as photo_chemin
                           FROM annonces a
@@ -40,6 +40,7 @@ include 'includes/nav.php';
                     <h1 class="display-4 mb-3">
                         <i class="fas fa-rocket"></i> Bienvenue chez Stars Doors
                     </h1>
+                    
                     <p class="lead mb-4">🌌 Explorez la galaxie et trouvez votre logement parfait sur des milliers de planètes</p>
 
                     <!-- Barre de recherche -->
@@ -92,7 +93,19 @@ include 'includes/nav.php';
                             <?php endif; ?>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($listing['titre']); ?></h5>
+                            <div class="d-flex align-items-center mb-2">
+                                <?php echo generateAvatarHtml($listing['avatar'] ?? '', $listing['race'] ?? '', 35, 'me-2'); ?>
+                                <div>
+                                    <h5 class="card-title mb-0"><?php echo htmlspecialchars($listing['titre']); ?></h5>
+                                    <small class="text-muted">
+                                        Par <?php echo htmlspecialchars($listing['prenom'] . ' ' . $listing['nom']); ?>
+                                        <?php if (!empty($listing['race'])): ?>
+                                            <span class="badge bg-info ms-1"><?php echo htmlspecialchars($listing['race']); ?></span>
+                                        <?php endif; ?>
+                                    </small>
+                                </div>
+                            </div>
+                            
                             <p class="card-text text-muted mb-1">
                                 <i class="fas fa-globe text-primary"></i>
                                 <strong><?php echo htmlspecialchars($listing['planete_nom']); ?></strong>
@@ -147,19 +160,3 @@ include 'includes/nav.php';
 </main>
 
 <?php include 'includes/footer.php'; ?>
-<?php
-echo hash('sha256', 'Bouziri');
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stars Door</title>
-</head>
-<body>
-    <nav></nav>
-</body>
-</html>

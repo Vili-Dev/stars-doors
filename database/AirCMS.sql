@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`telephone` varchar(20) NOT NULL,
 	`date_de_naissance` varchar(255) NOT NULL,
 	`race` varchar(255) NOT NULL,
+	`avatar` varchar(255),
 	`role` enum('locataire', 'proprietaire', 'admin') NOT NULL DEFAULT 'locataire',
 	`date_inscription` datetime NOT NULL,
 	`actif` boolean NOT NULL DEFAULT TRUE,

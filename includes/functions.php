@@ -421,4 +421,158 @@ function titleToSlug($title) {
     $slug = preg_replace('/[\s-]+/', '-', $slug);
     return trim($slug, '-');
 }
+
+/**
+ * Retourne la classe CSS pour l'avatar par défaut selon la race
+ * @param string $race Race de l'utilisateur
+ * @return string Classe CSS Bootstrap
+ */
+function getAvatarColorClass($race) {
+    $raceColors = [
+        'Humain' => 'bg-primary',
+        'Alien' => 'bg-success',
+        'Robot' => 'bg-secondary',
+        'Vulcain' => 'bg-danger',
+        'Klingon' => 'bg-dark',
+        'Andorien' => 'bg-info',
+        'Betazoid' => 'bg-warning',
+        'Ferengi' => 'bg-success',
+        'Bajoran' => 'bg-info',
+        'Cardassian' => 'bg-secondary',
+        'Romulan' => 'bg-dark',
+        'Borg' => 'bg-danger',
+        'Jedi' => 'bg-primary',
+        'Sith' => 'bg-danger',
+        'Wookiee' => 'bg-warning'
+    ];
+    
+    return $raceColors[$race] ?? 'bg-primary';
+}
+
+/**
+ * Génère le HTML pour un avatar (image ou placeholder)
+ * @param string $avatar Chemin vers l'avatar (peut être vide)
+ * @param string $race Race de l'utilisateur
+ * @param int $size Taille de l'avatar en pixels
+ * @param string $additionalClasses Classes CSS supplémentaires
+ * @return string HTML de l'avatar
+ */
+function generateAvatarHtml($avatar, $race = '', $size = 50, $additionalClasses = '') {
+    if (!empty($avatar) && file_exists($avatar)) {
+        return sprintf(
+            '<img src="%s" class="rounded-circle %s" width="%d" height="%d" alt="Avatar" style="object-fit: cover;">',
+            htmlspecialchars($avatar),
+            htmlspecialchars($additionalClasses),
+            $size,
+            $size
+        );
+    } else {
+        $colorClass = getAvatarColorClass($race);
+        $iconSize = $size <= 35 ? '0.8rem' : ($size <= 50 ? '1rem' : '1.5rem');
+        
+        return sprintf(
+            '<div class="rounded-circle %s d-flex align-items-center justify-content-center %s" style="width: %dpx; height: %dpx;">
+                <i class="fas fa-user text-white" style="font-size: %s;"></i>
+            </div>',
+            $colorClass,
+            htmlspecialchars($additionalClasses),
+            $size,
+            $size,
+            $iconSize
+        );
+    }
+}
+
+/**
+ * Redimensionne et optimise une image pour les annonces
+ * @param string $source_file Chemin vers le fichier source
+ * @param string $original_name Nom original du fichier
+ * @return array Résultat avec success, tmp_file et error
+ */
+function resizeAndOptimizeImage($source_file, $original_name) {
+    $result = ['success' => false, 'tmp_file' => '', 'error' => ''];
+    
+    // Dimensions standard pour les annonces
+    $target_width = 1200;
+    $target_height = 800;
+    $quality = 85;
+    
+    // Créer un fichier temporaire
+    $tmp_file = tempnam(sys_get_temp_dir(), 'resize_');
+    
+    try {
+        // Détecter le type d'image
+        $image_info = getimagesize($source_file);
+        if (!$image_info) {
+            $result['error'] = 'Impossible de détecter le type d\'image';
+            return $result;
+        }
+        
+        $source_width = $image_info[0];
+        $source_height = $image_info[1];
+        $mime_type = $image_info['mime'];
+        
+        // Créer l'image source selon le type
+        switch ($mime_type) {
+            case 'image/jpeg':
+                $source_image = imagecreatefromjpeg($source_file);
+                break;
+            case 'image/png':
+                $source_image = imagecreatefrompng($source_file);
+                break;
+            case 'image/webp':
+                $source_image = imagecreatefromwebp($source_file);
+                break;
+            default:
+                $result['error'] = 'Type d\'image non supporté';
+                return $result;
+        }
+        
+        if (!$source_image) {
+            $result['error'] = 'Impossible de créer l\'image source';
+            return $result;
+        }
+        
+        // Calculer les nouvelles dimensions en gardant les proportions
+        $ratio = min($target_width / $source_width, $target_height / $source_height);
+        $new_width = round($source_width * $ratio);
+        $new_height = round($source_height * $ratio);
+        
+        // Créer l'image redimensionnée
+        $resized_image = imagecreatetruecolor($new_width, $new_height);
+        
+        // Préserver la transparence pour les PNG
+        if ($mime_type === 'image/png') {
+            imagealphablending($resized_image, false);
+            imagesavealpha($resized_image, true);
+            $transparent = imagecolorallocatealpha($resized_image, 255, 255, 255, 127);
+            imagefilledrectangle($resized_image, 0, 0, $new_width, $new_height, $transparent);
+        }
+        
+        // Redimensionner
+        imagecopyresampled($resized_image, $source_image, 0, 0, 0, 0, 
+                          $new_width, $new_height, $source_width, $source_height);
+        
+        // Sauvegarder en JPG optimisé
+        $save_result = imagejpeg($resized_image, $tmp_file, $quality);
+        
+        // Nettoyer la mémoire
+        imagedestroy($source_image);
+        imagedestroy($resized_image);
+        
+        if (!$save_result) {
+            $result['error'] = 'Impossible de sauvegarder l\'image redimensionnée';
+            return $result;
+        }
+        
+        $result['success'] = true;
+        $result['tmp_file'] = $tmp_file;
+        $result['error'] = '';
+        
+    } catch (Exception $e) {
+        $result['error'] = 'Erreur lors du redimensionnement: ' . $e->getMessage();
+    }
+    
+    return $result;
+}
 ?>

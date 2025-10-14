@@ -82,6 +82,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     error_log("Erreur mise à jour profil: " . $e->getMessage());
                 }
             }
+        } elseif ($action === 'upload_avatar') {
+            // Upload d'avatar
+            if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+                $uploadResult = uploadImage($_FILES['avatar'], UPLOAD_AVATARS_PATH, MAX_UPLOAD_SIZE);
+                
+                if ($uploadResult['success']) {
+                    try {
+                        // Supprimer l'ancien avatar s'il existe
+                        if (!empty($user['avatar']) && file_exists($user['avatar'])) {
+                            unlink($user['avatar']);
+                        }
+                        
+                        // Mettre à jour la base de données
+                        $avatarPath = 'uploads/avatars/' . $uploadResult['filename'];
+                        $stmt = $pdo->prepare("UPDATE users SET avatar = ? WHERE id_user = ?");
+                        $stmt->execute([$avatarPath, $_SESSION['user_id']]);
+                        
+                        // Actualiser les données utilisateur
+                        $user['avatar'] = $avatarPath;
+                        
+                        $success = true;
+                        setFlashMessage('Avatar mis à jour avec succès !', 'success');
+                        
+                    } catch (PDOException $e) {
+                        $errors[] = 'Erreur lors de la mise à jour de l\'avatar.';
+                        error_log("Erreur upload avatar: " . $e->getMessage());
+                        
+                        // Supprimer le fichier uploadé en cas d'erreur
+                        if (file_exists($uploadResult['filename'])) {
+                            unlink($uploadResult['filename']);
+                        }
+                    }
+                } else {
+                    $errors[] = $uploadResult['error'];
+                }
+            } else {
+                $errors[] = 'Veuillez sélectionner une image valide.';
+            }
         } elseif ($action === 'change_password') {
             // Changement de mot de passe
             $current_password = $_POST['current_password'] ?? '';
@@ -144,6 +182,37 @@ include 'includes/nav.php';
                 </ul>
             </div>
             <?php endif; ?>
+
+            <!-- Avatar -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Photo de profil</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center">
+                            <?php echo generateAvatarHtml($user['avatar'] ?? '', $user['race'] ?? '', 120, 'mb-3 mx-auto'); ?>
+                        </div>
+                        <div class="col-md-8">
+                            <form method="POST" enctype="multipart/form-data" novalidate>
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                <input type="hidden" name="action" value="upload_avatar">
+                                
+                                <div class="mb-3">
+                                    <label for="avatar" class="form-label">Changer l'avatar</label>
+                                    <input type="file" class="form-control" id="avatar" name="avatar" 
+                                           accept="image/jpeg,image/png,image/gif,image/webp">
+                                    <div class="form-text">Formats acceptés : JPG, PNG, GIF, WebP (max 5MB)</div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-upload"></i> Mettre à jour l'avatar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Informations personnelles -->
             <div class="card mb-4">

@@ -13,6 +13,16 @@ $current_page = 'dashboard';
 $user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['user_role'];
 
+// Récupération des données utilisateur pour l'avatar
+try {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id_user = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    error_log("Erreur récupération utilisateur dashboard: " . $e->getMessage());
+    $user = [];
+}
+
 // Traitement de la suppression d'annonce
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_listing') {
     // Vérification CSRF
@@ -83,8 +93,16 @@ include 'includes/nav.php';
 
     <div class="row">
         <div class="col-12 mb-4">
-            <h1>Tableau de bord</h1>
-            <p class="text-muted">Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+            <div class="d-flex align-items-center">
+                <?php echo generateAvatarHtml($user['avatar'] ?? '', $user['race'] ?? '', 60, 'me-3'); ?>
+                <div>
+                    <h1 class="mb-1">Tableau de bord</h1>
+                    <p class="text-muted mb-0">Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+                    <?php if (!empty($user['race'])): ?>
+                        <span class="badge bg-info"><?php echo htmlspecialchars($user['race']); ?></span>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -126,7 +144,7 @@ include 'includes/nav.php';
                 try {
                     if ($user_role === 'proprietaire' || $user_role === 'admin') {
                         // Réservations reçues pour les propriétaires
-                        $stmt = $pdo->prepare("SELECT r.*, a.titre, a.ville, u.prenom, u.nom, u.email 
+                        $stmt = $pdo->prepare("SELECT r.*, a.titre, a.ville, u.prenom, u.nom, u.email, u.avatar, u.race 
                                               FROM reservations r 
                                               LEFT JOIN annonces a ON r.id_annonce = a.id_annonce 
                                               LEFT JOIN users u ON r.id_user = u.id_user 
@@ -146,14 +164,22 @@ include 'includes/nav.php';
                                 <div class="border-bottom pb-3 mb-3">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
-                                            <h6><?php echo htmlspecialchars($reservation['titre']); ?></h6>
-                                            <p class="text-muted mb-1">
-                                                <?php echo htmlspecialchars($reservation['prenom'] . ' ' . $reservation['nom']); ?>
-                                            </p>
-                                            <small class="text-muted">
-                                                Du <?php echo date('d/m/Y', strtotime($reservation['date_debut'])); ?>
-                                                au <?php echo date('d/m/Y', strtotime($reservation['date_fin'])); ?>
-                                            </small>
+                                            <div class="d-flex align-items-center">
+                                                <?php echo generateAvatarHtml($reservation['avatar'] ?? '', $reservation['race'] ?? '', 50, 'me-3'); ?>
+                                                <div>
+                                                    <h6 class="mb-1"><?php echo htmlspecialchars($reservation['titre']); ?></h6>
+                                                    <p class="text-muted mb-1">
+                                                        <?php echo htmlspecialchars($reservation['prenom'] . ' ' . $reservation['nom']); ?>
+                                                        <?php if (!empty($reservation['race'])): ?>
+                                                            <span class="badge bg-info ms-2"><?php echo htmlspecialchars($reservation['race']); ?></span>
+                                                        <?php endif; ?>
+                                                    </p>
+                                                    <small class="text-muted">
+                                                        Du <?php echo date('d/m/Y', strtotime($reservation['date_debut'])); ?>
+                                                        au <?php echo date('d/m/Y', strtotime($reservation['date_fin'])); ?>
+                                                    </small>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-3">
                                             <span class="badge bg-<?php 
@@ -234,9 +260,10 @@ include 'includes/nav.php';
                 <h3>Mes annonces</h3>
                 <?php
                 try {
-                    $stmt = $pdo->prepare("SELECT a.*, COUNT(r.id_reservation) as nb_reservations 
+                    $stmt = $pdo->prepare("SELECT a.*, COUNT(r.id_reservation) as nb_reservations, u.avatar, u.race 
                                           FROM annonces a 
                                           LEFT JOIN reservations r ON a.id_annonce = r.id_annonce 
+                                          LEFT JOIN users u ON a.id_user = u.id_user 
                                           WHERE a.id_user = ? 
                                           GROUP BY a.id_annonce 
                                           ORDER BY a.date_creation DESC 
@@ -251,10 +278,19 @@ include 'includes/nav.php';
                             <div class="border-bottom pb-3 mb-3">
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
-                                        <h6><?php echo htmlspecialchars($annonce['titre']); ?></h6>
-                                        <p class="text-muted mb-0">
-                                            <?php echo htmlspecialchars($annonce['ville']); ?>
-                                        </p>
+                                        <div class="d-flex align-items-center">
+                                            <?php echo generateAvatarHtml($annonce['avatar'] ?? '', $annonce['race'] ?? '', 50, 'me-3'); ?>
+                                            <div>
+                                                <h6 class="mb-1"><?php echo htmlspecialchars($annonce['titre']); ?></h6>
+                                                <p class="text-muted mb-1">
+                                                    <?php echo htmlspecialchars($annonce['ville']); ?>
+                                                    <?php if (!empty($annonce['race'])): ?>
+                                                        <span class="badge bg-info ms-2"><?php echo htmlspecialchars($annonce['race']); ?></span>
+                                                    <?php endif; ?>
+                                                </p>
+                                                <small class="text-muted">Propriétaire</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-2">
                                         <span class="badge bg-<?php echo $annonce['disponible'] ? 'success' : 'secondary'; ?>">

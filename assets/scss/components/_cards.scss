@@ -1,460 +1,221 @@
 // ===================================================================
-// CARTES - STARS DOORS
+// CARTES - STARS DOORS (Version simplifiée)
 // Styles pour les cartes et composants similaires
 // ===================================================================
 
 // === CARTE DE BASE ===
 .card {
-  @include card();
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-clip: border-box;
+  background-color: $white;
+  border: $card-border-width solid $card-border-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-sm;
+  transition: $transition-base;
 }
 
 .card-body {
   flex: 1 1 auto;
-  padding: $card-spacer-y $card-spacer-x;
+  padding: $card-spacer;
 }
 
 .card-title {
-  margin-bottom: spacing(2);
+  margin-bottom: 0.5rem;
   font-weight: $font-weight-medium;
   font-size: $font-size-lg;
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.card-subtitle {
-  margin-top: -spacing(1);
-  margin-bottom: 0;
-  font-weight: $font-weight-normal;
-  color: $gray-600;
 }
 
 .card-text {
-  &:last-child {
-    margin-bottom: 0;
-  }
+  margin-bottom: $spacer;
 }
 
-.card-link {
-  &:hover {
-    text-decoration: none;
-  }
-
-  + .card-link {
-    margin-left: $card-spacer-x;
-  }
+.card-text:last-child {
+  margin-bottom: 0;
 }
 
 // === HEADER ET FOOTER ===
 .card-header {
-  padding: $card-spacer-y $card-spacer-x;
-  margin-bottom: 0;
-  color: $dark-color;
+  padding: $card-spacer;
   background-color: $gray-100;
   border-bottom: $card-border-width solid $card-border-color;
   border-top-left-radius: $card-border-radius;
   border-top-right-radius: $card-border-radius;
-
-  &:first-child {
-    border-radius: $card-border-radius $card-border-radius 0 0;
-  }
 }
 
 .card-footer {
-  padding: $card-spacer-y $card-spacer-x;
-  color: $gray-600;
+  padding: $card-spacer;
   background-color: $gray-100;
   border-top: $card-border-width solid $card-border-color;
   border-bottom-left-radius: $card-border-radius;
   border-bottom-right-radius: $card-border-radius;
-
-  &:last-child {
-    border-radius: 0 0 $card-border-radius $card-border-radius;
-  }
 }
 
 // === IMAGES ===
-.card-img,
-.card-img-top,
-.card-img-bottom {
-  width: 100%;
-}
-
-.card-img,
 .card-img-top {
+  width: 100%;
   border-top-left-radius: $card-border-radius;
   border-top-right-radius: $card-border-radius;
 }
 
-.card-img,
-.card-img-bottom {
-  border-bottom-left-radius: $card-border-radius;
-  border-bottom-right-radius: $card-border-radius;
-}
-
-// === OVERLAY ===
-.card-img-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: $card-spacer-y $card-spacer-x;
-  border-radius: $card-border-radius;
-}
-
-// === VARIANTES DE CARTES ===
+// === VARIANTES ===
 // Carte avec hover
 .card-hover {
-  @include card-hover();
+  cursor: pointer;
 }
 
-// Carte avec ombre
-.card-shadow {
-  box-shadow: $box-shadow;
-}
-
-.card-shadow-lg {
+.card-hover:hover {
   box-shadow: $box-shadow-lg;
+  transform: translateY(-2px);
 }
 
-// === CARTES SPÉCIFIQUES AU PROJET ===
-// Carte de logement
+// === CARTE DE LOGEMENT (LISTING) ===
 .listing-card {
-  @extend .card;
-  @include card-hover();
   overflow: hidden;
   height: $listing-card-height;
-
-  .listing-image {
-    position: relative;
-    overflow: hidden;
-    height: $listing-image-height;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      @include transition(transform 0.3s ease);
-    }
-
-    .image-overlay {
-      @include overlay(0.3);
-      opacity: 0;
-      @include transition($transition-base);
-    }
-
-    .listing-actions {
-      position: absolute;
-      top: spacing(2);
-      right: spacing(2);
-      z-index: 2;
-
-      .btn {
-        margin-left: spacing(1);
-        backdrop-filter: blur(10px);
-        background-color: rgba($white, 0.9);
-      }
-    }
-
-    .listing-badge {
-      position: absolute;
-      top: spacing(2);
-      left: spacing(2);
-      z-index: 2;
-      @include badge($primary-color);
-    }
-  }
-
-  &:hover {
-    .listing-image img {
-      transform: scale(1.05);
-    }
-
-    .image-overlay {
-      opacity: 1;
-    }
-  }
-
-  .listing-content {
-    padding: spacing(3);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .listing-title {
-    font-weight: $font-weight-medium;
-    margin-bottom: spacing(1);
-    @include line-clamp(2);
-  }
-
-  .listing-location {
-    color: $gray-600;
-    font-size: $font-size-sm;
-    margin-bottom: spacing(2);
-
-    .fas {
-      margin-right: spacing(1);
-    }
-  }
-
-  .listing-description {
-    color: $gray-700;
-    font-size: $font-size-sm;
-    margin-bottom: spacing(2);
-    @include line-clamp(2);
-    flex: 1;
-  }
-
-  .listing-features {
-    display: flex;
-    align-items: center;
-    margin-bottom: spacing(2);
-    font-size: $font-size-sm;
-    color: $gray-600;
-
-    .feature {
-      margin-right: spacing(3);
-
-      .fas {
-        margin-right: spacing(1);
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .listing-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .listing-price {
-    font-weight: $font-weight-bold;
-    font-size: $font-size-lg;
-    color: $primary-color;
-
-    .currency {
-      font-size: $font-size-sm;
-      color: $gray-600;
-    }
-  }
-
-  .listing-rating {
-    display: flex;
-    align-items: center;
-    font-size: $font-size-sm;
-
-    .stars {
-      color: $warning-color;
-      margin-right: spacing(1);
-    }
-
-    .rating-count {
-      color: $gray-600;
-    }
-  }
+  border: $card-border-width solid $card-border-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-sm;
+  transition: $transition-base;
+  cursor: pointer;
 }
 
-// === CARTES DE STATISTIQUES ===
-.stat-card {
-  @extend .card;
-  text-align: center;
-  
-  .stat-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto spacing(2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: $white;
-    
-    &.primary { background-color: $primary-color; }
-    &.secondary { background-color: $secondary-color; }
-    &.success { background-color: $success-color; }
-    &.danger { background-color: $danger-color; }
-    &.warning { background-color: $warning-color; }
-    &.info { background-color: $info-color; }
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-    font-weight: $font-weight-bold;
-    color: $dark-color;
-    margin-bottom: spacing(1);
-  }
-  
-  .stat-label {
-    color: $gray-600;
-    font-size: $font-size-sm;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+.listing-card:hover {
+  box-shadow: $box-shadow-lg;
+  transform: translateY(-5px);
 }
 
-// === CARTES DE PROFIL ===
-.profile-card {
-  @extend .card;
-  text-align: center;
-  
-  .profile-avatar {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto spacing(2);
-    @include avatar(80px);
-  }
-  
-  .profile-name {
-    font-weight: $font-weight-medium;
-    margin-bottom: spacing(1);
-  }
-  
-  .profile-role {
-    color: $primary-color;
-    font-size: $font-size-sm;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: spacing(2);
-  }
-  
-  .profile-stats {
-    display: flex;
-    justify-content: space-around;
-    padding-top: spacing(2);
-    border-top: 1px solid $gray-200;
-    
-    .stat {
-      text-align: center;
-      
-      .number {
-        font-weight: $font-weight-bold;
-        font-size: $font-size-lg;
-        color: $dark-color;
-      }
-      
-      .label {
-        font-size: $font-size-sm;
-        color: $gray-600;
-      }
-    }
-  }
+// Image du listing
+.listing-card .listing-image {
+  position: relative;
+  overflow: hidden;
+  height: $listing-image-height;
 }
 
-// === CARTES D'AVIS ===
-.review-card {
-  @extend .card;
-  
-  .review-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: spacing(2);
-    
-    .reviewer-avatar {
-      @include avatar(40px);
-      margin-right: spacing(2);
-    }
-    
-    .reviewer-info {
-      flex: 1;
-      
-      .reviewer-name {
-        font-weight: $font-weight-medium;
-        margin-bottom: spacing(0.5);
-      }
-      
-      .review-date {
-        font-size: $font-size-sm;
-        color: $gray-600;
-      }
-    }
-    
-    .review-rating {
-      color: $warning-color;
-    }
-  }
-  
-  .review-content {
-    line-height: $line-height-lg;
-  }
+.listing-card .listing-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-// === GROUPES DE CARTES ===
-.card-group {
+.listing-card:hover .listing-image img {
+  transform: scale(1.05);
+}
+
+// Actions (favoris, etc.)
+.listing-card .listing-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+}
+
+.listing-card .listing-actions .btn {
+  margin-left: 0.5rem;
+  background-color: rgba($white, 0.9);
+}
+
+// Badge sur l'image
+.listing-card .listing-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: $font-weight-medium;
+  color: $white;
+  background-color: $primary-color;
+  border-radius: $border-radius-sm;
+}
+
+// Contenu du listing
+.listing-card .listing-content {
+  padding: 1rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
-
-  .card {
-    margin-bottom: spacing(3);
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  @include media-breakpoint-up(sm) {
-    flex-direction: row;
-    
-    .card {
-      flex: 1 0 0%;
-      margin-bottom: 0;
-      margin-right: spacing(3);
-      
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
 }
 
-.card-deck {
-  @extend .card-group;
+.listing-card .listing-title {
+  font-weight: $font-weight-medium;
+  margin-bottom: 0.5rem;
+  @include text-truncate;
 }
 
-// === CARTES RESPONSIVE ===
-@include media-breakpoint-down(sm) {
+.listing-card .listing-location {
+  color: $gray-600;
+  font-size: $font-size-sm;
+  margin-bottom: 0.5rem;
+}
+
+.listing-card .listing-description {
+  color: $gray-700;
+  font-size: $font-size-sm;
+  margin-bottom: 0.5rem;
+  flex: 1;
+}
+
+// Features (chambres, lits, etc.)
+.listing-card .listing-features {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: $font-size-sm;
+  color: $gray-600;
+}
+
+.listing-card .listing-features .feature {
+  margin-right: 1rem;
+}
+
+.listing-card .listing-features .feature:last-child {
+  margin-right: 0;
+}
+
+// Footer avec prix
+.listing-card .listing-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listing-card .listing-price {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  color: $primary-color;
+}
+
+.listing-card .listing-rating {
+  display: flex;
+  align-items: center;
+  font-size: $font-size-sm;
+}
+
+.listing-card .listing-rating .stars {
+  color: $warning-color;
+  margin-right: 0.25rem;
+}
+
+// === RESPONSIVE ===
+// Cartes plus petites sur mobile
+@include responsive-md {
   .listing-card {
     height: auto;
-    
-    .listing-image {
-      height: 180px;
-    }
-    
-    .listing-features {
-      flex-wrap: wrap;
-      
-      .feature {
-        margin-bottom: spacing(1);
-      }
-    }
-    
-    .listing-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      
-      .listing-rating {
-        margin-top: spacing(2);
-      }
-    }
   }
-  
-  .card-group {
-    .card {
-      margin-right: 0;
-      margin-bottom: spacing(2);
-    }
+
+  .listing-card .listing-image {
+    height: 180px;
+  }
+
+  .listing-card .listing-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .listing-card .listing-rating {
+    margin-top: 0.5rem;
   }
 }

@@ -1,18 +1,13 @@
 // ===================================================================
-// MAIN SASS FILE - STARS DOORS
+// MAIN SASS FILE - STARS DOORS (Version simplifiée)
 // Point d'entrée principal pour tous les styles SASS
 // ===================================================================
 
 // === ABSTRACTS ===
-// Variables, fonctions et mixins (pas de CSS généré)
+// Variables, fonctions et mixins
 @import "abstracts/_variables";
 @import "abstracts/functions";
 @import "abstracts/mixins";
-
-// === VENDORS ===
-// Code CSS de librairies tierces
-// Bootstrap sera chargé via CDN, on peut ajouter des overrides ici si nécessaire
-// @import 'vendors/bootstrap-overrides';
 
 // === BASE ===
 // Styles de base et reset
@@ -20,7 +15,7 @@
 @import "base/typography";
 
 // === LAYOUT ===
-// Styles de mise en page (header, footer, navigation, grid, etc.)
+// Styles de mise en page
 @import "layout/navigation";
 
 // === COMPONENTS ===
@@ -32,420 +27,134 @@
 // Styles spécifiques aux pages
 @import "pages/home";
 
-// === UTILITIES ===
-// Classes utilitaires et helpers
+// ===================================================================
+// === UTILITAIRES SIMPLES ===
+// Classes utilitaires essentielles uniquement
+// ===================================================================
 
-// Utilitaires d'espacement
-@each $breakpoint in map-keys($breakpoints) {
-  @include media-breakpoint-up($breakpoint) {
-    $infix: if($breakpoint == xs, "", "-#{$breakpoint}");
+// === ESPACEMENT ===
+// Marges
+.m-0 { margin: 0; }
+.m-1 { margin: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+.m-3 { margin: 1rem; }
+.m-4 { margin: 1.5rem; }
+.m-5 { margin: 3rem; }
 
-    @each $prop, $abbrev in (margin: m, padding: p) {
-      @each $size, $length in $spacers {
-        .#{$abbrev}#{$infix}-#{$size} {
-          #{$prop}: $length !important;
-        }
-        .#{$abbrev}t#{$infix}-#{$size},
-        .#{$abbrev}y#{$infix}-#{$size} {
-          #{$prop}-top: $length !important;
-        }
-        .#{$abbrev}r#{$infix}-#{$size},
-        .#{$abbrev}x#{$infix}-#{$size} {
-          #{$prop}-right: $length !important;
-        }
-        .#{$abbrev}b#{$infix}-#{$size},
-        .#{$abbrev}y#{$infix}-#{$size} {
-          #{$prop}-bottom: $length !important;
-        }
-        .#{$abbrev}l#{$infix}-#{$size},
-        .#{$abbrev}x#{$infix}-#{$size} {
-          #{$prop}-left: $length !important;
-        }
-      }
-    }
-  }
-}
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
 
-// Utilitaires de display
-.d-none {
-  display: none !important;
-}
-.d-inline {
-  display: inline !important;
-}
-.d-inline-block {
-  display: inline-block !important;
-}
-.d-block {
-  display: block !important;
-}
-.d-table {
-  display: table !important;
-}
-.d-table-row {
-  display: table-row !important;
-}
-.d-table-cell {
-  display: table-cell !important;
-}
-.d-flex {
-  display: flex !important;
-}
-.d-inline-flex {
-  display: inline-flex !important;
-}
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
 
-@each $breakpoint in map-keys($breakpoints) {
-  @include media-breakpoint-up($breakpoint) {
-    $infix: if($breakpoint == xs, "", "-#{$breakpoint}");
+.ml-0 { margin-left: 0; }
+.ml-1 { margin-left: 0.25rem; }
+.ml-2 { margin-left: 0.5rem; }
+.ml-3 { margin-left: 1rem; }
 
-    .d#{$infix}-none {
-      display: none !important;
-    }
-    .d#{$infix}-inline {
-      display: inline !important;
-    }
-    .d#{$infix}-inline-block {
-      display: inline-block !important;
-    }
-    .d#{$infix}-block {
-      display: block !important;
-    }
-    .d#{$infix}-table {
-      display: table !important;
-    }
-    .d#{$infix}-table-row {
-      display: table-row !important;
-    }
-    .d#{$infix}-table-cell {
-      display: table-cell !important;
-    }
-    .d#{$infix}-flex {
-      display: flex !important;
-    }
-    .d#{$infix}-inline-flex {
-      display: inline-flex !important;
-    }
-  }
-}
+.mr-0 { margin-right: 0; }
+.mr-1 { margin-right: 0.25rem; }
+.mr-2 { margin-right: 0.5rem; }
+.mr-3 { margin-right: 1rem; }
 
-// Utilitaires Flexbox
-.flex-row {
-  flex-direction: row !important;
-}
-.flex-column {
-  flex-direction: column !important;
-}
-.flex-row-reverse {
-  flex-direction: row-reverse !important;
-}
-.flex-column-reverse {
-  flex-direction: column-reverse !important;
-}
+// Padding
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 3rem; }
 
-.flex-wrap {
-  flex-wrap: wrap !important;
-}
-.flex-nowrap {
-  flex-wrap: nowrap !important;
-}
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse !important;
-}
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: 0.25rem; }
+.pt-2 { padding-top: 0.5rem; }
+.pt-3 { padding-top: 1rem; }
+.pt-4 { padding-top: 1.5rem; }
+.pt-5 { padding-top: 3rem; }
 
-.justify-content-start {
-  justify-content: flex-start !important;
-}
-.justify-content-end {
-  justify-content: flex-end !important;
-}
-.justify-content-center {
-  justify-content: center !important;
-}
-.justify-content-between {
-  justify-content: space-between !important;
-}
-.justify-content-around {
-  justify-content: space-around !important;
-}
-.justify-content-evenly {
-  justify-content: space-evenly !important;
-}
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: 0.25rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pb-3 { padding-bottom: 1rem; }
+.pb-4 { padding-bottom: 1.5rem; }
+.pb-5 { padding-bottom: 3rem; }
 
-.align-items-start {
-  align-items: flex-start !important;
-}
-.align-items-end {
-  align-items: flex-end !important;
-}
-.align-items-center {
-  align-items: center !important;
-}
-.align-items-baseline {
-  align-items: baseline !important;
-}
-.align-items-stretch {
-  align-items: stretch !important;
-}
+// === DISPLAY ===
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
 
-.align-self-auto {
-  align-self: auto !important;
-}
-.align-self-start {
-  align-self: flex-start !important;
-}
-.align-self-end {
-  align-self: flex-end !important;
-}
-.align-self-center {
-  align-self: center !important;
-}
-.align-self-baseline {
-  align-self: baseline !important;
-}
-.align-self-stretch {
-  align-self: stretch !important;
-}
+// === FLEXBOX ===
+.flex-row { flex-direction: row; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
 
-// Utilitaires de couleurs de fond
-.bg-primary {
-  background-color: $primary-color !important;
-}
-.bg-secondary {
-  background-color: $secondary-color !important;
-}
-.bg-success {
-  background-color: $success-color !important;
-}
-.bg-danger {
-  background-color: $danger-color !important;
-}
-.bg-warning {
-  background-color: $warning-color !important;
-}
-.bg-info {
-  background-color: $info-color !important;
-}
-.bg-light {
-  background-color: $light-color !important;
-}
-.bg-dark {
-  background-color: $dark-color !important;
-}
-.bg-white {
-  background-color: $white !important;
-}
-.bg-transparent {
-  background-color: transparent !important;
-}
+.justify-content-start { justify-content: flex-start; }
+.justify-content-end { justify-content: flex-end; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
 
-// Utilitaires de bordures
-.border {
-  border: $border-width solid $border-color !important;
-}
-.border-top {
-  border-top: $border-width solid $border-color !important;
-}
-.border-right {
-  border-right: $border-width solid $border-color !important;
-}
-.border-bottom {
-  border-bottom: $border-width solid $border-color !important;
-}
-.border-left {
-  border-left: $border-width solid $border-color !important;
-}
+.align-items-start { align-items: flex-start; }
+.align-items-end { align-items: flex-end; }
+.align-items-center { align-items: center; }
 
-.border-0 {
-  border: 0 !important;
-}
-.border-top-0 {
-  border-top: 0 !important;
-}
-.border-right-0 {
-  border-right: 0 !important;
-}
-.border-bottom-0 {
-  border-bottom: 0 !important;
-}
-.border-left-0 {
-  border-left: 0 !important;
-}
+// === COULEURS DE FOND ===
+.bg-primary { background-color: $primary-color; }
+.bg-secondary { background-color: $secondary-color; }
+.bg-success { background-color: $success-color; }
+.bg-danger { background-color: $danger-color; }
+.bg-warning { background-color: $warning-color; }
+.bg-info { background-color: $info-color; }
+.bg-light { background-color: $light-color; }
+.bg-dark { background-color: $dark-color; }
+.bg-white { background-color: $white; }
 
-// Couleurs de bordures
-.border-primary {
-  border-color: $primary-color !important;
-}
-.border-secondary {
-  border-color: $secondary-color !important;
-}
-.border-success {
-  border-color: $success-color !important;
-}
-.border-danger {
-  border-color: $danger-color !important;
-}
-.border-warning {
-  border-color: $warning-color !important;
-}
-.border-info {
-  border-color: $info-color !important;
-}
-.border-light {
-  border-color: $light-color !important;
-}
-.border-dark {
-  border-color: $dark-color !important;
-}
-.border-white {
-  border-color: $white !important;
-}
+// === BORDURES ===
+.border { border: $border-width solid $border-color; }
+.border-0 { border: 0; }
 
-// Border radius
-.rounded {
-  border-radius: $border-radius !important;
-}
-.rounded-sm {
-  border-radius: $border-radius-sm !important;
-}
-.rounded-lg {
-  border-radius: $border-radius-lg !important;
-}
-.rounded-xl {
-  border-radius: $border-radius-xl !important;
-}
-.rounded-pill {
-  border-radius: $border-radius-pill !important;
-}
-.rounded-circle {
-  border-radius: 50% !important;
-}
-.rounded-0 {
-  border-radius: 0 !important;
-}
+.rounded { border-radius: $border-radius; }
+.rounded-sm { border-radius: $border-radius-sm; }
+.rounded-lg { border-radius: $border-radius-lg; }
+.rounded-circle { border-radius: 50%; }
 
-// Utilitaires de position
-.position-static {
-  position: static !important;
-}
-.position-relative {
-  position: relative !important;
-}
-.position-absolute {
-  position: absolute !important;
-}
-.position-fixed {
-  position: fixed !important;
-}
-.position-sticky {
-  position: sticky !important;
-}
+// === OMBRES ===
+.shadow-sm { box-shadow: $box-shadow-sm; }
+.shadow { box-shadow: $box-shadow; }
+.shadow-lg { box-shadow: $box-shadow-lg; }
 
-// Utilitaires de largeur et hauteur
-.w-25 {
-  width: 25% !important;
-}
-.w-50 {
-  width: 50% !important;
-}
-.w-75 {
-  width: 75% !important;
-}
-.w-100 {
-  width: 100% !important;
-}
-.w-auto {
-  width: auto !important;
-}
+// === POSITION ===
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-fixed { position: fixed; }
 
-.h-25 {
-  height: 25% !important;
-}
-.h-50 {
-  height: 50% !important;
-}
-.h-75 {
-  height: 75% !important;
-}
-.h-100 {
-  height: 100% !important;
-}
-.h-auto {
-  height: auto !important;
-}
+// === LARGEUR ===
+.w-25 { width: 25%; }
+.w-50 { width: 50%; }
+.w-75 { width: 75%; }
+.w-100 { width: 100%; }
 
-.mw-100 {
-  max-width: 100% !important;
-}
-.mh-100 {
-  max-height: 100% !important;
-}
+.h-100 { height: 100%; }
 
-.min-vw-100 {
-  min-width: 100vw !important;
-}
-.min-vh-100 {
-  min-height: 100vh !important;
-}
-
-.vw-100 {
-  width: 100vw !important;
-}
-.vh-100 {
-  height: 100vh !important;
-}
-
-// Utilitaires d'ombre
-.shadow-none {
-  box-shadow: none !important;
-}
-.shadow-sm {
-  box-shadow: $box-shadow-sm !important;
-}
-.shadow {
-  box-shadow: $box-shadow !important;
-}
-.shadow-lg {
-  box-shadow: $box-shadow-lg !important;
-}
-
-// Utilitaires de visibilité
-.visible {
-  visibility: visible !important;
-}
-.invisible {
-  visibility: hidden !important;
-}
-
+// ===================================================================
 // === STYLES SPÉCIFIQUES AU PROJET ===
+// ===================================================================
 
-// Hero section avec pattern
-.hero-pattern {
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: radial-gradient(
-      circle,
-      rgba($white, 0.1) 1px,
-      transparent 1px
-    );
-    background-size: 20px 20px;
-    pointer-events: none;
-  }
-}
-
-// Container avec largeur maximale personnalisée
+// Container avec largeur maximale
 .container-stars {
   width: 100%;
-  padding-right: spacing(3);
-  padding-left: spacing(3);
+  padding-right: 1rem;
+  padding-left: 1rem;
   margin-right: auto;
   margin-left: auto;
   max-width: 1400px;
@@ -455,146 +164,37 @@
 .listings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: spacing(4);
+  gap: 1.5rem;
+}
 
-  @include media-breakpoint-down(md) {
+// Responsive pour la grille
+@include responsive-md {
+  .listings-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: spacing(3);
+    gap: 1rem;
   }
+}
 
-  @include media-breakpoint-down(sm) {
+@include responsive-lg {
+  .listings-grid {
     grid-template-columns: 1fr;
-    gap: spacing(2);
   }
 }
 
-// Animation de chargement
-.loading-spinner {
-  @include spinner($primary-color);
-}
-
-// Overlay sombre
-.overlay {
-  @include overlay();
-}
-
-.overlay-light {
-  @include overlay(0.3, $white);
-}
-
-// Badge flottant
-.floating-badge {
-  position: absolute;
-  top: spacing(2);
-  right: spacing(2);
-  z-index: 10;
-  @include badge($primary-color);
-  @include transition($transition-base);
-
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-// Section avec fond dégradé
-.gradient-bg {
-  @include gradient(135deg, $primary-color, $primary-dark);
-}
-
-// Carte avec élévation
-.elevation-1 {
-  box-shadow: elevation-shadow(1) !important;
-}
-.elevation-2 {
-  box-shadow: elevation-shadow(2) !important;
-}
-.elevation-3 {
-  box-shadow: elevation-shadow(3) !important;
-}
-.elevation-4 {
-  box-shadow: elevation-shadow(4) !important;
-}
-.elevation-5 {
-  box-shadow: elevation-shadow(5) !important;
-}
-
-// Animation d'apparition au scroll
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s ease;
-
-  &.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Mode sombre (pour future implémentation)
-.dark-mode {
-  .card {
-    background-color: $gray-800;
-    color: $white;
-    border-color: $gray-700;
-  }
-
-  .text-muted {
-    color: $gray-400 !important;
-  }
-
-  .bg-light {
-    background-color: $gray-800 !important;
-  }
-}
-
-// Print styles
-@media print {
-  .no-print {
-    display: none !important;
-  }
-
-  .card {
-    border: 1px solid $black !important;
-    box-shadow: none !important;
-  }
-
-  .btn {
-    display: none !important;
-  }
-
-  .navbar,
-  .footer {
-    display: none !important;
-  }
-}
-
-// === HIGH CONTRAST MODE ===
-@media (prefers-contrast: high) {
-  .card {
-    border-color: $black;
-    border-width: 2px;
-  }
-
-  .btn {
-    border-width: 2px;
-  }
-
-  .text-muted {
-    color: $dark-color !important;
-  }
+// === RESPONSIVE UTILITIES ===
+// Cacher sur mobile
+@include responsive-md {
+  .d-md-none { display: none; }
+  .d-md-block { display: block; }
+  .d-md-flex { display: flex; }
 }
 
 // === REDUCED MOTION ===
+// Respecter les préférences d'accessibilité
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .reveal-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }

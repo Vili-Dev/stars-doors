@@ -21,8 +21,6 @@
 - Carousel d'images sur les pages de détail
 - Dashboard propriétaire fonctionnel
 
-📝 **Voir `SESSION_SUMMARY.md` pour les détails complets**
-
 ---
 
 ## ✨ Fonctionnalités Principales
@@ -224,10 +222,13 @@ stars-doors/
 ├── logout.php             # Déconnexion
 ├── install.php            # Installation automatique
 ├── README.md              # Ce fichier
-├── SESSION_SUMMARY.md     # Résumé dernière session
-├── PHASE1_README.md       # Doc Phase 1
-├── PHASE2_README.md       # Doc Phase 2
-└── PHASE3_README.md       # Doc Phase 3
+└── docs/                  # 📚 Documentation
+    ├── GUIDE_COMPILATION_SASS.md
+    ├── GUIDE_SCSS_SIMPLE.md
+    ├── README_SASS.md
+    ├── PHASE1_README.md
+    ├── PHASE2_README.md
+    └── PHASE3_README.md
 ```
 
 ---
@@ -551,10 +552,21 @@ Le `.htaccess` dans `uploads/` peut bloquer l'accès. Vérifiez qu'il utilise la
 
 ## 📖 Documentation Complète
 
-- `PHASE1_README.md` - Système spatial (planètes, races)
-- `PHASE2_README.md` - Recherche et exploration
-- `PHASE3_README.md` - Transport et monnaies
-- `PHASE4_README.md` - Fonctionnalités avancées (à créer)
+👉 **[`docs/README.md`](docs/README.md)** - Index de toute la documentation
+
+### 🎨 Guides SASS
+- [`docs/sass/README_SASS.md`](docs/sass/README_SASS.md) - ⭐ Index documentation SASS
+- [`docs/sass/GUIDE_COMPILATION_SASS.md`](docs/sass/GUIDE_COMPILATION_SASS.md) - Comment compiler
+- [`docs/sass/GUIDE_SCSS_SIMPLE.md`](docs/sass/GUIDE_SCSS_SIMPLE.md) - Comment modifier les styles
+
+### 📚 Guides du projet
+- [`docs/guides/PHASE1_README.md`](docs/guides/PHASE1_README.md) - Système spatial (planètes, races)
+- [`docs/guides/PHASE2_README.md`](docs/guides/PHASE2_README.md) - Recherche et exploration
+- [`docs/guides/PHASE3_README.md`](docs/guides/PHASE3_README.md) - Transport et monnaies
+
+### 📋 Autres
+- [`docs/PROJET_COMPLET.md`](docs/PROJET_COMPLET.md) - État complet du projet
+- [`docs/SECURITY.md`](docs/SECURITY.md) - Guide de sécurité
 
 ---
 

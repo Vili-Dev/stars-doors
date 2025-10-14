@@ -1,5 +1,5 @@
 // ===================================================================
-// BOUTONS - STARS DOORS
+// BOUTONS - STARS DOORS (Version simplifiée)
 // Styles pour tous les boutons du projet
 // ===================================================================
 
@@ -8,385 +8,207 @@
   display: inline-block;
   font-family: $font-family-base;
   font-weight: $font-weight-medium;
-  line-height: $btn-line-height;
-  color: $dark-color;
+  line-height: 1.5;
+  color: $white;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-color: transparent;
-  border: $border-width solid transparent;
+  background-color: $primary-color;
+  border: $border-width solid $primary-color;
   padding: $btn-padding-y $btn-padding-x;
   font-size: $btn-font-size;
   border-radius: $btn-border-radius;
-  @include transition($transition-base);
-
-  &:hover {
-    color: $dark-color;
-    text-decoration: none;
-  }
-
-  &:focus,
-  &.focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
-  }
-
-  &.disabled,
-  &:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-
-  &:not(:disabled):not(.disabled):active,
-  &:not(:disabled):not(.disabled).active {
-    background-image: none;
-  }
+  transition: $transition-base;
 }
 
-// === VARIANTS DE COULEURS ===
-// Bouton primary
+.btn:hover {
+  background-color: lighten($primary-color, 10%);
+  border-color: lighten($primary-color, 10%);
+}
+
+
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// === BOUTONS DE COULEUR ===
+
+// Bouton primary (bleu)
 .btn-primary {
-  @include button-variant($primary-color);
+  color: $white;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 
-// Bouton secondary
+.btn-primary:hover {
+  color: $white;
+  background-color: lighten($primary-color, 10%);
+  border-color: lighten($primary-color, 10%);
+}
+
+// Bouton secondary (jaune)
 .btn-secondary {
-  @include button-variant($secondary-color, $secondary-color, $dark-color);
+  color: $dark-color;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
 }
 
-// Bouton success
+.btn-secondary:hover {
+  color: $dark-color;
+  background-color: lighten($secondary-color, 10%);
+  border-color: lighten($secondary-color, 10%);
+}
+
+// Bouton success (vert)
 .btn-success {
-  @include button-variant($success-color);
+  color: $white;
+  background-color: $success-color;
+  border-color: $success-color;
 }
 
-// Bouton danger
+.btn-success:hover {
+  color: $white;
+  background-color: lighten($success-color, 10%);
+  border-color: lighten($success-color, 10%);
+}
+
+// Bouton danger (rouge)
 .btn-danger {
-  @include button-variant($danger-color);
+  color: $white;
+  background-color: $danger-color;
+  border-color: $danger-color;
 }
 
-// Bouton warning
+.btn-danger:hover {
+  color: $white;
+  background-color: lighten($danger-color, 10%);
+  border-color: lighten($danger-color, 10%);
+}
+
+// Bouton warning (orange)
 .btn-warning {
-  @include button-variant($warning-color, $warning-color, $dark-color);
+  color: $dark-color;
+  background-color: $warning-color;
+  border-color: $warning-color;
 }
 
-// Bouton info
+.btn-warning:hover {
+  color: $dark-color;
+  background-color: lighten($warning-color, 10%);
+  border-color: lighten($warning-color, 10%);
+}
+
+// Bouton info (cyan)
 .btn-info {
-  @include button-variant($info-color);
+  color: $white;
+  background-color: $info-color;
+  border-color: $info-color;
 }
 
-// Bouton light
-.btn-light {
-  @include button-variant($light-color, $light-color, $dark-color);
+.btn-info:hover {
+  color: $white;
+  background-color: lighten($info-color, 10%);
+  border-color: lighten($info-color, 10%);
 }
 
-// Bouton dark
-.btn-dark {
-  @include button-variant($dark-color);
-}
+// === BOUTONS OUTLINE (contour) ===
 
-// === VARIANTS OUTLINE ===
+// Bouton outline primary
 .btn-outline-primary {
-  @include button-outline-variant($primary-color);
+  color: $primary-color;
+  border-color: $primary-color;
+  background-color: $white;
 }
 
+.btn-outline-primary:hover {
+  color: $white;
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
+// Bouton outline secondary
 .btn-outline-secondary {
-  @include button-outline-variant($secondary-color);
+  color: $dark-color;
+  border-color: $secondary-color;
+  background-color: $white;
+  font-weight: $font-weight-medium;
 }
 
-.btn-outline-success {
-  @include button-outline-variant($success-color);
+.btn-outline-secondary:hover {
+  color: $dark-color;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
 }
 
+// Bouton outline danger
 .btn-outline-danger {
-  @include button-outline-variant($danger-color);
+  color: $danger-color;
+  border-color: $danger-color;
+  background-color: $white;
 }
 
-.btn-outline-warning {
-  @include button-outline-variant($warning-color);
+.btn-outline-danger:hover {
+  color: $white;
+  background-color: $danger-color;
+  border-color: $danger-color;
 }
 
-.btn-outline-info {
-  @include button-outline-variant($info-color);
-}
+// === TAILLES DE BOUTONS ===
 
-.btn-outline-light {
-  @include button-outline-variant($light-color, $dark-color);
-}
-
-.btn-outline-dark {
-  @include button-outline-variant($dark-color);
-}
-
-// === TAILLES ===
+// Grand bouton
 .btn-lg {
-  padding: spacing(0.75) spacing(1.5);
+  padding: 0.75rem 1.5rem;
   font-size: $font-size-lg;
   border-radius: $border-radius-lg;
 }
 
+// Petit bouton
 .btn-sm {
-  padding: spacing(0.25) spacing(0.5);
+  padding: 0.25rem 0.5rem;
   font-size: $font-size-sm;
   border-radius: $border-radius-sm;
 }
 
-// === BOUTONS SPÉCIAUX ===
-// Bouton block (pleine largeur)
+// Bouton pleine largeur
 .btn-block {
   display: block;
   width: 100%;
-
-  + .btn-block {
-    margin-top: spacing(1);
-  }
 }
 
-// Bouton lien
+// === BOUTON LIEN ===
 .btn-link {
   font-weight: $font-weight-normal;
   color: $primary-color;
   text-decoration: none;
   background-color: transparent;
   border: 0;
-
-  &:hover {
-    color: $primary-dark;
-    text-decoration: underline;
-    background-color: transparent;
-    border-color: transparent;
-  }
-
-  &:focus,
-  &.focus {
-    text-decoration: underline;
-    border-color: transparent;
-    box-shadow: none;
-  }
-
-  &:disabled,
-  &.disabled {
-    color: $gray-600;
-    pointer-events: none;
-  }
 }
 
-// === GROUPES DE BOUTONS ===
-.btn-group {
-  position: relative;
-  display: inline-flex;
-  vertical-align: middle;
-
-  > .btn {
-    position: relative;
-    flex: 1 1 auto;
-
-    &:hover {
-      z-index: 1;
-    }
-
-    &:focus,
-    &:active,
-    &.active {
-      z-index: 1;
-    }
-  }
-
-  .btn + .btn,
-  .btn + .btn-group,
-  .btn-group + .btn,
-  .btn-group + .btn-group {
-    margin-left: -$border-width;
-  }
-
-  > .btn:not(:last-child):not(.dropdown-toggle),
-  > .btn-group:not(:last-child) > .btn {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  > .btn:not(:first-child),
-  > .btn-group:not(:first-child) > .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
-
-// Groupe vertical
-.btn-group-vertical {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  > .btn,
-  > .btn-group {
-    width: 100%;
-  }
-
-  > .btn:not(:last-child):not(.dropdown-toggle),
-  > .btn-group:not(:last-child) > .btn {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  > .btn:not(:first-child),
-  > .btn-group:not(:first-child) > .btn {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-// === BOUTONS AVEC ICÔNES ===
-.btn {
-  .fas,
-  .far,
-  .fab {
-    margin-right: spacing(1);
-
-    &:last-child {
-      margin-right: 0;
-      margin-left: spacing(1);
-    }
-
-    &:only-child {
-      margin: 0;
-    }
-  }
-}
-
-// Bouton icône seule
-.btn-icon {
-  padding: $btn-padding-y;
-  width: calc(#{$btn-font-size} + #{$btn-padding-y * 2} + #{$border-width * 2});
-  height: calc(#{$btn-font-size} + #{$btn-padding-y * 2} + #{$border-width * 2});
-
-  .fas,
-  .far,
-  .fab {
-    margin: 0;
-  }
-
-  &.btn-lg {
-    padding: spacing(0.75);
-    width: calc(#{$font-size-lg} + #{spacing(1.5)} + #{$border-width * 2});
-    height: calc(#{$font-size-lg} + #{spacing(1.5)} + #{$border-width * 2});
-  }
-
-  &.btn-sm {
-    padding: spacing(0.25);
-    width: calc(#{$font-size-sm} + #{spacing(0.5)} + #{$border-width * 2});
-    height: calc(#{$font-size-sm} + #{spacing(0.5)} + #{$border-width * 2});
-  }
-}
-
-// === BOUTONS FLOTTANTS (FAB) ===
-.btn-fab {
-  position: fixed;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  box-shadow: $box-shadow-lg;
-  z-index: z-index('fixed');
-  padding: 0;
-  
-  &:hover {
-    box-shadow: 0 8px 25px rgba($black, 0.25);
-    transform: translateY(-2px);
-  }
-
-  .fas,
-  .far,
-  .fab {
-    margin: 0;
-  }
-}
-
-// === ÉTATS DE CHARGEMENT ===
-.btn-loading {
-  position: relative;
-  pointer-events: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    margin: -8px 0 0 -8px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    @include spin();
-  }
-
-  .btn-text {
-    opacity: 0;
-  }
-}
-
-// === ANIMATIONS SPÉCIALES ===
-.btn-bounce {
-  &:hover {
-    animation: buttonBounce 0.3s ease;
-  }
-}
-
-@keyframes buttonBounce {
-  0%, 20%, 60%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-3px);
-  }
-  80% {
-    transform: translateY(-1px);
-  }
-}
-
-// === BOUTONS GRADIENT ===
-.btn-gradient-primary {
-  @include gradient(135deg, $primary-color, $primary-dark);
-  color: $white;
-  border: none;
-
-  &:hover {
-    @include gradient(135deg, $primary-dark, darken($primary-dark, 10%));
-    color: $white;
-  }
-}
-
-.btn-gradient-secondary {
-  @include gradient(135deg, $secondary-color, $secondary-dark);
-  color: $dark-color;
-  border: none;
-
-  &:hover {
-    @include gradient(135deg, $secondary-dark, darken($secondary-dark, 10%));
-    color: $dark-color;
-  }
+.btn-link:hover {
+  color: lighten($primary-color, 15%);
+  text-decoration: underline;
+  background-color: transparent;
 }
 
 // === RESPONSIVE ===
-@include media-breakpoint-down(sm) {
+// Boutons plus petits sur mobile
+@include responsive-md {
   .btn {
-    padding: spacing(0.75) spacing(1);
+    padding: 0.75rem 1rem;
     font-size: $font-size-sm;
   }
 
   .btn-lg {
-    padding: spacing(1) spacing(1.25);
+    padding: 1rem 1.25rem;
     font-size: $font-size-base;
-  }
-
-  .btn-sm {
-    padding: spacing(0.5) spacing(0.75);
-    font-size: 0.75rem;
   }
 }

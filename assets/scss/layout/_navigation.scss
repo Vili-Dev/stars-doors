@@ -1,5 +1,5 @@
 // ===================================================================
-// NAVIGATION - STARS DOORS
+// NAVIGATION - STARS DOORS (Version simplifiée)
 // Styles pour la navigation principale
 // ===================================================================
 
@@ -10,20 +10,19 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: $navbar-padding-y $navbar-padding-x;
+  padding: 0.75rem 1rem;
   background-color: $white;
   border-bottom: 1px solid $gray-200;
   box-shadow: $box-shadow-sm;
-  z-index: z-index('sticky');
-  
-  // Navbar fixe
-  &.navbar-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: z-index('fixed');
-  }
+  z-index: 1020;
+}
+
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
 }
 
 // === BRAND/LOGO ===
@@ -31,24 +30,18 @@
   display: inline-block;
   padding-top: 0;
   padding-bottom: 0;
-  margin-right: spacing(4);
-  font-size: $navbar-brand-font-size;
+  margin-right: 1.5rem;
+  font-size: 1.5rem;
   font-weight: $font-weight-bold;
   line-height: inherit;
-  white-space: nowrap;
   color: $primary-color;
   text-decoration: none;
-  @include transition($transition-base);
+  transition: $transition-base;
+}
 
-  &:hover,
-  &:focus {
-    color: $primary-dark;
-    text-decoration: none;
-  }
-
-  .fas {
-    margin-right: spacing(1);
-  }
+.navbar-brand:hover {
+  color: darken($primary-color, 15%);
+  text-decoration: none;
 }
 
 // === NAVIGATION LINKS ===
@@ -58,73 +51,47 @@
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+}
 
-  .nav-link {
-    position: relative;
-    display: block;
-    padding: spacing(2) spacing(3);
-    color: $dark-color;
-    text-decoration: none;
-    font-weight: $font-weight-medium;
-    @include transition($transition-base);
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: $dark-color;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: $transition-base;
+}
 
-    &:hover,
-    &:focus {
-      color: $primary-color;
-      text-decoration: none;
-    }
+.nav-link:hover {
+  color: $primary-color;
+  text-decoration: none;
+}
 
-    &.active {
-      color: $primary-color;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 2px;
-        background-color: $primary-color;
-      }
-    }
+.nav-link.active {
+  color: $primary-color;
+}
 
-    &.disabled {
-      color: $gray-600;
-      pointer-events: none;
-      cursor: default;
-    }
-
-    .fas {
-      margin-right: spacing(1);
-      font-size: 0.875rem;
-    }
-  }
+.nav-link.disabled {
+  color: $gray-600;
+  pointer-events: none;
+  cursor: default;
 }
 
 // === TOGGLER (MOBILE) ===
 .navbar-toggler {
-  padding: spacing(1) spacing(1.5);
+  padding: 0.25rem 0.375rem;
   font-size: $font-size-lg;
   line-height: 1;
   background-color: transparent;
   border: $border-width solid transparent;
   border-radius: $border-radius;
-  @include transition($transition-base);
+  cursor: pointer;
+  transition: $transition-base;
+}
 
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-
-  &:focus {
-    text-decoration: none;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
-  }
+.navbar-toggler:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
 }
 
 .navbar-toggler-icon {
@@ -132,10 +99,8 @@
   width: 1.5em;
   height: 1.5em;
   vertical-align: middle;
-  content: "";
   background: no-repeat center center;
   background-size: 100% 100%;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33, 37, 41, 0.75)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 // === COLLAPSE ===
@@ -146,159 +111,74 @@
 }
 
 // === DROPDOWN ===
-.navbar .dropdown-menu {
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: z-index('dropdown');
+  z-index: 1000;
   display: none;
   min-width: 200px;
-  padding: spacing(2) 0;
+  padding: 0.5rem 0;
   margin: 0;
   font-size: $font-size-base;
   color: $dark-color;
   text-align: left;
   list-style: none;
   background-color: $white;
-  background-clip: padding-box;
   border: $border-width solid $gray-200;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
+}
 
-  &.show {
-    display: block;
-  }
-
-  &.dropdown-menu-end {
-    right: 0;
-    left: auto;
-  }
+.dropdown-menu.show {
+  display: block;
 }
 
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: spacing(1.5) spacing(3);
-  clear: both;
-  font-weight: $font-weight-normal;
+  padding: 0.5rem 1rem;
   color: $dark-color;
   text-align: inherit;
   text-decoration: none;
-  white-space: nowrap;
   background-color: transparent;
   border: 0;
-  @include transition($transition-base);
-
-  &:hover,
-  &:focus {
-    color: $primary-color;
-    text-decoration: none;
-    background-color: $gray-100;
-  }
-
-  &.active,
-  &:active {
-    color: $white;
-    text-decoration: none;
-    background-color: $primary-color;
-  }
-
-  &.disabled,
-  &:disabled {
-    color: $gray-600;
-    pointer-events: none;
-    background-color: transparent;
-  }
-
-  .fas {
-    margin-right: spacing(2);
-    width: 16px;
-    text-align: center;
-  }
+  transition: $transition-base;
 }
 
-.dropdown-divider {
-  height: 0;
-  margin: spacing(1.5) 0;
-  overflow: hidden;
-  border-top: 1px solid $gray-200;
+.dropdown-item:hover {
+  color: $primary-color;
+  background-color: $gray-100;
+}
+
+.dropdown-item.active {
+  color: $white;
+  background-color: $primary-color;
 }
 
 // === RESPONSIVE NAVBAR ===
-@include media-breakpoint-up(lg) {
+@include responsive-lg {
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
-
-    .navbar-nav {
-      flex-direction: row;
-
-      .nav-link {
-        padding-right: spacing(2);
-        padding-left: spacing(2);
-      }
-    }
-
-    .navbar-collapse {
-      display: flex !important;
-      flex-basis: auto;
-    }
-
-    .navbar-toggler {
-      display: none;
-    }
-  }
-}
-
-// === NOTIFICATION BADGE ===
-.nav-link {
-  .badge {
-    position: absolute;
-    top: spacing(1);
-    right: spacing(1);
-    transform: translate(50%, -50%);
-  }
-}
-
-// === SEARCH BAR IN NAVBAR ===
-.navbar-search {
-  position: relative;
-  max-width: 300px;
-  margin: 0 spacing(3);
-
-  .search-input {
-    width: 100%;
-    padding: spacing(1.5) spacing(5) spacing(1.5) spacing(3);
-    border: 1px solid $gray-300;
-    border-radius: $border-radius-pill;
-    background-color: $gray-100;
-    @include transition($transition-base);
-
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-      background-color: $white;
-      box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
-    }
-
-    &::placeholder {
-      color: $gray-500;
-    }
   }
 
-  .search-btn {
-    position: absolute;
-    right: spacing(1);
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: $gray-500;
-    @include transition($transition-base);
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
 
-    &:hover {
-      color: $primary-color;
-    }
+  .navbar-expand-lg .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
   }
 }
 
@@ -306,95 +186,26 @@
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: spacing(2) 0;
-  margin-bottom: spacing(3);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
   list-style: none;
   background-color: transparent;
   border-radius: $border-radius;
-
-  .breadcrumb-item {
-    + .breadcrumb-item {
-      padding-left: spacing(2);
-
-      &::before {
-        display: inline-block;
-        padding-right: spacing(2);
-        color: $gray-600;
-        content: "/";
-      }
-    }
-
-    &.active {
-      color: $gray-600;
-    }
-  }
 }
 
-// === SIDEBAR NAVIGATION ===
-.sidebar-nav {
-  width: $sidebar-width;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: $dark-color;
-  color: $white;
-  @include transition(all 0.3s ease);
-  z-index: z-index('fixed');
+.breadcrumb-item + .breadcrumb-item {
+  padding-left: 0.5rem;
+}
 
-  &.collapsed {
-    width: $sidebar-width-collapsed;
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: $gray-600;
+  content: "/";
+}
 
-    .nav-text {
-      display: none;
-    }
-
-    .nav-link {
-      text-align: center;
-      padding: spacing(3) spacing(2);
-    }
-  }
-
-  .nav-header {
-    padding: spacing(4) spacing(3);
-    border-bottom: 1px solid rgba($white, 0.1);
-
-    .nav-title {
-      font-weight: $font-weight-bold;
-      margin: 0;
-    }
-  }
-
-  .nav-menu {
-    padding: spacing(2) 0;
-
-    .nav-item {
-      .nav-link {
-        display: flex;
-        align-items: center;
-        padding: spacing(3) spacing(4);
-        color: rgba($white, 0.8);
-        text-decoration: none;
-        @include transition($transition-base);
-
-        &:hover {
-          color: $white;
-          background-color: rgba($white, 0.1);
-        }
-
-        &.active {
-          color: $white;
-          background-color: $primary-color;
-        }
-
-        .nav-icon {
-          margin-right: spacing(3);
-          width: 16px;
-          text-align: center;
-        }
-      }
-    }
-  }
+.breadcrumb-item.active {
+  color: $gray-600;
 }
 
 // === TAB NAVIGATION ===
@@ -405,64 +216,24 @@
   margin-bottom: 0;
   list-style: none;
   border-bottom: $border-width solid $gray-300;
-
-  .nav-link {
-    display: block;
-    padding: spacing(2) spacing(3);
-    margin-bottom: -$border-width;
-    background: none;
-    border: $border-width solid transparent;
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
-    @include transition($transition-base);
-
-    &:hover,
-    &:focus {
-      border-color: $gray-200 $gray-200 $gray-300;
-      isolation: isolate;
-    }
-
-    &.disabled {
-      color: $gray-600;
-      background-color: transparent;
-      border-color: transparent;
-    }
-
-    &.active {
-      color: $gray-700;
-      background-color: $white;
-      border-color: $gray-300 $gray-300 $white;
-    }
-  }
 }
 
-// === RESPONSIVE ADJUSTMENTS ===
-@include media-breakpoint-down(lg) {
-  .navbar-search {
-    order: -1;
-    width: 100%;
-    max-width: none;
-    margin: spacing(2) 0;
-  }
-
-  .sidebar-nav {
-    transform: translateX(-100%);
-
-    &.show {
-      transform: translateX(0);
-    }
-  }
+.nav-tabs .nav-link {
+  padding: 0.5rem 1rem;
+  margin-bottom: -$border-width;
+  background: none;
+  border: $border-width solid transparent;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  transition: $transition-base;
 }
 
-@include media-breakpoint-down(md) {
-  .navbar-brand {
-    font-size: $font-size-lg;
-  }
+.nav-tabs .nav-link:hover {
+  border-color: $gray-200 $gray-200 $gray-300;
+}
 
-  .nav-tabs {
-    .nav-link {
-      padding: spacing(1.5) spacing(2);
-      font-size: $font-size-sm;
-    }
-  }
+.nav-tabs .nav-link.active {
+  color: $gray-700;
+  background-color: $white;
+  border-color: $gray-300 $gray-300 $white;
 }
