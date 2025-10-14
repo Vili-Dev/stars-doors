@@ -5,8 +5,7 @@
 
 // === HERO SECTION ===
 .hero-section {
-  background:
-    url("../images/bg.jpeg") center center/cover no-repeat;
+  background: url("../images/bg.jpeg") center center/cover no-repeat;
   position: relative;
   min-height: 400px;
   padding: 5rem 0;
@@ -19,7 +18,7 @@
 .hero-section h1 {
   font-weight: $font-weight-bold;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba($black, 0.3); 
+  text-shadow: 0 2px 4px rgba($black, 0.3);
 }
 
 .hero-section .lead {
@@ -38,7 +37,7 @@
 // === SECTION ANNONCES VEDETTES ===
 .featured-listings {
   padding: 4rem 0;
-  background-color: $gray-50;
+  background: url("../images/bgsite.jpeg") center center/cover no-repeat;
 }
 
 .featured-listings h2 {
