@@ -17,9 +17,7 @@ class EmailJSMailer {
     }
 
     public function addAddress($address) {
-        if ($address) {
             $this->to[] = $address;
-        }
     }
 
     public function isHTML($isHtml = true) {
@@ -42,21 +40,24 @@ class EmailJSMailer {
         }
 
         $toEmail = $this->to[0];
-        $payload = [
-            'service_id' => EMAILJS_SERVICE_ID,
-            'template_id' => EMAILJS_TEMPLATE_ID,
-            'template_params' => [
-                'to_email' => $toEmail,
-                'from_email' => $this->fromAddress ?: MAIL_FROM_ADDRESS,
-                'from_name' => $this->fromName ?: MAIL_FROM_NAME,
-                'subject' => $this->Subject,
-                'message' => $this->Body,
-                'alt_message' => $this->AltBody,
-                'is_html' => $this->isHtml ? 'true' : 'false'
-            ]
-        ];
-        if (EMAILJS_PUBLIC_KEY) {
-            $payload['user_id'] = EMAILJS_PUBLIC_KEY; // client-side identifier (optional when using Private Key)
+
+            $payload = [
+                'service_id' => EMAILJS_SERVICE_ID,
+                'template_id' => EMAILJS_TEMPLATE_ID,
+                'template_params' => [
+                    'to_email' => $toEmail,
+                    'reply_to' => $toEmail,
+                    'from_email' => $this->fromAddress ?: MAIL_FROM_ADDRESS,
+                    'from_name' => $this->fromName ?: MAIL_FROM_NAME,
+                    'subject' => $this->Subject,
+                    'message' => $this->Body,
+                    'alt_message' => $this->AltBody,
+                    'is_html' => $this->isHtml ? 'true' : 'false'
+                ]
+            ];
+        // Only include user_id when no private key is used (EmailJS expects either Authorization or user_id)
+        if (EMAILJS_PUBLIC_KEY && !EMAILJS_PRIVATE_KEY) {
+            $payload['user_id'] = EMAILJS_PUBLIC_KEY; // client-side identifier (omit when using Private Key)
         }
 
         $ch = curl_init(EMAILJS_API_URL);

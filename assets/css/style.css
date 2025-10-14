@@ -25,16 +25,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-dl, dd, ol, ul,
-figure, hr,
-fieldset, legend {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+figure,
+hr,
+fieldset,
+legend {
   margin: 0;
   padding: 0;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -48,7 +61,8 @@ a:hover {
   color: rgba(27.5, 56.25, 100, 0.3333333333);
   text-decoration: underline;
 }
-a:not([href]):not([class]), a:not([href]):not([class]):hover {
+a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
   color: inherit;
   text-decoration: none;
 }
@@ -126,7 +140,7 @@ select {
   text-transform: none;
 }
 
-[role=button] {
+[role="button"] {
   cursor: pointer;
 }
 
@@ -138,16 +152,16 @@ select:disabled {
 }
 
 button,
-[type=button],
-[type=reset],
-[type=submit] {
+[type="button"],
+[type="reset"],
+[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
 button:not(:disabled),
-[type=button]:not(:disabled),
-[type=reset]:not(:disabled),
-[type=submit]:not(:disabled) {
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
   cursor: pointer;
 }
 
@@ -197,42 +211,48 @@ legend + * {
     scroll-behavior: auto !important;
   }
 }
-h1, .h1 {
+h1,
+.h1 {
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-h5, .h5 {
+h5,
+.h5 {
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-h6, .h6 {
+h6,
+.h6 {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
@@ -248,20 +268,24 @@ p:last-child {
   margin-bottom: 0;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 700;
 }
 
-em, i {
+em,
+i {
   font-style: italic;
 }
 
-small, .small {
+small,
+.small {
   font-size: 0.875rem;
   color: #6c757d;
 }
 
-ul, ol {
+ul,
+ol {
   margin-bottom: 1rem;
   padding-left: 2rem;
 }
@@ -395,13 +419,16 @@ a.link-white:hover {
 }
 
 @media (min-width: 768px) {
-  h1, .h1 {
+  h1,
+  .h1 {
     font-size: 2rem;
   }
-  h2, .h2 {
+  h2,
+  .h2 {
     font-size: 1.75rem;
   }
-  h3, .h3 {
+  h3,
+  .h3 {
     font-size: 1.5rem;
   }
 }
@@ -1016,7 +1043,11 @@ a.link-white:hover {
   background: url("../images/bgsite.jpeg") center center/cover no-repeat;
   border: 0; /* on supprime les autres bordures */
   border-bottom: 5px solid; /* seulement en bas */
-  border-image: linear-gradient(to right, rgba(168, 212, 236, 0.856), rgba(11, 18, 67, 0.541));
+  border-image: linear-gradient(
+    to right,
+    rgba(168, 212, 236, 0.856),
+    rgba(11, 18, 67, 0.541)
+  );
   border-image-slice: 1;
   position: relative;
   min-height: 400px;
@@ -1159,7 +1190,11 @@ a.link-white:hover {
 
 .cta-section {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #f8c146 0%, rgb(246.140625, 176.53125, 20.859375) 100%);
+  background: linear-gradient(
+    135deg,
+    #f8c146 0%,
+    rgb(246.140625, 176.53125, 20.859375) 100%
+  );
   text-align: center;
   color: #343a40;
 }

@@ -13,8 +13,6 @@ $sql = "UPDATE users SET reset_token_hash = ?, reset_token_expires_at = DATE_ADD
 
 $stmt = $pdo->prepare($sql);
 
-// $stmt->bind_param("sss", $token_hash, $expiry, $email);
-
 $stmt->execute([$token_hash, $email]);
 
 if ($stmt->rowCount() === 0) {
@@ -26,6 +24,7 @@ require_once __DIR__ . '/mailer.php';
 
 $mail->setFrom(MAIL_FROM_ADDRESS, MAIL_FROM_NAME);
 $mail->addAddress($email);
+
 $mail->Subject = "Réinitialisation de mot de passe";
 $resetUrl = rtrim(SITE_URL, '/') . "/reset_password/reset_password.php?token=" . urlencode($token);
 $mail->Body = <<<END
