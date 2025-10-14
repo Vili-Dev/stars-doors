@@ -18,6 +18,16 @@
     "sass": "^1.77.0"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1"
-  }
+    "@emailjs/browser": "^4.4.1",
+    "ws": "^8.18.3"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vili-Dev/stars-doors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vili-Dev/stars-doors/issues"
+  },
+  "homepage": "https://github.com/Vili-Dev/stars-doors#readme"
 }
