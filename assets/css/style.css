@@ -39,13 +39,13 @@ ol, ul {
 }
 
 a {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   text-decoration: none;
   background-color: transparent;
   transition: all 0.15s ease-in-out;
 }
 a:hover {
-  color: rgb(27.5, 56.25, 100);
+  color: rgba(27.5, 56.25, 100, 0.3333333333);
   text-decoration: underline;
 }
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -183,7 +183,7 @@ legend + * {
 }
 
 :focus-visible {
-  outline: 2px solid #2c5aa0;
+  outline: 2px solid rgba(44, 90, 160, 0.3333333333);
   outline-offset: 2px;
 }
 
@@ -326,7 +326,7 @@ li:last-child {
 }
 
 .text-primary {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .text-secondary {
@@ -362,7 +362,7 @@ li:last-child {
 }
 
 a {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 }
@@ -434,13 +434,13 @@ a.link-white:hover {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: inherit;
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 }
 
 .navbar-brand:hover {
-  color: rgb(27.5, 56.25, 100);
+  color: rgba(27.5, 56.25, 100, 0.3333333333);
   text-decoration: none;
 }
 
@@ -462,12 +462,12 @@ a.link-white:hover {
 }
 
 .nav-link:hover {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   text-decoration: none;
 }
 
 .nav-link.active {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .nav-link.disabled {
@@ -543,13 +543,13 @@ a.link-white:hover {
 }
 
 .dropdown-item:hover {
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   background-color: #f8f9fa;
 }
 
 .dropdown-item.active {
   color: #ffffff;
-  background-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
 }
 
 @media (min-width: 992px) {
@@ -637,8 +637,8 @@ a.link-white:hover {
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-color: #2c5aa0;
-  border: 1px solid #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
+  border: 1px solid rgba(44, 90, 160, 0.3333333333);
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 0.375rem;
@@ -646,8 +646,8 @@ a.link-white:hover {
 }
 
 .btn:hover {
-  background-color: rgb(55, 112.5, 200);
-  border-color: rgb(55, 112.5, 200);
+  background-color: rgba(55, 112.5, 200, 0.3333333333);
+  border-color: rgba(55, 112.5, 200, 0.3333333333);
 }
 
 .btn:focus {
@@ -663,14 +663,14 @@ a.link-white:hover {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #2c5aa0;
-  border-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
+  border-color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .btn-primary:hover {
   color: #ffffff;
-  background-color: rgb(55, 112.5, 200);
-  border-color: rgb(55, 112.5, 200);
+  background-color: rgba(55, 112.5, 200, 0.3333333333);
+  border-color: rgba(55, 112.5, 200, 0.3333333333);
 }
 
 .btn-secondary {
@@ -734,15 +734,15 @@ a.link-white:hover {
 }
 
 .btn-outline-primary {
-  color: #2c5aa0;
-  border-color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
+  border-color: rgba(44, 90, 160, 0.3333333333);
   background-color: #ffffff;
 }
 
 .btn-outline-primary:hover {
   color: #ffffff;
-  background-color: #2c5aa0;
-  border-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
+  border-color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .btn-outline-secondary {
@@ -789,14 +789,14 @@ a.link-white:hover {
 
 .btn-link {
   font-weight: 400;
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
   text-decoration: none;
   background-color: transparent;
   border: 0;
 }
 
 .btn-link:hover {
-  color: rgb(75, 126.75, 205.5);
+  color: rgba(75, 126.75, 205.5, 0.3333333333);
   text-decoration: underline;
   background-color: transparent;
 }
@@ -926,7 +926,7 @@ a.link-white:hover {
   font-size: 0.75rem;
   font-weight: 500;
   color: #ffffff;
-  background-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
   border-radius: 0.25rem;
 }
 
@@ -983,7 +983,7 @@ a.link-white:hover {
 .listing-card .listing-price {
   font-weight: 700;
   font-size: 1.125rem;
-  color: #2c5aa0;
+  color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .listing-card .listing-rating {
@@ -1013,7 +1013,11 @@ a.link-white:hover {
   }
 }
 .hero-section {
-  background: url("../images/bg.jpeg") center center/cover no-repeat;
+  background: url("../images/bgsite.jpeg") center center/cover no-repeat;
+  border: 0; /* on supprime les autres bordures */
+  border-bottom: 5px solid; /* seulement en bas */
+  border-image: linear-gradient(to right, rgba(168, 212, 236, 0.856), rgba(11, 18, 67, 0.541));
+  border-image-slice: 1;
   position: relative;
   min-height: 400px;
   padding: 5rem 0;
@@ -1044,7 +1048,9 @@ a.link-white:hover {
 
 .featured-listings {
   padding: 4rem 0;
-  background-color: #fafbfc;
+  background-image: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 .featured-listings h2 {
@@ -1086,7 +1092,7 @@ a.link-white:hover {
   justify-content: center;
   font-size: 1.5rem;
   color: #ffffff;
-  background-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .stat-number {
@@ -1130,7 +1136,7 @@ a.link-white:hover {
   height: 50px;
   margin: 0 auto 1rem;
   border-radius: 50%;
-  background-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -1437,7 +1443,7 @@ a.link-white:hover {
 }
 
 .bg-primary {
-  background-color: #2c5aa0;
+  background-color: rgba(44, 90, 160, 0.3333333333);
 }
 
 .bg-secondary {

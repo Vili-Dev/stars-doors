@@ -5,7 +5,15 @@
 
 // === HERO SECTION ===
 .hero-section {
-  background: url("../images/bg.jpeg") center center/cover no-repeat;
+   background: url("../images/bgsite.jpeg") center center/cover no-repeat;
+  border: 0; /* on supprime les autres bordures */
+  border-bottom: 5px solid; /* seulement en bas */
+  border-image: linear-gradient(
+    to right,
+    rgba(168, 212, 236, 0.856),
+    rgba(11, 18, 67, 0.541)
+  );
+  border-image-slice: 1;
   position: relative;
   min-height: 400px;
   padding: 5rem 0;
@@ -37,7 +45,9 @@
 // === SECTION ANNONCES VEDETTES ===
 .featured-listings {
   padding: 4rem 0;
-  background: url("../images/bgsite.jpeg") center center/cover no-repeat;
+  background-image: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 .featured-listings h2 {
