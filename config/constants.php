@@ -10,8 +10,22 @@ if (!defined('PHP_VERSION_ID')) {
 define('APP_VERSION', '1.0.0');
 define('APP_NAME', $_ENV['SITE_NAME'] ?? 'Stars Doors');
 
-// Configuration du site
-define('SITE_URL', $_ENV['SITE_URL'] ?? 'http://localhost');
+// Configuration du site - AUTO-DÉTECTION DU CHEMIN
+if (!empty($_ENV['SITE_URL'])) {
+    define('SITE_URL', rtrim($_ENV['SITE_URL'], '/'));
+} else {
+    // Auto-détection du SITE_URL basé sur le chemin actuel
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $script = $_SERVER['SCRIPT_NAME'] ?? '';
+    // Extraire le chemin jusqu'au dossier racine du projet
+    $path = str_replace('\\', '/', dirname($script));
+    $path = preg_replace('#/config$#', '', $path); // Enlever /config si présent
+    $path = preg_replace('#/includes$#', '', $path); // Enlever /includes si présent
+    $path = preg_replace('#/admin$#', '', $path); // Enlever /admin si présent
+    $path = rtrim($path, '/');
+    define('SITE_URL', $protocol . '://' . $host . $path);
+}
 define('ADMIN_EMAIL', $_ENV['ADMIN_EMAIL'] ?? 'admin@starsdoors.com');
 
 // Environnement
