@@ -3,13 +3,18 @@ session_start(); // نفتح الدفتر / On ouvre le cahier
 
 // نقرأو من "الدفتر"
 // On lit depuis le "cahier"
+require_once '../includes/config.php';
+require_once '../includes/database.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
 
-echo $_SESSION['user_id'];    // يعرض : 5
-echo $_SESSION['user_name'];  // يعرض : Ahmed
-// PHP se souvient ! Pas besoin de redemander
-session config
-session database
-session auth
+requireLogin();
+requireAdmin();
 
-loggedin
-is admin 
+$title = 'Statistiques - Administration';
+
+include '../includes/header.php';
+include '../includes/navbar.php'
+
+
+

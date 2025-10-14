@@ -148,10 +148,10 @@ include '../includes/header.php';
         <div class="col-lg-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="fas fa-cog fa-3x text-secondary mb-3"></i>
-                    <h5>Paramètres</h5>
-                    <p class="text-muted">Configuration générale de la plateforme</p>
-                    <a href="settings.php" class="btn btn-secondary">Accéder</a>
+                    <i class="bi bi-star-fill fa-3x text-secondary mb-3" style="color:#FFC107 !important"></i>
+                    <h5>Avis</h5>
+                    <p class="text-muted">Modérer et gérer les avis</p>
+                    <a href="avis.php" class="btn btn-secondary" style="background:#FFC107 !important;border:1px solid #FFC107 ">Accéder</a>
                 </div>
             </div>
         </div>
