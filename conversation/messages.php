@@ -47,7 +47,7 @@ try {
             u.avatar,
             r.nom as race_nom,
             p.nom as planete_nom,
-            p.distance_terre,
+            p.distance_terre_al AS distance_terre,
             (SELECT contenu FROM messages m2
              WHERE (m2.id_expediteur = ? AND m2.id_destinataire = interlocuteur_id)
                 OR (m2.id_destinataire = ? AND m2.id_expediteur = interlocuteur_id)
@@ -81,7 +81,7 @@ if ($conversation_id) {
     try {
         // Récupérer l'interlocuteur
         $stmt = $pdo->prepare("
-            SELECT u.*, r.nom as race_nom, p.nom as planete_nom, p.distance_terre, p.galaxie
+            SELECT u.*, r.nom as race_nom, p.nom as planete_nom, p.distance_terre_al AS distance_terre, p.galaxie
             FROM users u
             LEFT JOIN races r ON u.id_race = r.id_race
             LEFT JOIN planetes p ON u.planete_residence = p.id_planete

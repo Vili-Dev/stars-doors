@@ -360,7 +360,8 @@ include 'includes/nav.php';
                         </p>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id'])): ?>
-                        <a href="messages.php?to=<?php echo $listing['id_user']; ?>&listing=<?php echo $listing['id_annonce']; ?>"
+                        <!-- Updated: contact button now opens modular WebSocket chat -->
+                        <a href="conversation/chat.php?to=<?php echo $listing['id_user']; ?>&listing=<?php echo $listing['id_annonce']; ?>"
                            class="btn btn-outline-primary w-100">
                             <i class="fas fa-envelope"></i> Contacter
                         </a>

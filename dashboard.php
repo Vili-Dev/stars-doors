@@ -350,7 +350,7 @@ include 'includes/nav.php';
                     </div>
                     <?php endif; ?>
                     <div class="col-md-6 mb-3">
-                        <a href="messages.php" class="btn btn-outline-info w-100">
+                        <a href="conversation/chat.php" class="btn btn-outline-info w-100">
                             <i class="fas fa-envelope"></i> Mes messages
                         </a>
                     </div>
