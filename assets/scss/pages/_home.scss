@@ -5,12 +5,12 @@
 
 // === HERO SECTION ===
 .hero-section {
-   background: url("../images/bgsite.jpeg") center center/cover no-repeat;
+   background: url("../images/bgsite1.webp") center center/cover no-repeat;
   border: 0; /* on supprime les autres bordures */
   border-bottom: 5px solid; /* seulement en bas */
   border-image: linear-gradient(
     to right,
-    rgba(168, 212, 236, 0.856),
+    rgba(168, 212, 236, 0.678),
     rgba(11, 18, 67, 0.541)
   );
   border-image-slice: 1;
@@ -53,7 +53,7 @@
 .featured-listings h2 {
   text-align: center;
   margin-bottom: 3rem;
-  color: $dark-color;
+  color: $light-color;
 }
 
 .listing-grid {
