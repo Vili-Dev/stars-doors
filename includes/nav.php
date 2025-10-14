@@ -8,7 +8,7 @@ if (!function_exists('isLoggedIn')) {
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand fw-bold text-primary" href="index.php">
+        <a class="navbar-brand fw-bold text-primary" href="<?php echo rtrim(SITE_URL, '/'); ?>/index.php">
             <i class="fas fa-star"></i> Stars Doors
         </a>
         
@@ -24,25 +24,25 @@ if (!function_exists('isLoggedIn')) {
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page ?? '') === 'home' ? 'active' : ''; ?>"
-                       href="index.php">
+                       href="<?php echo rtrim(SITE_URL, '/'); ?>/index.php">
                         <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page ?? '') === 'search' ? 'active' : ''; ?>"
-                       href="search.php">
+                       href="<?php echo rtrim(SITE_URL, '/'); ?>/search.php">
                         <i class="fas fa-search"></i> Rechercher
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page ?? '') === 'planetes' ? 'active' : ''; ?>"
-                       href="planetes.php">
+                       href="<?php echo rtrim(SITE_URL, '/'); ?>/planetes.php">
                         <i class="fas fa-globe"></i> Planètes
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page ?? '') === 'about' ? 'active' : ''; ?>"
-                       href="about.php">
+                       href="<?php echo rtrim(SITE_URL, '/'); ?>/about.php">
                         <i class="fas fa-info-circle"></i> À propos
                     </a>
                 </li>
@@ -53,13 +53,13 @@ if (!function_exists('isLoggedIn')) {
                         <i class="fas fa-building"></i> Propriétaire
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="proprietaireDropdown">
-                        <li><a class="dropdown-item" href="create_listing.php">
+                        <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/create_listing.php">
                             <i class="fas fa-plus"></i> Ajouter une annonce
                         </a></li>
-                        <li><a class="dropdown-item" href="dashboard.php?section=mes-annonces">
+                        <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/dashboard.php?section=mes-annonces">
                             <i class="fas fa-list"></i> Mes annonces
                         </a></li>
-                        <li><a class="dropdown-item" href="dashboard.php?section=reservations-recues">
+                        <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/dashboard.php?section=reservations-recues">
                             <i class="fas fa-calendar-check"></i> Réservations reçues
                         </a></li>
                     </ul>
@@ -78,21 +78,21 @@ if (!function_exists('isLoggedIn')) {
                             <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Mon compte'); ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="dashboard.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/dashboard.php">
                                 <i class="fas fa-tachometer-alt"></i> Tableau de bord
                             </a></li>
-                            <li><a class="dropdown-item" href="profile.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/profile.php">
                                 <i class="fas fa-user"></i> Mon profil
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="booking.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/booking.php">
                                 <i class="fas fa-calendar-check"></i> Mes réservations
                             </a></li>
-                            <li><a class="dropdown-item" href="voyages.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/voyages.php">
                                 <i class="fas fa-rocket"></i> Mes voyages
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="messages.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/conversation/chat.php">
                                 <i class="fas fa-envelope"></i> Messages
                                 <?php
                                 // TODO: Afficher le nombre de messages non lus
@@ -100,20 +100,20 @@ if (!function_exists('isLoggedIn')) {
                                 // if ($unread_count > 0) echo '<span class="badge bg-danger ms-1">'.$unread_count.'</span>';
                                 ?>
                             </a></li>
-                            <li><a class="dropdown-item" href="favorites.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/favorites.php">
                                 <i class="fas fa-heart"></i> Mes favoris
                             </a></li>
-                            <li><a class="dropdown-item" href="reviews.php">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/reviews.php">
                                 <i class="fas fa-star"></i> Mes avis
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <?php if (function_exists('isAdmin') && isAdmin()): ?>
-                            <li><a class="dropdown-item" href="admin/">
+                            <li><a class="dropdown-item" href="<?php echo rtrim(SITE_URL, '/'); ?>/admin/">
                                 <i class="fas fa-cog"></i> Administration
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <?php endif; ?>
-                            <li><a class="dropdown-item text-danger" href="logout.php">
+                            <li><a class="dropdown-item text-danger" href="<?php echo rtrim(SITE_URL, '/'); ?>/logout.php">
                                 <i class="fas fa-sign-out-alt"></i> Déconnexion
                             </a></li>
                         </ul>
@@ -121,12 +121,12 @@ if (!function_exists('isLoggedIn')) {
                 <?php else: ?>
                     <!-- Utilisateur non connecté -->
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">
+                        <a class="nav-link" href="<?php echo rtrim(SITE_URL, '/'); ?>/login.php">
                             <i class="fas fa-sign-in-alt"></i> Connexion
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm ms-2" href="register.php">
+                        <a class="btn btn-primary btn-sm ms-2" href="<?php echo rtrim(SITE_URL, '/'); ?>/register.php">
                             <i class="fas fa-user-plus"></i> Inscription
                         </a>
                     </li>
@@ -137,7 +137,7 @@ if (!function_exists('isLoggedIn')) {
 </nav>
 
 <!-- Barre de notifications (si nécessaire) -->
-<?php if (function_exists('hasMaintenanceMode') && hasMaintenanceMode()): ?>
+<?php if (defined('MAINTENANCE_MODE') && MAINTENANCE_MODE): ?>
 <div class="alert alert-warning alert-dismissible mb-0 text-center" role="alert">
     <i class="fas fa-exclamation-triangle"></i> 
     Maintenance programmée le [DATE]. Certaines fonctionnalités peuvent être temporairement indisponibles.

@@ -10,11 +10,13 @@
 ## 🆕 Dernières Mises à Jour (Octobre 2025)
 
 ✅ **Gestion complète des annonces**
+
 - Upload multiple d'images (JPG/PNG/WEBP)
 - Modification d'annonces existantes
 - Suppression sécurisée avec confirmation
 
 ✅ **Corrections importantes**
+
 - Problème d'affichage des images résolu (.htaccess corrigé)
 - Carousel d'images sur les pages de détail
 - Dashboard propriétaire fonctionnel
@@ -26,12 +28,14 @@
 ## ✨ Fonctionnalités Principales
 
 ### 🌍 Système Spatial Complet
+
 - **15 planètes** réparties sur 5 galaxies (Voie Lactée, Andromède, Triangulum, etc.)
 - **15 races aliens** avec caractéristiques uniques
 - Système de **compatibilité atmosphérique** automatique
 - Alertes de sécurité selon niveau de compatibilité
 
 ### 🚀 Transport Spatial
+
 - **8 vaisseaux** de classe économique à luxe
 - Vitesses de 1.2c à 6.5c (multiples vitesse lumière)
 - Calcul automatique : distance, durée, coût
@@ -39,12 +43,14 @@
 - **Co-voiturage spatial** pour économiser
 
 ### 💰 Système Monétaire Galactique
+
 - **14 monnaies** avec conversion en temps réel
 - Crédit Galactique Universel (CRG) comme référence
 - Widget de conversion interactif
 - Bonus de bienvenue : 1000 CRG
 
 ### 🏆 Programme de Fidélité
+
 - **5 niveaux** : Bronze → Silver → Gold → Platinum → Diamond
 - Accumulation de **Miles Galactiques**
 - Réductions jusqu'à 25%
@@ -52,32 +58,38 @@
 - **Système de parrainage** : 500 points/filleul
 
 ### 🛡️ Assurance Voyage
+
 - **4 formules** : Basique, Standard, Premium, Platinium
 - Couvertures : annulation, médical, accident spatial, radiation, piraterie
 - Remboursements jusqu'à 500,000 CRG
 
 ### 📨 Messagerie Intergalactique
+
 - Délai de transmission selon distance
 - Instantané jusqu'à 100 AL
 - Système de priorité (normale/urgente/critique)
 - Traduction automatique entre races
 
 ### 🌦️ Météo Spatiale & Événements
+
 - Alertes : tempêtes solaires, pluies de météorites
 - Événements galactiques (festivals, célébrations)
 - Niveau de sévérité et recommandations
 
 ### 🛂 Système de Visas
+
 - **5 types de visas** : Tourisme, Travail, Étudiant, Diplomatique, Affaires
 - Gestion automatique des validités
 - Contrôles douaniers planétaires
 
 ### 👨‍👩‍👧‍👦 Réservations Groupe/Famille
+
 - Réservations groupées avec réductions
 - Gestion des membres
 - Types : famille, amis, entreprise, scolaire
 
 ### 🏠 Gestion des Annonces (Propriétaires)
+
 - **Création d'annonces** avec upload multiple d'images
 - **Modification d'annonces** existantes (edit_listing.php)
 - **Suppression d'annonces** avec confirmation sécurisée
@@ -105,6 +117,7 @@
 ### Méthode 2 : Installation Manuelle
 
 #### Prérequis
+
 - PHP 7.4 ou supérieur
 - MySQL 5.7 ou supérieur
 - Extension PDO activée
@@ -113,12 +126,14 @@
 #### Étapes
 
 1. **Créer la base de données**
+
 ```sql
 CREATE DATABASE stars_doors CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE stars_doors;
 ```
 
 2. **Exécuter les migrations dans l'ordre**
+
 ```bash
 # 1. Structure de base
 mysql -u root -p stars_doors < database/schema.sql
@@ -136,6 +151,7 @@ mysql -u root -p stars_doors < database/migration_phase4_advanced.sql
 3. **Configurer la connexion**
 
 Créez `config/.env` (optionnel, sinon utilise les valeurs par défaut) :
+
 ```env
 DB_HOST=localhost
 DB_NAME=stars_doors
@@ -143,12 +159,13 @@ DB_USER=root
 DB_PASS=
 DB_PORT=3306
 
-SITE_URL=http://localhost/stars-doors
+SITE_URL=http://localhost/projets/stars-doors
 ENVIRONMENT=development
 ```
 
 4. **Tester l'installation**
-- Accédez à `http://localhost/stars-doors`
+
+- Accédez à `http://localhost/projets/stars-doors`
 - Créez votre premier compte
 - Explorez les planètes !
 
@@ -220,16 +237,19 @@ stars-doors/
 ### Tables Principales (40+)
 
 **Utilisateurs & Authentification**
+
 - `users` - Comptes utilisateurs
 - `points_fidelite` - Miles galactiques
 - `programmes_fidelite` - Niveaux de fidélité
 
 **Spatial**
+
 - `planetes` (15 entrées) - Planètes galactiques
 - `races` (15 entrées) - Races aliens
 - `compatibilite_atmospherique` (225 entrées) - Matrice 15×15
 
 **Logements**
+
 - `annonces` - Annonces de logement
 - `photo` - Photos des annonces (multi-upload)
 - `reservations` - Réservations
@@ -237,6 +257,7 @@ stars-doors/
 - `reservations_assurances` - Assurances
 
 **Transport**
+
 - `vaisseaux` (8 entrées) - Vaisseaux spatiaux
 - `voyage_transport` - Transports réservés
 - `covoiturage_spatial` - Co-voiturage
@@ -245,23 +266,28 @@ stars-doors/
 - `escales` - Escales
 
 **Monnaies**
+
 - `monnaies` (14 entrées) - Devises galactiques
 
 **Administratif**
+
 - `visas` - Visas inter-planétaires
 - `types_visa` (5 entrées)
 - `douanes_planetaires` - Contrôles douaniers
 - `declarations_douanieres` - Déclarations
 
 **Événements**
+
 - `meteo_spatiale` - Météo et alertes
 - `evenements_galactiques` - Festivals, célébrations
 - `calendriers_planetaires` - Calendriers locaux
 
 **Assurances**
+
 - `assurances_voyage` (4 entrées) - Formules d'assurance
 
 **Communication**
+
 - `messages` - Messagerie avec délais transmission
 
 ### Fonctions SQL
@@ -328,12 +354,14 @@ stars-doors/
 ### Gagner des Miles Galactiques
 
 **Méthodes :**
+
 - 1 point par CRG dépensé (× multiplicateur niveau)
 - Bonus voyage complété
 - Parrainage : 500 points/filleul
 - Événements spéciaux
 
 **Avantages :**
+
 - Bronze : 0% réduction
 - Silver : -5% + x1.25 points
 - Gold : -10% + x1.50 points + Lounge VIP
@@ -343,6 +371,7 @@ stars-doors/
 ### Co-voiturage Spatial
 
 **Proposer un trajet :**
+
 1. "Co-voiturage" → "Proposer un trajet"
 2. Sélectionnez départ/arrivée
 3. Choisissez vaisseau et date
@@ -351,6 +380,7 @@ stars-doors/
 6. Publiez
 
 **Rejoindre un trajet :**
+
 1. Recherchez un co-voiturage
 2. Consultez les détails
 3. Envoyez une demande
@@ -360,6 +390,7 @@ stars-doors/
 ### Gérer vos Annonces (Propriétaires)
 
 **Créer une annonce :**
+
 1. Dashboard → "Ajouter une annonce"
 2. Remplissez les informations de base (titre, description, planète)
 3. Définissez le type de logement et les caractéristiques
@@ -370,6 +401,7 @@ stars-doors/
 6. Publiez votre annonce
 
 **Modifier une annonce :**
+
 1. Dashboard → "Mes annonces" → Cliquer sur l'icône ✏️ Modifier
 2. Modifiez les informations souhaitées
 3. Ajoutez de nouvelles photos si besoin
@@ -377,6 +409,7 @@ stars-doors/
 5. Enregistrez les modifications
 
 **Supprimer une annonce :**
+
 1. Dashboard → "Mes annonces" → Cliquer sur l'icône 🗑️ Supprimer
 2. Confirmez la suppression dans la popup
 3. ⚠️ **Attention :** Cette action est irréversible
@@ -417,6 +450,7 @@ stars-doors/
 ## 🌟 Roadmap
 
 ### ✅ Phase 4 - Complétée (Octobre 2025)
+
 - [x] **Gestion complète des annonces pour propriétaires**
   - [x] Création d'annonces avec upload multiple d'images
   - [x] Modification d'annonces (edit_listing.php)
@@ -433,6 +467,7 @@ stars-doors/
   - [x] Actions rapides (voir/modifier/supprimer)
 
 ### 🚧 Phase 5 - En cours / Propositions
+
 - [ ] Panel administration complet
 - [ ] Système de paiement réel (Stripe, PayPal)
 - [ ] Notifications push et emails
@@ -453,6 +488,7 @@ stars-doors/
 ## 🐛 Résolution de Problèmes
 
 ### Erreur : "Table doesn't exist"
+
 ```bash
 # Réexécutez les migrations dans l'ordre
 mysql -u root -p stars_doors < database/schema.sql
@@ -461,6 +497,7 @@ mysql -u root -p stars_doors < database/migration_phase1_spatial.sql
 ```
 
 ### Erreur : "Function convertir_monnaie does not exist"
+
 ```sql
 -- Vérifiez les fonctions
 SHOW FUNCTION STATUS WHERE Db = 'stars_doors';
@@ -470,17 +507,21 @@ SOURCE database/migration_phase3_transport.sql;
 ```
 
 ### Erreur : "Cannot connect to database"
+
 - Vérifiez que MySQL est démarré
 - Vérifiez les identifiants dans `config.php` ou `.env`
 - Testez la connexion manuellement
 
 ### Page blanche
+
 - Activez display_errors dans `php.ini`
 - Consultez les logs d'erreur PHP
 - Vérifiez que toutes les `includes/` sont présentes
 
 ### Images ne s'affichent pas
+
 Si les images uploadées ne s'affichent pas :
+
 1. Vérifiez que le dossier `uploads/annonces/` existe et a les bonnes permissions
 2. Vérifiez le fichier `uploads/.htaccess` - il doit autoriser les images
 3. Testez l'accès direct : `http://localhost/stars-doors/uploads/annonces/nom_image.jpg`
@@ -496,7 +537,9 @@ php test_photos.php
 ```
 
 ### Erreur 500 sur les images
+
 Le `.htaccess` dans `uploads/` peut bloquer l'accès. Vérifiez qu'il utilise la syntaxe Apache 2.4 :
+
 ```apache
 # Bloquer les fichiers PHP
 <FilesMatch "\.(php|phtml|php3|php4|php5)$">
@@ -520,6 +563,7 @@ Le `.htaccess` dans `uploads/` peut bloquer l'accès. Vérifiez qu'il utilise la
 Ce projet est un projet scolaire/d'apprentissage. Les contributions sont les bienvenues !
 
 **Comment contribuer :**
+
 1. Fork le projet
 2. Créez une branche (`git checkout -b feature/AmazingFeature`)
 3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
@@ -553,6 +597,7 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 ## 📞 Support
 
 Pour toute question ou problème :
+
 - Consultez la documentation dans les fichiers README
 - Vérifiez les logs d'erreur
 - Créez une issue sur GitHub (si applicable)
@@ -563,4 +608,4 @@ Pour toute question ou problème :
 
 ---
 
-*Stars Doors v1.0.0 - "One small step for code, one giant leap for intergalactic hospitality"*
+_Stars Doors v1.0.0 - "One small step for code, one giant leap for intergalactic hospitality"_
