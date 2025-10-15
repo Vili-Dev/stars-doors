@@ -1,4 +1,5 @@
 10/10/2025
+Rajouter: link < Bootstrap Icons > dans le fichier header.php
 Rajouter: Mise à jour de la dernière connexion (login.php)
 13/10/2025
 j’ai ajouté la partie admin pour gérer les avis
