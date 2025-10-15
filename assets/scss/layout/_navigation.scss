@@ -72,7 +72,7 @@
 }
 
 .nav-link.disabled {
-  color: $gray-600;
+  color: $primary-color;
   pointer-events: none;
   cursor: default;
 }
@@ -138,7 +138,7 @@
   display: block;
   width: 100%;
   padding: 0.5rem 1rem;
-  color: $dark-color;
+  color: $primary-color;
   text-align: inherit;
   text-decoration: none;
   background-color: transparent;
