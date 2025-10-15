@@ -15,6 +15,27 @@ $user_id = $_SESSION['user_id'];
 $to_id = filter_input(INPUT_GET, 'to', FILTER_VALIDATE_INT);
 $listing_id = filter_input(INPUT_GET, 'listing', FILTER_VALIDATE_INT);
 
+// Server-side POST fallback: store messages with required columns
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $postToId = filter_input(INPUT_POST, 'toId', FILTER_VALIDATE_INT);
+  $content = trim($_POST['content'] ?? '');
+  $subject = trim($_POST['subject'] ?? 'Chat');
+  $postListingId = filter_input(INPUT_POST, 'listingId', FILTER_VALIDATE_INT);
+  $effectiveToId = $to_id ?: ($postToId ?: $user_id);
+  $effectiveListingId = $postListingId ?: ($listing_id ?: null);
+  if ($content !== '') {
+    try {
+      sendMessage($pdo, $user_id, (int)$effectiveToId, $content, $effectiveListingId, $subject);
+      setFlashMessage('Message enregistré dans la conversation.', 'success');
+      redirect('chat.php?to=' . (int)$effectiveToId . ($effectiveListingId ? ('&listing='.(int)$effectiveListingId) : ''));
+      exit;
+    } catch (PDOException $e) {
+      error_log('Erreur envoi message (chat.php POST): ' . $e->getMessage());
+      setFlashMessage('Erreur lors de l\'enregistrement du message.', 'danger');
+    }
+  }
+}
+
 // Relaxed: do not redirect if recipient missing or self; show conversation anyway
 if (!$to_id || $to_id === $user_id) {
     setFlashMessage('Destinataire introuvable ou non connecté. Affichage en mode consultation.', 'warning');
@@ -58,9 +79,9 @@ include __DIR__ . '/../includes/nav.php';
     userId: <?php echo (int)$user_id; ?>,
     toId: <?php echo (int)$to_id; ?>,
     listingId: <?php echo $listing_id ? (int)$listing_id : 0; ?>,
-    saveUrl: '/conversation/api/save_message.php'
+    saveUrl: 'api/save_message.php'
   };
 </script>
-<script src="/assets/js/chat.js"></script>
+<script src="../assets/js/chat.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

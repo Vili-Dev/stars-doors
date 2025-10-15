@@ -5,26 +5,38 @@ require_once 'includes/database.php';
 require_once 'includes/auth.php';
 require_once 'includes/functions.php';
 
+/**
+ * Messagerie Intergalactique
+ * - Sécurise l'accès (requireLogin)
+ * - Envoi et affichage des messages et conversations
+ * - Marquage des messages comme lus à l'ouverture
+ *
+ * Note: envisager l'ajout d'une protection CSRF pour le formulaire.
+ */
 requireLogin();
 
 $title = 'Messagerie Intergalactique - Stars Doors';
 $current_page = 'messages';
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id']; // ID de l'utilisateur connecté
 
-// Traitement envoi de message
+// Traitement de l'envoi de message (validation, insertion, feedback)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    // Action du formulaire: 'send' pour envoyer un message
     if ($_POST['action'] === 'send') {
+        // Récupération et nettoyage des champs du formulaire
         $destinataire_id = filter_input(INPUT_POST, 'destinataire_id', FILTER_VALIDATE_INT);
         $contenu = trim($_POST['contenu'] ?? '');
-        $priorite = $_POST['priorite'] ?? 'normale';
+        $sujet = trim($_POST['sujet'] ?? 'Chat');
+        $annonce_id = filter_input(INPUT_POST, 'annonce_id', FILTER_VALIDATE_INT);
 
         if ($destinataire_id && $contenu) {
+            // Insertion en base si validation réussie
             try {
                 $stmt = $pdo->prepare("
-                    INSERT INTO messages (id_expediteur, id_destinataire, contenu, priorite, date_envoi)
-                    VALUES (?, ?, ?, ?, NOW())
+                    INSERT INTO messages (id_expediteur, id_destinataire, id_annonce, sujet, contenu, lu, date_envoi, date_lecture)
+                    VALUES (?, ?, ?, ?, ?, 0, NOW(), NULL)
                 ");
-                $stmt->execute([$user_id, $destinataire_id, $contenu, $priorite]);
+                $stmt->execute([$user_id, $destinataire_id, $annonce_id, $sujet, $contenu]);
                 setFlashMessage('Message envoyé avec succès !', 'success');
             } catch (PDOException $e) {
                 error_log("Erreur envoi message: " . $e->getMessage());
@@ -34,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-// Récupération des conversations
+// Récupération des conversations (interlocuteurs, dernier message, non lus, métadonnées)
 try {
     $stmt = $pdo->prepare("
         SELECT DISTINCT
@@ -65,6 +77,7 @@ try {
         WHERE m.id_expediteur = ? OR m.id_destinataire = ?
         ORDER BY date_dernier_message DESC
     ");
+    // Exécution avec ID utilisateur pour sous-requêtes corrélées
     $stmt->execute([$user_id, $user_id, $user_id, $user_id, $user_id, $user_id, $user_id, $user_id, $user_id]);
     $conversations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -72,7 +85,7 @@ try {
     $conversations = [];
 }
 
-// Conversation sélectionnée
+// Conversation sélectionnée (via paramètre GET `with`)
 $conversation_id = filter_input(INPUT_GET, 'with', FILTER_VALIDATE_INT);
 $messages_conversation = [];
 $interlocuteur = null;
@@ -99,12 +112,13 @@ if ($conversation_id) {
                OR (m.id_expediteur = ? AND m.id_destinataire = ?)
             ORDER BY m.date_envoi ASC
         ");
+        // Tri chronologique ascendant pour l'affichage
         $stmt->execute([$user_id, $conversation_id, $conversation_id, $user_id]);
         $messages_conversation = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Marquer comme lus
         $stmt = $pdo->prepare("
-            UPDATE messages SET lu = 1
+            UPDATE messages SET lu = 1, date_lecture = NOW()
             WHERE id_destinataire = ? AND id_expediteur = ? AND lu = 0
         ");
         $stmt->execute([$user_id, $conversation_id]);
@@ -168,6 +182,7 @@ include 'includes/nav.php';
                                             <small class="text-warning">
                                                 <i class="fas fa-satellite-dish"></i>
                                                 <?php
+                                                // Estimation fictive du délai de transmission selon la distance
                                                 $delai = ($conv['distance_terre'] > 100) ? floor($conv['distance_terre'] - 100) : 0;
                                                 if ($delai > 0) {
                                                     echo "Délai: {$delai}s";
@@ -217,6 +232,7 @@ include 'includes/nav.php';
                             <div>
                                 <?php if ($interlocuteur['distance_terre']): ?>
                                     <?php
+                                    // Badge d'état de transmission basé sur la distance
                                     $delai = ($interlocuteur['distance_terre'] > 100) ? floor($interlocuteur['distance_terre'] - 100) : 0;
                                     ?>
                                     <span class="badge <?php echo $delai > 0 ? 'bg-warning' : 'bg-success'; ?>">
@@ -248,6 +264,7 @@ include 'includes/nav.php';
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small class="<?php echo $is_me ? 'text-white-50' : 'text-muted'; ?>">
                                                 <?php
+                                                // Formatage de la date d'envoi (jour/mois/année heure:minute)
                                                 $date = new DateTime($msg['date_envoi']);
                                                 echo $date->format('d/m/Y H:i');
                                                 ?>
@@ -262,6 +279,7 @@ include 'includes/nav.php';
                                                 </span>
                                             <?php endif; ?>
                                         </div>
+                                        <!-- Indicateurs supplémentaires: délai de transmission et traduction -->
                                         <?php if ($msg['delai_transmission_secondes'] > 0): ?>
                                             <small class="<?php echo $is_me ? 'text-white-50' : 'text-muted'; ?> d-block mt-1">
                                                 <i class="fas fa-clock"></i>
@@ -282,24 +300,25 @@ include 'includes/nav.php';
                     <!-- Formulaire d'envoi -->
                     <div class="card-footer">
                         <form method="POST" action="">
+                            <!-- Paramètres du formulaire: action et destinataire -->
                             <input type="hidden" name="action" value="send">
                             <input type="hidden" name="destinataire_id" value="<?php echo $interlocuteur['id_user']; ?>">
+                            <input type="hidden" name="annonce_id" value="0">
 
                             <div class="row g-2">
                                 <div class="col-12">
+                                    <!-- Sujet du message (optionnel) -->
+                                    <input type="text" name="sujet" class="form-control" placeholder="Sujet (optionnel)">
+                                </div>
+                                <div class="col-12">
+                                    <!-- Contenu du message -->
                                     <div class="input-group">
                                         <textarea name="contenu" class="form-control" rows="2"
                                                   placeholder="Votre message..." required></textarea>
                                     </div>
                                 </div>
-                                <div class="col-auto">
-                                    <select name="priorite" class="form-select form-select-sm">
-                                        <option value="normale">Normale</option>
-                                        <option value="urgente">Urgente</option>
-                                        <option value="critique">Critique</option>
-                                    </select>
-                                </div>
                                 <div class="col">
+                                    <!-- Bouton d'envoi -->
                                     <button type="submit" class="btn btn-primary w-100">
                                         <i class="fas fa-paper-plane"></i> Envoyer
                                     </button>

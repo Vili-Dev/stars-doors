@@ -36,14 +36,14 @@ function getConversationMessages(PDO $pdo, int $meId, int $otherId, int $limit =
 }
 
 function markAsRead(PDO $pdo, int $meId, int $otherId): void {
-    $stmt = $pdo->prepare("UPDATE messages SET lu = 1
+    $stmt = $pdo->prepare("UPDATE messages SET lu = 1, date_lecture = NOW()
                            WHERE id_destinataire = ? AND id_expediteur = ? AND lu = 0");
     $stmt->execute([$meId, $otherId]);
 }
 
-function sendMessage(PDO $pdo, int $fromId, int $toId, string $content, string $priority = 'normale'): void {
-    $stmt = $pdo->prepare("INSERT INTO messages (id_expediteur, id_destinataire, contenu, priorite, date_envoi)
-                           VALUES (?, ?, ?, ?, NOW())");
-    $stmt->execute([$fromId, $toId, $content, $priority]);
+function sendMessage(PDO $pdo, int $fromId, int $toId, string $content, ?int $listingId = null, string $subject = 'Chat'): void {
+    $stmt = $pdo->prepare("INSERT INTO messages (id_expediteur, id_destinataire, id_annonce, sujet, contenu, lu, date_envoi, date_lecture)
+                           VALUES (?, ?, ?, ?, ?, 0, NOW(), NULL)");
+    $stmt->execute([$fromId, $toId, $listingId, $subject, $content]);
 }
 ?>

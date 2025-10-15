@@ -12,6 +12,8 @@ header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
 $toId = filter_var($input['toId'] ?? null, FILTER_VALIDATE_INT);
 $content = trim($input['content'] ?? '');
+$listingId = filter_var($input['listingId'] ?? null, FILTER_VALIDATE_INT);
+$subject = isset($input['subject']) && is_string($input['subject']) ? trim($input['subject']) : 'Chat';
 $userId = $_SESSION['user_id'];
 
 // Content is required; recipient can be missing → default to self (draft/self-chat)
@@ -26,9 +28,9 @@ if (!$toId || $toId === $userId) {
 }
 
 try {
-    $stmt = $pdo->prepare("INSERT INTO messages (id_expediteur, id_destinataire, contenu, priorite, date_envoi)
-                           VALUES (?, ?, ?, ?, NOW())");
-    $stmt->execute([$userId, $toId, $content, 'normale']);
+    $stmt = $pdo->prepare("INSERT INTO messages (id_expediteur, id_destinataire, id_annonce, sujet, contenu, lu, date_envoi, date_lecture)
+                           VALUES (?, ?, ?, ?, ?, 0, NOW(), NULL)");
+    $stmt->execute([$userId, $toId, $listingId, $subject, $content]);
     echo json_encode(['ok' => true]);
 } catch (PDOException $e) {
     error_log('Erreur save_message: ' . $e->getMessage());
