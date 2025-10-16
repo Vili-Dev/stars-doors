@@ -378,15 +378,50 @@
 }
 
 .planetes-hero {
-  // Ajoutez ici les styles spécifiques pour la section planetes-hero
+  background: url("../images/bgsite1.webp") center center/cover no-repeat;
+  border: 0;
+  border-bottom: 5px solid;
+  border-image: linear-gradient(
+    to right,
+    rgba(168, 212, 236, 0.678),
+    rgba(11, 18, 67, 0.541)
+  );
+  border-image-slice: 1;
+  position: relative;
+  min-height: 400px;
+  padding: 5rem 0;
+  color: $white;
+  overflow: hidden;
+  z-index: 1;
+
+  h1 {
+    font-weight: $font-weight-bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba($black, 0.3);
+  }
+
+  .lead {
+    font-size: $font-size-xl;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 2px rgba($black, 0.3);
+  }
 }
 
 .planetes-grid {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  background-image: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: $light-color;
+  }
 }
 
 // Responsive pour la grille des planètes
