@@ -77,6 +77,7 @@ try {
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log("Erreur fetch litige: " . $e->getMessage());
+    echo '<pre style="color:red;">Erreur SQL : ' . htmlspecialchars($e->getMessage()) . '</pre>';
 }
 
 $totalPages = max(1, (int)ceil($total / $limit));
@@ -256,11 +257,7 @@ include '../includes/header.php';
                                    title="Voir détails">
                                     👁️ Voir
                                 </a>
-                                <a href="litige_moderer.php?id=<?= $litige['id_litige'] ?>" 
-                                   class="btn btn-sm btn-warning" 
-                                   title="Modérer">
-                                    ⚖️ Modérer
-                                </a>
+                                
                             </td>
                         </tr>
                     <?php endforeach; ?>
