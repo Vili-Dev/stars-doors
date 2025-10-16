@@ -636,7 +636,9 @@ a.link-white:hover {
   text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   background-color: rgba(25, 51, 87, 0.7450980392);
   border: 1px solid rgba(25, 51, 87, 0.7450980392);
   padding: 0.5rem 1rem;
@@ -896,7 +898,8 @@ a.link-white:hover {
 .listing-card .listing-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform 0.3s ease;
 }
 
@@ -1016,7 +1019,8 @@ a.link-white:hover {
   background: url("../images/bgsite1.webp") center center/cover no-repeat;
   border: 0; /* on supprime les autres bordures */
   border-bottom: 5px solid; /* seulement en bas */
-  border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+  -o-border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+     border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
   border-image-slice: 1;
   position: relative;
   min-height: 400px;
@@ -1212,7 +1216,8 @@ a.link-white:hover {
   background-position: center;
   border: 0;
   border-bottom: 5px solid;
-  border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+  -o-border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+     border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
   border-image-slice: 1;
   position: relative;
   min-height: 300px;
@@ -1281,7 +1286,8 @@ a.link-white:hover {
   background: url("../images/bgsite1.webp") center center/cover no-repeat;
   border: 0;
   border-bottom: 5px solid;
-  border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+  -o-border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
+     border-image: linear-gradient(to right, rgba(168, 212, 236, 0.678), rgba(11, 18, 67, 0.541));
   border-image-slice: 1;
   position: relative;
   min-height: 400px;
@@ -1341,7 +1347,8 @@ a.link-white:hover {
 .planet-card .planet-image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .planet-card .planet-content {
   padding: 1.5rem;
@@ -1762,25 +1769,4 @@ a.link-white:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-.planetes-grid {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .planetes-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-}
-@media (min-width: 992px) {
-  .planetes-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

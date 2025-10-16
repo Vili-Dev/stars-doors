@@ -142,11 +142,20 @@ include 'includes/nav.php';
         </div>
     </section>
 
-    <!-- Liste des planètes -->
-    <section class="planetes-list py-5">
+    <!-- Section Planètes Hero -->
+    <section class="planetes-hero">
         <div class="container">
-            <?php if (!empty($planetes)): ?>
+            <h1>Découvrez nos Planètes</h1>
+            <p class="lead">Explorez des mondes extraordinaires à travers la galaxie</p>
+        </div>
+    </section>
+
+    <!-- Section Planètes Disponibles -->
+    <section class="planetes-grid py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Nos Planètes Disponibles</h2>
             <div class="row">
+                <?php if (!empty($planetes)): ?>
                 <?php foreach ($planetes as $planete): ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100 shadow-sm hover-shadow">
@@ -283,17 +292,17 @@ include 'includes/nav.php';
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php else: ?>
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h3>Aucune planète trouvée</h3>
+                    <p class="text-muted">Essayez de modifier vos filtres de recherche</p>
+                    <a href="planetes.php" class="btn btn-primary mt-3">
+                        <i class="fas fa-redo"></i> Réinitialiser les filtres
+                    </a>
+                </div>
+                <?php endif; ?>
             </div>
-            <?php else: ?>
-            <div class="text-center py-5">
-                <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                <h3>Aucune planète trouvée</h3>
-                <p class="text-muted">Essayez de modifier vos filtres de recherche</p>
-                <a href="planetes.php" class="btn btn-primary mt-3">
-                    <i class="fas fa-redo"></i> Réinitialiser les filtres
-                </a>
-            </div>
-            <?php endif; ?>
         </div>
     </section>
 
@@ -505,6 +514,24 @@ include 'includes/nav.php';
             </div>
         </div>
     </section>
+
+    <div class="planets-list">
+        <!-- Example of a planet card -->
+        <div class="planet-card">
+            <img src="assets/images/planet1.jpeg" alt="Mars" class="planet-image">
+            <div class="planet-content">
+                <h3 class="planet-title">Mars</h3>
+                <p class="planet-description">
+                    La planète rouge, idéale pour les aventuriers en quête de nouveaux horizons.
+                </p>
+                <div class="planet-stats">
+                    <span>Température: -63°C</span>
+                    <span>Distance: 225M km</span>
+                </div>
+                <a href="#" class="btn btn-primary mt-3 w-100">Découvrir</a>
+            </div>
+        </div>
+    </div>
 </main>
 
 <style>
