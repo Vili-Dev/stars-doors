@@ -1,94 +1,177 @@
 </div> <!-- Fermeture du conteneur principal ouvert dans nav.php -->
 
 <!-- Footer -->
-<footer class="bg-dark text-light py-5 mt-5">
+<footer class="footer-galaxy bg-dark text-light py-4 mt-4">
     <div class="container">
-        <div class="row">
+        <div class="row g-3">
             <!-- À propos -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5><i class="fas fa-star text-primary"></i> Stars Doors</h5>
-                <p class="text-muted">
-                    Votre plateforme de confiance pour la location de logements de courte durée. 
-                    Découvrez des hébergements uniques et vivez des expériences inoubliables.
+            <div class="col-lg-4 col-md-6 mb-3">
+                <h5 class="footer-title mb-2">
+                    <i class="fas fa-rocket text-primary me-2"></i>
+                    Stars Doors
+                </h5>
+                <p class="text-muted mb-2 small">
+                    Voyagez à travers la galaxie et découvrez des logements extraordinaires.
                 </p>
+                <div class="footer-badges mb-2">
+                    <span class="badge bg-primary me-2">
+                        <i class="fas fa-globe"></i> 1000+ Planètes
+                    </span>
+                    <span class="badge bg-primary">
+                        <i class="fas fa-home"></i> 50K+ Logements
+                    </span>
+                </div>
                 <div class="social-links">
-                    <a href="#" class="text-light me-3" aria-label="Facebook">
+                    <a href="#" class="social-icon text-light me-2" aria-label="Facebook" title="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="text-light me-3" aria-label="Twitter">
+                    <a href="#" class="social-icon text-light me-2" aria-label="Twitter" title="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-light me-3" aria-label="Instagram">
+                    <a href="#" class="social-icon text-light me-2" aria-label="Instagram" title="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-light" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="#" class="social-icon text-light me-2" aria-label="Discord" title="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-icon text-light" aria-label="YouTube" title="YouTube">
+                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
             </div>
-            
-            <!-- Liens rapides -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h6>Découvrir</h6>
-                <ul class="list-unstyled">
-                    <li><a href="<?php echo SITE_URL; ?>" class="text-muted text-decoration-none">Accueil</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>/search.php" class="text-muted text-decoration-none">Rechercher</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Destinations populaires</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Offres spéciales</a></li>
+
+            <!-- Exploration -->
+            <div class="col-lg-2 col-md-6 mb-3">
+                <h6 class="footer-heading mb-2"><i class="fas fa-compass me-1"></i> Explorer</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-1">
+                        <a href="<?php echo SITE_URL; ?>" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Accueil
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="<?php echo SITE_URL; ?>/search.php" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Rechercher
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Planètes populaires
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Offres spéciales
+                        </a>
+                    </li>
                 </ul>
             </div>
-            
-            <!-- Support -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h6>Support</h6>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-muted text-decoration-none">Centre d'aide</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Nous contacter</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">FAQ</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Signaler un problème</a></li>
+
+            <!-- Voyageurs -->
+            <div class="col-lg-2 col-md-6 mb-3">
+                <h6 class="footer-heading mb-2"><i class="fas fa-user-astronaut me-1"></i> Voyageurs</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Mes réservations
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Mes favoris
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Guide
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> FAQ
+                        </a>
+                    </li>
                 </ul>
             </div>
-            
-            <!-- Légal -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h6>Légal</h6>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-muted text-decoration-none">Conditions d'utilisation</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Politique de confidentialité</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Mentions légales</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Cookies</a></li>
+
+            <!-- Hôtes -->
+            <div class="col-lg-2 col-md-6 mb-3">
+                <h6 class="footer-heading mb-2"><i class="fas fa-satellite-dish me-1"></i> Hôtes</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Devenir hôte
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Tableau de bord
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Guide
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Assurance
+                        </a>
+                    </li>
                 </ul>
             </div>
-            
-            <!-- Propriétaires -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h6>Propriétaires</h6>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-muted text-decoration-none">Mettre en location</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Guide du propriétaire</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Outils de gestion</a></li>
-                    <li><a href="#" class="text-muted text-decoration-none">Assurance</a></li>
+
+            <!-- Support & Légal -->
+            <div class="col-lg-2 col-md-6 mb-3">
+                <h6 class="footer-heading mb-2"><i class="fas fa-info-circle me-1"></i> Infos</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Centre d'aide
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Contact
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> CGU
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a href="#" class="footer-link text-muted text-decoration-none">
+                            <i class="fas fa-angle-right me-1"></i> Confidentialité
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
-        
-        <!-- Barre de séparation -->
-        <hr class="my-4">
-        
+
+        <!-- Barre de séparation avec effet galaxie -->
+        <hr class="footer-divider my-2">
+
         <!-- Copyright et informations -->
         <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="mb-0 text-muted">
-                    &copy; <?php echo date('Y'); ?> Stars Doors. Tous droits réservés.
+            <div class="col-md-7 mb-2 mb-md-0">
+                <p class="mb-0 text-muted small">
+                    <i class="far fa-copyright"></i> <?php echo date('Y'); ?> Stars Doors - Plateforme intergalactique
+                    <span class="d-none d-md-inline">| <i class="fas fa-heart text-danger"></i> Fait avec passion</span>
                 </p>
             </div>
-            <div class="col-md-6 text-md-end">
-                <p class="mb-0 text-muted">
-                    <i class="fas fa-code"></i> 
-                    Version <?php echo APP_VERSION ?? '1.0.0'; ?> | 
-                    <i class="fas fa-shield-alt"></i> 
-                    Site sécurisé SSL
-                </p>
+            <div class="col-md-5 text-md-end">
+                <div class="footer-badges-inline">
+                    <span class="badge bg-secondary me-1">
+                        <i class="fas fa-shield-alt"></i> SSL
+                    </span>
+                    <span class="badge bg-secondary me-1">
+                        <i class="fas fa-check-circle"></i> Sécurisé
+                    </span>
+                    <span class="badge bg-secondary">
+                        v<?php echo APP_VERSION ?? '1.0'; ?>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

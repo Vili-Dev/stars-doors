@@ -320,6 +320,21 @@ include '../includes/header.php';
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php if (true): ?>
+<nav class="mt-3">
+    <ul class="pagination justify-content-center">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+                <a class="page-link"
+                   href="?page=<?= $i ?>&limit=<?= $limit ?>&sort=<?= $sort ?>&dir=<?= strtolower($dir) ?>&statut=<?= $statut ?>">
+                    <?= $i ?>
+                </a>
+            </li>
+        <?php endfor; ?>
+    </ul>
+</nav>
+<?php endif; ?>
+
         </div>
     </div>
 </main>

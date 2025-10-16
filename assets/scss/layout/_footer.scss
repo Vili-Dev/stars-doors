@@ -1,0 +1,193 @@
+// ===================================================================
+// FOOTER - STARS DOORS
+// Styles pour le footer avec effet galaxie
+// ===================================================================
+
+.footer-galaxy {
+  position: relative;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
+  border-top: 2px solid rgba($primary-color, 0.3);
+  overflow: hidden;
+
+  // Effet étoiles en arrière-plan (optionnel)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 50% 50%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(2px 2px at 90% 60%, white, transparent),
+      radial-gradient(1px 1px at 33% 80%, white, transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Titres du footer
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: $font-weight-bold;
+  color: $white;
+
+  i {
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+.footer-heading {
+  font-size: 0.85rem;
+  font-weight: $font-weight-bold;
+  color: rgba($white, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Liens du footer
+.footer-links {
+  li {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.footer-link {
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+
+  i {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    color: blanchedalmond !important;
+
+    i {
+      opacity: 1;
+    }
+  }
+}
+
+// Badges
+.footer-badges {
+  .badge {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: $font-weight-medium;
+    border-radius: $border-radius-sm;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba($primary-color, 0.3);
+    }
+  }
+}
+
+.footer-badges-inline {
+  .badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Icônes sociales
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba($white, 0.1);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: $primary-color;
+    color: $white !important;
+    transform: translateY(-2px) rotate(5deg);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.4);
+  }
+}
+
+// Séparateur
+.footer-divider {
+  border-top: 1px solid rgba($white, 0.1);
+  box-shadow: 0 1px 0 rgba($primary-color, 0.1);
+}
+
+// Animation du pulse pour les icônes
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+// Responsive
+@include responsive-md {
+  .footer-galaxy {
+    .col-lg-2,
+    .col-lg-4 {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .footer-badges-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    .badge {
+      display: inline-block;
+    }
+  }
+
+  .social-links {
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+}
+
+@include responsive-sm {
+  .footer-title {
+    font-size: 1.1rem;
+  }
+
+  .footer-heading {
+    font-size: 0.85rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+  }
+}

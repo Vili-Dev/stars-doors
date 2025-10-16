@@ -8,20 +8,26 @@ require_once 'includes/auth.php';
 $title = 'Accueil - Stars Doors';
 $current_page = 'home';
 
-// Récupération des annonces en vedette
+// Récupération des annonces en vedette avec toutes leurs photos
 try {
     $stmt = $pdo->prepare("SELECT a.*, u.prenom, u.nom, u.avatar, u.race,
-                          pl.nom as planete_nom, pl.galaxie, pl.image_planete,
-                          p.chemin as photo_chemin
+                          pl.nom as planete_nom, pl.galaxie, pl.image_planete
                           FROM annonces a
                           LEFT JOIN users u ON a.id_user = u.id_user
                           LEFT JOIN planetes pl ON a.id_planete = pl.id_planete
-                          LEFT JOIN photo p ON a.id_annonce = p.id_annonce AND p.photo_principale = 1
                           WHERE a.disponible = 1
                           ORDER BY a.date_creation DESC
                           LIMIT 6");
     $stmt->execute();
     $featured_listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupérer toutes les photos pour chaque annonce
+    foreach ($featured_listings as &$listing) {
+        $stmt_photos = $pdo->prepare("SELECT chemin, ordre FROM photo WHERE id_annonce = ? ORDER BY photo_principale DESC, ordre ASC");
+        $stmt_photos->execute([$listing['id_annonce']]);
+        $listing['photos'] = $stmt_photos->fetchAll(PDO::FETCH_ASSOC);
+    }
+    unset($listing);
 } catch (PDOException $e) {
     $featured_listings = [];
     error_log("Erreur lors de la récupération des annonces: " . $e->getMessage());
@@ -77,17 +83,52 @@ include 'includes/nav.php';
                 <?php foreach ($featured_listings as $listing): ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card listing-card h-100 shadow-sm">
-                        <div class="listing-image position-relative">
-                            <?php if (!empty($listing['photo_chemin']) && file_exists($listing['photo_chemin'])): ?>
-                                <img src="<?php echo htmlspecialchars($listing['photo_chemin']); ?>"
-                                     class="card-img-top" alt="<?php echo htmlspecialchars($listing['titre']); ?>"
-                                     style="height: 200px; object-fit: cover;">
-                            <?php else: ?>
-                                <img src="assets/images/no-image.jpg" class="card-img-top" alt="Pas d'image"
-                                     style="height: 200px; object-fit: cover;">
+                        <!-- Carousel pour les photos -->
+                        <div id="carousel-<?php echo $listing['id_annonce']; ?>" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <?php if (!empty($listing['photos'])): ?>
+                                    <?php foreach ($listing['photos'] as $index => $photo): ?>
+                                        <?php if (file_exists($photo['chemin'])): ?>
+                                            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                                <img src="<?php echo htmlspecialchars($photo['chemin']); ?>"
+                                                     class="d-block w-100" alt="<?php echo htmlspecialchars($listing['titre']); ?>"
+                                                     style="height: 200px; object-fit: cover;">
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <div class="carousel-item active">
+                                        <img src="assets/images/no-image.jpg" class="d-block w-100" alt="Pas d'image"
+                                             style="height: 200px; object-fit: cover;">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Contrôles du carousel (seulement si plusieurs photos) -->
+                            <?php if (!empty($listing['photos']) && count($listing['photos']) > 1): ?>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?php echo $listing['id_annonce']; ?>" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?php echo $listing['id_annonce']; ?>" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+
+                                <!-- Indicateurs (points) -->
+                                <div class="carousel-indicators">
+                                    <?php foreach ($listing['photos'] as $index => $photo): ?>
+                                        <button type="button" data-bs-target="#carousel-<?php echo $listing['id_annonce']; ?>"
+                                                data-bs-slide-to="<?php echo $index; ?>"
+                                                <?php echo $index === 0 ? 'class="active" aria-current="true"' : ''; ?>
+                                                aria-label="Slide <?php echo $index + 1; ?>"></button>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php endif; ?>
+
+                            <!-- Badge vue spatiale -->
                             <?php if ($listing['vue_spatiale']): ?>
-                            <span class="badge bg-info position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-info position-absolute top-0 end-0 m-2" style="z-index: 10;">
                                 <?php echo ucfirst(str_replace('_', ' ', $listing['vue_spatiale'])); ?>
                             </span>
                             <?php endif; ?>

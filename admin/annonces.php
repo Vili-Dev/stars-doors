@@ -321,6 +321,37 @@ include '../includes/header.php';
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php if ($totalPages > 1): ?>
+    <nav class="mt-3">
+        <ul class="pagination justify-content-center">
+            <!-- Bouton Précédent -->
+            <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                <a class="page-link"
+                   href="?page=<?= max(1, $page - 1) ?>&limit=<?= $limit ?>&sort=<?= $sort ?>&dir=<?= strtolower($dir) ?>&statut=<?= $statut ?>&type=<?= $type ?>">
+                    « Précédent
+                </a>
+            </li>
+
+            <!-- Numéros de pages -->
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+                    <a class="page-link"
+                       href="?page=<?= $i ?>&limit=<?= $limit ?>&sort=<?= $sort ?>&dir=<?= strtolower($dir) ?>&statut=<?= $statut ?>&type=<?= $type ?>">
+                        <?= $i ?>
+                    </a>
+                </li>
+            <?php endfor; ?>
+
+            <!-- Bouton Suivant -->
+            <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                <a class="page-link"
+                   href="?page=<?= min($totalPages, $page + 1) ?>&limit=<?= $limit ?>&sort=<?= $sort ?>&dir=<?= strtolower($dir) ?>&statut=<?= $statut ?>&type=<?= $type ?>">
+                    Suivant »
+                </a>
+            </li>
+        </ul>
+    </nav>
+<?php endif; ?>
         </div>
     </div>
 </main>
