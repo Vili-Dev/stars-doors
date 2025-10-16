@@ -378,16 +378,7 @@
 }
 
 .planetes-hero {
-  background: url("../images/bgsite1.webp") center center/cover no-repeat;
-  border: 0;
-  border-bottom: 5px solid;
-  border-image: linear-gradient(
-    to right,
-    rgba(168, 212, 236, 0.678),
-    rgba(11, 18, 67, 0.541)
-  );
-  border-image-slice: 1;
-  position: relative;
+  background: url("../images/bgsite1.webp") center/cover;
   min-height: 400px;
   padding: 5rem 0;
   color: $white;
@@ -435,5 +426,49 @@
 @include responsive-lg {
   .planetes-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.planet-card {
+  background: rgba($white, 0.9);
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  .carousel {
+    height: 250px;
+
+    img {
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    background: rgba($black, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 10px;
+  }
+}
+
+.planet-images {
+  margin-bottom: 2rem;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  .carousel {
+    height: 400px;
+
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
   }
 }

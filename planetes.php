@@ -64,21 +64,11 @@ include 'includes/nav.php';
 ?>
 
 <main>
-    <!-- Hero Section -->
-    <section class="hero-section bg-dark text-white py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <section class="planetes-hero">
         <div class="container">
             <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="display-4 mb-3">
-                        <i class="fas fa-globe-americas"></i> Explorez la Galaxie
-                    </h1>
-                    <p class="lead mb-4">
-                        Découvrez des milliers de planètes habitables à travers l'univers
-                    </p>
-                    <p class="text-white-50">
-                        <?php echo count($planetes); ?> planètes disponibles
-                    </p>
-                </div>
+                <h1>Explorez la Galaxie</h1>
+                <p class="lead">Découvrez des milliers de planètes habitables</p>
             </div>
         </div>
     </section>
@@ -139,14 +129,6 @@ include 'includes/nav.php';
                     <?php endif; ?>
                 </div>
             </form>
-        </div>
-    </section>
-
-    <!-- Section Planètes Hero -->
-    <section class="planetes-hero">
-        <div class="container">
-            <h1>Découvrez nos Planètes</h1>
-            <p class="lead">Explorez des mondes extraordinaires à travers la galaxie</p>
         </div>
     </section>
 
@@ -515,20 +497,52 @@ include 'includes/nav.php';
         </div>
     </section>
 
-    <div class="planets-list">
-        <!-- Example of a planet card -->
-        <div class="planet-card">
-            <img src="assets/images/planet1.jpeg" alt="Mars" class="planet-image">
-            <div class="planet-content">
-                <h3 class="planet-title">Mars</h3>
-                <p class="planet-description">
-                    La planète rouge, idéale pour les aventuriers en quête de nouveaux horizons.
-                </p>
-                <div class="planet-stats">
-                    <span>Température: -63°C</span>
-                    <span>Distance: 225M km</span>
-                </div>
-                <a href="#" class="btn btn-primary mt-3 w-100">Découvrir</a>
+    <div class="planetes-grid">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($planetes as $planete): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="planet-card">
+                            <!-- Carousel Bootstrap pour les images -->
+                            <div id="carousel-<?php echo $planete['id_planete']; ?>" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <?php
+                                    // Récupérer les images de la planète
+                                    $stmt = $pdo->prepare("SELECT * FROM planetes_images WHERE id_planete = ?");
+                                    $stmt->execute([$planete['id_planete']]);
+                                    $images = $stmt->fetchAll();
+                                    
+                                    foreach ($images as $index => $image): ?>
+                                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                            <img src="assets/images/planetes/<?php echo $image['image_url']; ?>" 
+                                                 class="d-block w-100" 
+                                                 alt="<?php echo $planete['nom']; ?>">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php if (count($images) > 1): ?>
+                                    <button class="carousel-control-prev" type="button" 
+                                            data-bs-target="#carousel-<?php echo $planete['id_planete']; ?>" 
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Précédent</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" 
+                                            data-bs-target="#carousel-<?php echo $planete['id_planete']; ?>" 
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Suivant</span>
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                            <!-- Reste des informations de la planète -->
+                            <div class="planet-content">
+                                <h3><?php echo $planete['nom']; ?></h3>
+                                <p><?php echo $planete['description']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

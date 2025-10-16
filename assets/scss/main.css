@@ -1769,4 +1769,90 @@ a.link-white:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+.planetes-hero {
+  background: url("../images/bgsite1.webp") center/cover;
+  min-height: 400px;
+  padding: 5rem 0;
+  color: rgba(255, 255, 255, 0.6039215686);
+  overflow: hidden;
+  z-index: 1;
+}
+.planetes-hero h1 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.planetes-hero .lead {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.planetes-grid {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-image: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.planetes-grid h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #f8f9fa;
+}
+
+@media (min-width: 768px) {
+  .planetes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .planetes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.planet-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.planet-card .carousel {
+  height: 250px;
+}
+.planet-card .carousel img {
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.planet-card .carousel-control-prev,
+.planet-card .carousel-control-next {
+  background: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 10px;
+}
+
+.planet-images {
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.planet-images .carousel {
+  height: 400px;
+}
+.planet-images .carousel img {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=main.css.map */
