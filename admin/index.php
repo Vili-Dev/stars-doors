@@ -123,7 +123,7 @@ include '../includes/header.php';
 
     <!-- Menu de navigation -->
     <div class="row">
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-3 mb-3">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="fas fa-users fa-3x text-primary mb-3"></i>
@@ -134,7 +134,7 @@ include '../includes/header.php';
             </div>
         </div>
         
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-3 mb-3">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="fas fa-home fa-3x text-success mb-3"></i>
@@ -145,13 +145,24 @@ include '../includes/header.php';
             </div>
         </div>
         
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-3 mb-3">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="bi bi-star-fill fa-3x text-secondary mb-3" style="color:#FFC107 !important"></i>
                     <h5>Avis</h5>
                     <p class="text-muted">Modérer et gérer les avis</p>
                     <a href="avis.php" class="btn btn-secondary" style="background:#FFC107 !important;border:1px solid #FFC107 ">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-list-check fa-3x text-secondary mb-3" style="color:red !important"></i>
+                    <h5>Litiges</h5>
+                    <p class="text-muted">Gérer les litiges</p>
+                    <a href="litige.php" class="btn btn-secondary" style="background:red !important;border:1px solid red ">Accéder</a>
                 </div>
             </div>
         </div>

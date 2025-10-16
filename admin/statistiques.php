@@ -11,6 +11,13 @@ require_once '../includes/functions.php';
 requireLogin();
 requireAdmin();
 
+// 1. Nombre d'utilisateurs
+$stmt = $pdo->query("SELECT COUNT(*) FROM users");
+$total_users = $stmt->fetchColumn();
+$title = 'Statistiques - Administration';
+
+
+
 $title = 'Statistiques - Administration';
 
 include '../includes/header.php';
@@ -36,7 +43,7 @@ include '../includes/header.php';
             <div class="card text-center">
                  <div class="card-body">
                     <h3 class="text-primary">0</h3>
-                      <p class="mb-0">Total Utilisateurs</p>
+                      <p class="mb-0"><?echo $total_useres;?></p>
    </div>
 </div>
 </div>
@@ -50,25 +57,15 @@ include '../includes/header.php';
 </div>
 </div>
                 <!-- البطاقة 3 : Total Avis -->
-                 <!-- Début colonne : prend un quart d'écran (3 sur 12) -->
                 <div class="col-md-3">
-                <!-- بداية البطاقة : شكل مستطيل مع حدود، النص في الوسط -->
-                <!-- Début carte : forme rectangulaire avec bordures, texte centré -->
                 <div class="card text-center">
-                <!-- بداية جسم البطاقة : المحتوى الداخلي مع مسافات (padding) -->
-                <!-- Début corps carte : contenu intérieur avec espaces (padding) -->
-                 <div class="card-body">
-                <!-- العنوان : رقم كبير بلون أصفر/برتقالي (warning) -->
-                 <!-- Titre : grand nombre en couleur jaune/orange (warning) -->
-                  <h3 class="text-warning">0</h3>
-                  <!-- فقرة : نص توضيحي صغير، بدون مسافة سفلية (mb-0) -->
-                  <!-- Paragraphe : petit texte descriptif, sans marge basse (mb-0) -->
-                   <p class="mb-0">Total Avis</p>
+                <div class="card-body">
+                <h3 class="text-warning">0</h3>
+                  <p class="mb-0">Total Avis</p>
                  </div>
                 </div>
                 </div>
-
-                    <!-- البطاقة 4 : Annonces en attente -->
+            
                  <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">

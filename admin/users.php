@@ -107,8 +107,6 @@ include '../includes/header.php';
 </nav>
 
 <main class="container py-4">
-
-<main class="container py-4">
     
     <?php
     // Messages de succès
@@ -153,21 +151,74 @@ include '../includes/header.php';
     ?>
     
     <div class="row">
-    <div class="col-12 mb-4">
-    <div class="row">
-    <div class="col-12 mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Gestion des utilisateurs</h1>
-            <a href="user_edit.php" class="btn btn-success">+ Nouvel utilisateur</a>
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Gestion des utilisateurs</h1>
+                <a href="user_edit.php" class="btn btn-success">+ Nouvel utilisateur</a>
+            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.php">Administration</a></li>
+                    <li class="breadcrumb-item active">Utilisateurs</li>
+                </ol>
+            </nav>
         </div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Administration</a></li>
-                <li class="breadcrumb-item active">Utilisateurs</li>
-            </ol>
-        </nav>
     </div>
-</div>
+
+    <!-- Statistiques rapides -->
+    <div class="row mb-4">
+        <?php
+        try {
+            $stats = $pdo->query("
+                SELECT 
+                    COUNT(*) as total,
+                    SUM(CASE WHEN role = 'locataire' THEN 1 ELSE 0 END) as locataires,
+                    SUM(CASE WHEN role = 'proprietaire' THEN 1 ELSE 0 END) as proprietaires,
+                    SUM(CASE WHEN role = 'admin' THEN 1 ELSE 0 END) as admins,
+                    SUM(CASE WHEN actif = 1 THEN 1 ELSE 0 END) as actifs,
+                    SUM(CASE WHEN email_verifie = 1 THEN 1 ELSE 0 END) as emails_verifies,
+                    SUM(CASE WHEN DATE(derniere_connexion) >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) THEN 1 ELSE 0 END) as actifs_7j
+                FROM users
+            ")->fetch(PDO::FETCH_ASSOC);
+        ?>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-primary"><?= $stats['total'] ?></h3>
+                        <p class="mb-0">Total utilisateurs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-success text-white">
+                    <div class="card-body">
+                        <h3><?= $stats['actifs'] ?></h3>
+                        <p class="mb-0">✅ Actifs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-info text-white">
+                    <div class="card-body">
+                        <h3><?= $stats['locataires'] ?></h3>
+                        <p class="mb-0">🏠 Locataires</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-warning text-white">
+                    <div class="card-body">
+                        <h3><?= $stats['actifs_7j'] ?></h3>
+                        <p class="mb-0">📊 Actifs (7j)</p>
+                    </div>
+                </div>
+            </div>
+        <?php } catch (PDOException $e) {
+            error_log("Erreur stats utilisateurs: " . $e->getMessage());
+        } ?>
+    </div>
+
+    <!-- Filtres -->
     <form class="card mb-3" method="get" action="users.php">
         <div class="card-body row g-2">
             <div class="col-md-3">
@@ -203,8 +254,10 @@ include '../includes/header.php';
             </div>
         </div>
     </form>
+
+    <!-- Tableau des utilisateurs -->
     <div class="card">
-        <div class="table-reponsive">
+        <div class="table-responsive">
             <table class="table table-sm">
                 <thead>
                     <tr>
@@ -227,13 +280,13 @@ include '../includes/header.php';
                         <tr>
                             <td><?= (int)$u['id_user'] ?></td>
                             <td>
-                                <div class="tw-semibold"><?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?></div>
+                                <div class="fw-semibold"><?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?></div>
                             </td>
                             <td>
-                                <div class="tw-semibold"><?= htmlspecialchars($u['email']) ?></div>
+                                <div class="fw-semibold"><?= htmlspecialchars($u['email']) ?></div>
                             </td>
                             <td>
-                                <div class="tw-semibold"><?= htmlspecialchars($u['role']) ?></div>
+                                <div class="fw-semibold"><?= htmlspecialchars($u['role']) ?></div>
                             </td>
                             <td>
                                 <?php if ((int)$u["actif"] === 1): ?>
@@ -245,24 +298,39 @@ include '../includes/header.php';
                             <td>
                                 <?php if(!empty($u['derniere_connexion'])): ?>
                                     <?= htmlspecialchars(date('d/m/Y H:i', strtotime($u['derniere_connexion']))) ?>
-                                    <?php else: ?>-
+                                <?php else: ?>-
                                 <?php endif; ?>
                             </td>
                             <td>
-    <a href="user_edit.php?id=<?= $u['id_user'] ?>" class="btn btn-sm btn-primary" title="Modifier">
-        ✏️ Modifier
-    </a>
-    <a href="user_delete.php?id=<?= $u['id_user'] ?>" 
-       class="btn btn-sm btn-danger" 
-       title="Supprimer"
-       onclick="return confirm('Voulez-vous vraiment supprimer <?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?> ?')">
-        🗑️ Supprimer
-    </a>
-</td>
+                                <a href="user_edit.php?id=<?= $u['id_user'] ?>" class="btn btn-sm btn-primary" title="Modifier">
+                                    ✏️ Modifier
+                                </a>
+                                <a href="user_delete.php?id=<?= $u['id_user'] ?>" 
+                                   class="btn btn-sm btn-danger" 
+                                   title="Supprimer"
+                                   onclick="return confirm('Voulez-vous vraiment supprimer <?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?> ?')">
+                                    🗑️ Supprimer
+                                </a>
+                            </td>
                         </tr>  
                     <?php endforeach; ?> 
                 </tbody>
             </table>   
+
+            <?php if ($totalPages > 1): ?>
+            <nav class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+                            <a class="page-link"
+                               href="?page=<?= $i ?>&limit=<?= $limit ?>&sort=<?= $sort ?>&dir=<?= strtolower($dir) ?>&role=<?= $role ?>&actif=<?= $actif ?>">
+                                <?= $i ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+            <?php endif; ?>
         </div>
     </div>
 </main>

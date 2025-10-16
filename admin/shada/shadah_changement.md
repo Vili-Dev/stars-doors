@@ -9,3 +9,10 @@ avis_delete.php
 avis_view.php
 avis_reject.php
 et j’ai modifié la section paramètre  dans la page index.php par Avis
+
+15/10/2025
+-creation de la table litiges.
+- ajouter le fichier litige.php pour afficher la liste des litiges aux admis avec les filtres
+- Ajouter les pagination
+
+
