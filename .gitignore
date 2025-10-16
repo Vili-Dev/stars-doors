@@ -218,3 +218,7 @@ phpunit.xml
 # Documentation temporaire (garder les README officiels)
 scratch/
 draft/
+
+#Pour éviter de versionner le CSS compilé
+assets/css/main.css
+assets/css/main.css.map
