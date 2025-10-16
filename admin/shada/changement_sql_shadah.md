@@ -20,7 +20,6 @@ SET statut = CASE
 END;
 
 15/10/2025
-
 CREATE TABLE litiges (
     id_litige INT AUTO_INCREMENT PRIMARY KEY, 
    	id_annonce INT NULL,
