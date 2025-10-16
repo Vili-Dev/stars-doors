@@ -34,7 +34,7 @@
   font-size: 1.5rem;
   font-weight: $font-weight-bold;
   line-height: inherit;
-  color: rgb(108, 120, 129) !important;
+  color: rgb(129, 108, 108) !important;
   text-decoration: none;
   transition: $transition-base;
 }
@@ -83,7 +83,7 @@
   font-size: $font-size-lg;
   line-height: 1;
   background-color: transparent;
-  border: $border-width solid transparent;
+  border: $border-width solid $black;
   border-radius: $border-radius;
   cursor: pointer;
   transition: $transition-base;
