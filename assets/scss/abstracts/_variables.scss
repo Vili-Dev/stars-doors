@@ -5,7 +5,11 @@
 
 // === COULEURS ===
 // Couleurs principales
+<<<<<<< HEAD
 $primary-color: #317d94;
+=======
+$primary-color: #193357be;
+>>>>>>> origin/chrystelle
 $secondary-color: #f8c146;
 
 // Couleurs fonctionnelles
@@ -17,23 +21,23 @@ $light-color: #f8f9fa;
 $dark-color: #343a40;
 
 // Couleurs neutres
-$white: #ffffff;
+$white: #ffffff9a;
 $black: #000000;
 $gray-50: #fafbfc;
-$gray-100: #f8f9fa;
+$gray-100: #f8f8fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
 $gray-400: #ced4da;
 $gray-500: #adb5bd;
-$gray-600: #6c757d;
+$gray-600: #000000;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
 
 // === TYPOGRAPHIE ===
 // Polices
-$font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$font-family-mono: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+$font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+$font-family-mono: "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 
 // Tailles de police
 $font-size-base: 1rem;

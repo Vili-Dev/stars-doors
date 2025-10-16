@@ -64,21 +64,11 @@ include 'includes/nav.php';
 ?>
 
 <main>
-    <!-- Hero Section -->
-    <section class="hero-section bg-dark text-white py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <section class="planetes-hero">
         <div class="container">
             <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="display-4 mb-3">
-                        <i class="fas fa-globe-americas"></i> Explorez la Galaxie
-                    </h1>
-                    <p class="lead mb-4">
-                        Découvrez des milliers de planètes habitables à travers l'univers
-                    </p>
-                    <p class="text-white-50">
-                        <?php echo count($planetes); ?> planètes disponibles
-                    </p>
-                </div>
+                <h1>Explorez la Galaxie</h1>
+                <p class="lead">Découvrez des milliers de planètes habitables</p>
             </div>
         </div>
     </section>
@@ -142,11 +132,12 @@ include 'includes/nav.php';
         </div>
     </section>
 
-    <!-- Liste des planètes -->
-    <section class="planetes-list py-5">
+    <!-- Section Planètes Disponibles -->
+    <section class="planetes-grid py-5">
         <div class="container">
-            <?php if (!empty($planetes)): ?>
+            <h2 class="text-center mb-4">Nos Planètes Disponibles</h2>
             <div class="row">
+                <?php if (!empty($planetes)): ?>
                 <?php foreach ($planetes as $planete): ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100 shadow-sm hover-shadow">
@@ -283,17 +274,17 @@ include 'includes/nav.php';
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php else: ?>
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h3>Aucune planète trouvée</h3>
+                    <p class="text-muted">Essayez de modifier vos filtres de recherche</p>
+                    <a href="planetes.php" class="btn btn-primary mt-3">
+                        <i class="fas fa-redo"></i> Réinitialiser les filtres
+                    </a>
+                </div>
+                <?php endif; ?>
             </div>
-            <?php else: ?>
-            <div class="text-center py-5">
-                <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                <h3>Aucune planète trouvée</h3>
-                <p class="text-muted">Essayez de modifier vos filtres de recherche</p>
-                <a href="planetes.php" class="btn btn-primary mt-3">
-                    <i class="fas fa-redo"></i> Réinitialiser les filtres
-                </a>
-            </div>
-            <?php endif; ?>
         </div>
     </section>
 
@@ -505,6 +496,56 @@ include 'includes/nav.php';
             </div>
         </div>
     </section>
+
+    <div class="planetes-grid">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($planetes as $planete): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="planet-card">
+                            <!-- Carousel Bootstrap pour les images -->
+                            <div id="carousel-<?php echo $planete['id_planete']; ?>" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <?php
+                                    // Récupérer les images de la planète
+                                    $stmt = $pdo->prepare("SELECT * FROM planetes_images WHERE id_planete = ?");
+                                    $stmt->execute([$planete['id_planete']]);
+                                    $images = $stmt->fetchAll();
+                                    
+                                    foreach ($images as $index => $image): ?>
+                                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                            <img src="assets/images/planetes/<?php echo $image['image_url']; ?>" 
+                                                 class="d-block w-100" 
+                                                 alt="<?php echo $planete['nom']; ?>">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php if (count($images) > 1): ?>
+                                    <button class="carousel-control-prev" type="button" 
+                                            data-bs-target="#carousel-<?php echo $planete['id_planete']; ?>" 
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Précédent</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" 
+                                            data-bs-target="#carousel-<?php echo $planete['id_planete']; ?>" 
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Suivant</span>
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                            <!-- Reste des informations de la planète -->
+                            <div class="planet-content">
+                                <h3><?php echo $planete['nom']; ?></h3>
+                                <p><?php echo $planete['description']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 </main>
 
 <style>

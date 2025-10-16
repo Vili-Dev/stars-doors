@@ -386,7 +386,11 @@ include 'includes/nav.php';
                         <div class="border-top pt-3 mt-3">
                             <small class="text-muted">
                                 <i class="fas fa-calendar"></i>
-                                Découverte: <?php echo date('d/m/Y', strtotime($planete['date_decouverte'])); ?>
+                                Découverte: <?php
+                                $date = !empty($planete['date_decouverte']) ? strtotime($planete['date_decouverte']) : strtotime('1970-01-01');
+                                $formatted_date = date('d/m/Y', $date);
+                                echo $formatted_date;
+                                ?>
                             </small>
                         </div>
                     </div>
@@ -428,6 +432,41 @@ include 'includes/nav.php';
         </div>
     </div>
 </main>
+
+<div class="planet-images">
+    <div id="planetCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php
+            $stmt = $pdo->prepare("SELECT * FROM planetes_images WHERE id_planete = ? ORDER BY ordre ASC");
+            $stmt->execute([$planet['id_planete']]);
+            $images = $stmt->fetchAll();
+            
+            if (empty($images)) {
+                // Image par défaut si aucune image n'est trouvée
+                echo '<div class="carousel-item active">
+                        <img src="assets/images/default-planet.jpg" class="d-block w-100" alt="'.$planet['nom'].'">
+                    </div>';
+            } else {
+                foreach ($images as $index => $image) {
+                    echo '<div class="carousel-item '.($index === 0 ? 'active' : '').'">
+                            <img src="assets/images/planetes/'.$image['image_url'].'" class="d-block w-100" alt="'.$planet['nom'].'">
+                          </div>';
+                }
+            }
+            ?>
+        </div>
+        <?php if (count($images) > 1): ?>
+            <button class="carousel-control-prev" type="button" data-bs-target="#planetCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#planetCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        <?php endif; ?>
+    </div>
+</div>
 
 <style>
 @keyframes float {

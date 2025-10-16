@@ -27,6 +27,8 @@
 // === PAGES ===
 // Styles spécifiques aux pages
 @import "pages/home";
+@import "pages/search";
+@import "pages/planetes";
 
 // ===================================================================
 // === UTILITAIRES SIMPLES ===
@@ -35,117 +37,287 @@
 
 // === ESPACEMENT ===
 // Marges
-.m-0 { margin: 0; }
-.m-1 { margin: 0.25rem; }
-.m-2 { margin: 0.5rem; }
-.m-3 { margin: 1rem; }
-.m-4 { margin: 1.5rem; }
-.m-5 { margin: 3rem; }
+.m-0 {
+  margin: 0;
+}
+.m-1 {
+  margin: 0.25rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-3 {
+  margin: 1rem;
+}
+.m-4 {
+  margin: 1.5rem;
+}
+.m-5 {
+  margin: 3rem;
+}
 
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 3rem; }
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 1rem;
+}
+.mt-4 {
+  margin-top: 1.5rem;
+}
+.mt-5 {
+  margin-top: 3rem;
+}
 
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 3rem; }
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+.mb-5 {
+  margin-bottom: 3rem;
+}
 
-.ml-0 { margin-left: 0; }
-.ml-1 { margin-left: 0.25rem; }
-.ml-2 { margin-left: 0.5rem; }
-.ml-3 { margin-left: 1rem; }
+.ml-0 {
+  margin-left: 0;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-3 {
+  margin-left: 1rem;
+}
 
-.mr-0 { margin-right: 0; }
-.mr-1 { margin-right: 0.25rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mr-3 { margin-right: 1rem; }
+.mr-0 {
+  margin-right: 0;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mr-3 {
+  margin-right: 1rem;
+}
 
 // Padding
-.p-0 { padding: 0; }
-.p-1 { padding: 0.25rem; }
-.p-2 { padding: 0.5rem; }
-.p-3 { padding: 1rem; }
-.p-4 { padding: 1.5rem; }
-.p-5 { padding: 3rem; }
+.p-0 {
+  padding: 0;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 1rem;
+}
+.p-4 {
+  padding: 1.5rem;
+}
+.p-5 {
+  padding: 3rem;
+}
 
-.pt-0 { padding-top: 0; }
-.pt-1 { padding-top: 0.25rem; }
-.pt-2 { padding-top: 0.5rem; }
-.pt-3 { padding-top: 1rem; }
-.pt-4 { padding-top: 1.5rem; }
-.pt-5 { padding-top: 3rem; }
+.pt-0 {
+  padding-top: 0;
+}
+.pt-1 {
+  padding-top: 0.25rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.pt-3 {
+  padding-top: 1rem;
+}
+.pt-4 {
+  padding-top: 1.5rem;
+}
+.pt-5 {
+  padding-top: 3rem;
+}
 
-.pb-0 { padding-bottom: 0; }
-.pb-1 { padding-bottom: 0.25rem; }
-.pb-2 { padding-bottom: 0.5rem; }
-.pb-3 { padding-bottom: 1rem; }
-.pb-4 { padding-bottom: 1.5rem; }
-.pb-5 { padding-bottom: 3rem; }
+.pb-0 {
+  padding-bottom: 0;
+}
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pb-3 {
+  padding-bottom: 1rem;
+}
+.pb-4 {
+  padding-bottom: 1.5rem;
+}
+.pb-5 {
+  padding-bottom: 3rem;
+}
 
 // === DISPLAY ===
-.d-none { display: none; }
-.d-block { display: block; }
-.d-inline { display: inline; }
-.d-inline-block { display: inline-block; }
-.d-flex { display: flex; }
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+.d-inline {
+  display: inline;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.d-flex {
+  display: flex;
+}
 
 // === FLEXBOX ===
-.flex-row { flex-direction: row; }
-.flex-column { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
+.flex-row {
+  flex-direction: row;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
 
-.justify-content-start { justify-content: flex-start; }
-.justify-content-end { justify-content: flex-end; }
-.justify-content-center { justify-content: center; }
-.justify-content-between { justify-content: space-between; }
+.justify-content-start {
+  justify-content: flex-start;
+}
+.justify-content-end {
+  justify-content: flex-end;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
 
-.align-items-start { align-items: flex-start; }
-.align-items-end { align-items: flex-end; }
-.align-items-center { align-items: center; }
+.align-items-start {
+  align-items: flex-start;
+}
+.align-items-end {
+  align-items: flex-end;
+}
+.align-items-center {
+  align-items: center;
+}
 
 // === COULEURS DE FOND ===
-.bg-primary { background-color: $primary-color; }
-.bg-secondary { background-color: $secondary-color; }
-.bg-success { background-color: $success-color; }
-.bg-danger { background-color: $danger-color; }
-.bg-warning { background-color: $warning-color; }
-.bg-info { background-color: $info-color; }
-.bg-light { background-color: $light-color; }
-.bg-dark { background-color: $dark-color; }
-.bg-white { background-color: $white; }
+.bg-primary {
+  background-color: $primary-color;
+}
+.bg-secondary {
+  background-color: $secondary-color;
+}
+.bg-success {
+  background-color: $success-color;
+}
+.bg-danger {
+  background-color: $danger-color;
+}
+.bg-warning {
+  background-color: $warning-color;
+}
+.bg-info {
+  background-color: $info-color;
+}
+.bg-light {
+  background-color: $light-color;
+}
+.bg-dark {
+  background-color: $dark-color;
+}
+.bg-white {
+  background-color: $white;
+}
 
 // === BORDURES ===
-.border { border: $border-width solid $border-color; }
-.border-0 { border: 0; }
+.border {
+  border: $border-width solid $border-color;
+}
+.border-0 {
+  border: 0;
+}
 
-.rounded { border-radius: $border-radius; }
-.rounded-sm { border-radius: $border-radius-sm; }
-.rounded-lg { border-radius: $border-radius-lg; }
-.rounded-circle { border-radius: 50%; }
+.rounded {
+  border-radius: $border-radius;
+}
+.rounded-sm {
+  border-radius: $border-radius-sm;
+}
+.rounded-lg {
+  border-radius: $border-radius-lg;
+}
+.rounded-circle {
+  border-radius: 50%;
+}
 
 // === OMBRES ===
-.shadow-sm { box-shadow: $box-shadow-sm; }
-.shadow { box-shadow: $box-shadow; }
-.shadow-lg { box-shadow: $box-shadow-lg; }
+.shadow-sm {
+  box-shadow: $box-shadow-sm;
+}
+.shadow {
+  box-shadow: $box-shadow;
+}
+.shadow-lg {
+  box-shadow: $box-shadow-lg;
+}
 
 // === POSITION ===
-.position-relative { position: relative; }
-.position-absolute { position: absolute; }
-.position-fixed { position: fixed; }
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-fixed {
+  position: fixed;
+}
 
 // === LARGEUR ===
-.w-25 { width: 25%; }
-.w-50 { width: 50%; }
-.w-75 { width: 75%; }
-.w-100 { width: 100%; }
+.w-25 {
+  width: 25%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-75 {
+  width: 75%;
+}
+.w-100 {
+  width: 100%;
+}
 
-.h-100 { height: 100%; }
+.h-100 {
+  height: 100%;
+}
 
 // ===================================================================
 // === STYLES SPÉCIFIQUES AU PROJET ===
@@ -185,9 +357,15 @@
 // === RESPONSIVE UTILITIES ===
 // Cacher sur mobile
 @include responsive-md {
-  .d-md-none { display: none; }
-  .d-md-block { display: block; }
-  .d-md-flex { display: flex; }
+  .d-md-none {
+    display: none;
+  }
+  .d-md-block {
+    display: block;
+  }
+  .d-md-flex {
+    display: flex;
+  }
 }
 
 // === REDUCED MOTION ===
@@ -197,5 +375,101 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.planetes-hero {
+  background: url("../images/bgsite1.webp") center/cover;
+  min-height: 400px;
+  padding: 5rem 0;
+  color: $white;
+  overflow: hidden;
+  z-index: 1;
+
+  h1 {
+    font-weight: $font-weight-bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba($black, 0.3);
+  }
+
+  .lead {
+    font-size: $font-size-xl;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 2px rgba($black, 0.3);
+  }
+}
+
+.planetes-grid {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-image: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: $light-color;
+  }
+}
+
+// Responsive pour la grille des planètes
+@include responsive-md {
+  .planetes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@include responsive-lg {
+  .planetes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.planet-card {
+  background: rgba($white, 0.9);
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  .carousel {
+    height: 250px;
+
+    img {
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    background: rgba($black, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 10px;
+  }
+}
+
+.planet-images {
+  margin-bottom: 2rem;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  .carousel {
+    height: 400px;
+
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
   }
 }
