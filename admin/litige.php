@@ -159,7 +159,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-danger text-white">
                     <div class="card-body">
                         <h3><?= $stats['rejete'] ?></h3>
-                        <p class="mb-0">❌ Rejeté</p>
+                        <p class="mb-0"><i class="bi bi-x-circle-fill"></i> Rejeté</p>
                     </div>
                 </div>
             </div>
@@ -240,10 +240,10 @@ include '../includes/header.php';
                                     'rejete' => 'danger'
                                 ];
                                 $label = [
-                                    'en_attente' => '⏳ En attente',
-                                    'en_cours' => '🔄 En cours',
-                                    'resolu' => '✅ Résolu',
-                                    'rejete' => '❌ Rejeté'
+                                    'en_attente' => '<i class="bi bi-hourglass-split"></i> En attente',
+                                    'en_cours' => '<i class="bi bi-arrow-repeat"></i> En cours',
+                                    'resolu' => '<i class="bi bi-check-circle"></i> Résolu',
+                                    'rejete' => '<i class="bi bi-x-circle-fill"></i> Rejeté'
                                 ];
                                 ?>
                                 <span class="badge bg-<?= $badge[$litige['statut']] ?? 'secondary' ?>">
@@ -253,9 +253,9 @@ include '../includes/header.php';
                             <td><?= date('d/m/Y H:i', strtotime($litige['date_creation'])) ?></td>
                             <td>
                                 <a href="litige_detail.php?id=<?= $litige['id_litige'] ?>" 
-                                   class="btn btn-sm btn-info" 
-                                   title="Voir détails">
-                                    👁️ Voir
+                                   class="btn btn-sm btn-info d-inline-flex algin-items-center" 
+                                   title="Voir détails"> <i class="bi bi-eye me-1"></i>
+                                     Voir
                                 </a>
                                 
                             </td>
