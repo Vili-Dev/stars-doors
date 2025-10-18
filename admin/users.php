@@ -193,7 +193,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-success text-white">
                     <div class="card-body">
                         <h3><?= $stats['actifs'] ?></h3>
-                        <p class="mb-0">✅ Actifs</p>
+                        <p class="mb-0"><i class="bi bi-check-lg"></i> Actifs</p>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-info text-white">
                     <div class="card-body">
                         <h3><?= $stats['locataires'] ?></h3>
-                        <p class="mb-0">🏠 Locataires</p>
+                        <p class="mb-0"><i class="bi bi-house-check"></i> Locataires</p>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-warning text-white">
                     <div class="card-body">
                         <h3><?= $stats['actifs_7j'] ?></h3>
-                        <p class="mb-0">📊 Actifs (7j)</p>
+                        <p class="mb-0"><i class="bi bi-bar-chart-line-fill"></i> Actifs (7j)</p>
                     </div>
                 </div>
             </div>
@@ -303,13 +303,13 @@ include '../includes/header.php';
                             </td>
                             <td>
                                 <a href="user_edit.php?id=<?= $u['id_user'] ?>" class="btn btn-sm btn-primary" title="Modifier">
-                                    ✏️ Modifier
+                                    <i class="bi bi-pencil-fill"></i> Modifier
                                 </a>
                                 <a href="user_delete.php?id=<?= $u['id_user'] ?>" 
                                    class="btn btn-sm btn-danger" 
                                    title="Supprimer"
                                    onclick="return confirm('Voulez-vous vraiment supprimer <?= htmlspecialchars($u['prenom'].' '.$u['nom']) ?> ?')">
-                                    🗑️ Supprimer
+                                    <i class="bi bi-trash3-fill"></i> Supprimer
                                 </a>
                             </td>
                         </tr>  

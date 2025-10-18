@@ -89,7 +89,7 @@ include '../includes/header.php';
         </div>
         
         <div class="col-lg-3 col-md-6 mb-3">
-            <div class="card bg-info text-white">
+            <div class="card bg-warning text-dark">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
@@ -105,7 +105,7 @@ include '../includes/header.php';
         </div>
         
         <div class="col-lg-3 col-md-6 mb-3">
-            <div class="card bg-warning text-white">
+            <div class="card bg-danger text-white">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
@@ -128,7 +128,7 @@ include '../includes/header.php';
                 <div class="card-body text-center">
                     <i class="fas fa-users fa-3x text-primary mb-3"></i>
                     <h5>Gestion des utilisateurs</h5>
-                    <p class="text-muted">Gérer les comptes utilisateurs, rôles et permissions</p>
+                    <p class="text-muted">Gérer les comptes utilisateurs et leurs permissions</p>
                     <a href="users.php" class="btn btn-primary">Accéder</a>
                 </div>
             </div>
@@ -150,7 +150,7 @@ include '../includes/header.php';
                 <div class="card-body text-center">
                     <i class="bi bi-star-fill fa-3x text-secondary mb-3" style="color:#FFC107 !important"></i>
                     <h5>Avis</h5>
-                    <p class="text-muted">Modérer et gérer les avis</p>
+                    <p class="text-muted">Modérer et gérer les avis des voyageurs</p>
                     <a href="avis.php" class="btn btn-secondary" style="background:#FFC107 !important;border:1px solid #FFC107 ">Accéder</a>
                 </div>
             </div>
@@ -161,7 +161,7 @@ include '../includes/header.php';
                 <div class="card-body text-center">
                     <i class="bi bi-list-check fa-3x text-secondary mb-3" style="color:red !important"></i>
                     <h5>Litiges</h5>
-                    <p class="text-muted">Gérer les litiges</p>
+                    <p class="text-muted">Résoudre et gérer les litiges entre utilisateurs</p>
                     <a href="litige.php" class="btn btn-secondary" style="background:red !important;border:1px solid red ">Accéder</a>
                 </div>
             </div>
