@@ -135,7 +135,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-warning text-white">
                     <div class="card-body">
                         <h3><?= $stats['en_attente'] ?></h3>
-                        <p class="mb-0">⏳ En attente</p>
+                        <p class="mb-0"><i class="bi bi-hourglass-split"></i> En attente</p>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-info text-white">
                     <div class="card-body">
                         <h3><?= $stats['en_cours'] ?></h3>
-                        <p class="mb-0">🔄 En cours</p>
+                        <p class="mb-0"><i class="bi bi-arrow-repeat"></i> En cours</p>
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-success text-white">
                     <div class="card-body">
                         <h3><?= $stats['resolu'] ?></h3>
-                        <p class="mb-0">✅ Résolu</p>
+                        <p class="mb-0"><i class="bi bi-check2"></i> Résolu</p>
                     </div>
                 </div>
             </div>
@@ -253,7 +253,7 @@ include '../includes/header.php';
                             <td><?= date('d/m/Y H:i', strtotime($litige['date_creation'])) ?></td>
                             <td>
                                 <a href="litige_detail.php?id=<?= $litige['id_litige'] ?>" 
-                                   class="btn btn-sm btn-info d-inline-flex algin-items-center" 
+                                   class="btn btn-sm btn-info d-inline-flex align-items-center" 
                                    title="Voir détails"> <i class="bi bi-eye me-1"></i>
                                      Voir
                                 </a>
