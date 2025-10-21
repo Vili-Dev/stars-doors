@@ -15,4 +15,12 @@ et j’ai modifié la section paramètre  dans la page index.php par Avis
 - ajouter le fichier litige.php pour afficher la liste des litiges aux admis avec les filtres
 - Ajouter les pagination
 
+16/10/2025
+J’ai ajouté les fichiers:
+Litige_detail.php
+Litige_en_cours.php
+Litige_rejeter.php
+Litige_resolu.pho
+
+
 

@@ -89,7 +89,7 @@ include '../includes/header.php';
                     $label = [
                         'en_attente' => '⏳ En attente',
                         'approuve' => '✅ Approuvé',
-                        'rejete' => '❌ Rejeté'
+                        'rejete' => '<i class="bi bi-x-lg"></i> Rejeté'
                     ];
                     ?>
                     <span class="badge bg-<?= $badge[$avis['statut']] ?? 'secondary' ?>">
@@ -193,18 +193,18 @@ include '../includes/header.php';
                         <a href="avis_approve.php?id=<?= $avis['id_avis'] ?>" 
                            class="btn btn-success w-100 mb-2"
                            onclick="return confirm('Approuver cet avis ?')">
-                            ✓ Approuver
+                            <i class="bi bi-check-lg"></i> Approuver
                         </a>
                         <a href="avis_reject.php?id=<?= $avis['id_avis'] ?>" 
                            class="btn btn-warning w-100 mb-2"
                            onclick="return confirm('Rejeter cet avis ?')">
-                            ✗ Rejeter
+                            <i class="bi bi-x-lg"></i> Rejeter
                         </a>
                     <?php elseif ($avis['statut'] === 'approuve'): ?>
                         <a href="avis_reject.php?id=<?= $avis['id_avis'] ?>" 
                            class="btn btn-warning w-100 mb-2"
                            onclick="return confirm('Rejeter cet avis ?')">
-                            ✗ Rejeter
+                            <i class="bi bi-x-lg"></i> Rejeter
                         </a>
                     <?php elseif ($avis['statut'] === 'rejete'): ?>
                         <a href="avis_approve.php?id=<?= $avis['id_avis'] ?>" 
@@ -219,7 +219,7 @@ include '../includes/header.php';
                     <a href="avis_delete.php?id=<?= $avis['id_avis'] ?>" 
                        class="btn btn-danger w-100"
                        onclick="return confirm('Supprimer définitivement cet avis ?')">
-                        🗑️ Supprimer
+                        <i class="bi bi-trash3"></i> Supprimer
                     </a>
                 </div>
             </div>

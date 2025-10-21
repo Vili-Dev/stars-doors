@@ -106,17 +106,17 @@ include '../includes/header.php';
     if (isset($_GET['success'])):
         if ($_GET['success'] === 'approved'): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                ✅ Annonce approuvée avec succès !
+                <i class="bi bi-check-lg"></i> Annonce approuvée avec succès !
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php elseif ($_GET['success'] === 'rejected'): ?>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                ⚠️ Annonce rejetée avec succès !
+               <i class="bi bi-exclamation-triangle-fill text-warning"></i> Annonce rejetée avec succès !
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php elseif ($_GET['success'] === 'deleted'): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                ✅ Annonce supprimée avec succès !
+                <i class="bi bi-check-lg"></i> Annonce supprimée avec succès !
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif;
@@ -126,12 +126,14 @@ include '../includes/header.php';
     if (isset($_GET['error'])):
         if ($_GET['error'] === 'action_failed'): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ❌ Erreur lors de l'action.
+               <i class="bi bi-x-lg"></i></i> Rejeté
+ Erreur lors de l'action.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php elseif ($_GET['error'] === 'not_found'): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ❌ Annonce introuvable.
+                <i class="bi bi-x-lg"></i></i> Rejeté
+ Annonce introuvable.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif;
@@ -175,7 +177,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-warning text-white">
                     <div class="card-body">
                         <h3><?= $stats['en_attente'] ?></h3>
-                        <p class="mb-0">⏳ En attente</p>
+                        <p class="mb-0"><i class="bi bi-hourglass-split"></i> En attente</p>
                     </div>
                 </div>
             </div>
@@ -183,7 +185,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-success text-white">
                     <div class="card-body">
                         <h3><?= $stats['approuve'] ?></h3>
-                        <p class="mb-0">✅ Approuvées</p>
+                        <p class="mb-0"><i class="bi bi-check-lg"></i> Approuvées</p>
                     </div>
                 </div>
             </div>
@@ -191,7 +193,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-danger text-white">
                     <div class="card-body">
                         <h3><?= $stats['rejete'] ?></h3>
-                        <p class="mb-0">❌ Rejetées</p>
+                        <p class="mb-0"><i class="bi bi-x-lg"></i></i> Rejetées</p>
                     </div>
                 </div>
             </div>
@@ -281,8 +283,8 @@ include '../includes/header.php';
                                 ];
                                 $label = [
                                     'en_attente' => '<i class="bi bi-hourglass-split"></i>En attente',
-                                    'approuve' => '✅ Approuvée',
-                                    'rejete' => '❌ Rejetée'
+                                    'approuve' => '<i class="bi bi-check-lg"></i> Approuvée',
+                                    'rejete' => '<i class="bi bi-x-lg"></i> Rejetée'
                                 ];
                                 ?>
                                 <span class="badge bg-<?= $badge[$annonce['statut']] ?? 'secondary' ?>">

@@ -185,13 +185,13 @@ include '../includes/header.php';
                         <a href="annonce_reject.php?id=<?= $annonce['id_annonce'] ?>" 
                            class="btn btn-warning w-100 mb-2"
                            onclick="return confirm('Rejeter cette annonce ?')">
-                            ✗ Rejeter
+                            <i class="bi bi-x-lg"></i> Rejeté
                         </a>
                     <?php elseif ($annonce['statut'] === 'approuve'): ?>
                         <a href="annonce_reject.php?id=<?= $annonce['id_annonce'] ?>" 
                            class="btn btn-warning w-100 mb-2"
                            onclick="return confirm('Rejeter cette annonce ?')">
-                            ✗ Rejeter
+                           <i class="bi bi-x-lg"></i> Rejeté
                         </a>
                     <?php elseif ($annonce['statut'] === 'rejete'): ?>
                         <a href="annonce_approve.php?id=<?= $annonce['id_annonce'] ?>" 
@@ -206,7 +206,7 @@ include '../includes/header.php';
                     <a href="annonce_delete.php?id=<?= $annonce['id_annonce'] ?>" 
                        class="btn btn-danger w-100"
                        onclick="return confirm('Supprimer définitivement cette annonce ?')">
-                        🗑️ Supprimer
+                        <i class="bi bi-trash3-fill"></i> Supprimer
                     </a>
                 </div>
             </div>

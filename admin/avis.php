@@ -170,7 +170,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-warning text-white">
                     <div class="card-body">
                         <h3><?= $stats['en_attente'] ?></h3>
-                        <p class="mb-0">⏳ En attente</p>
+                        <p class="mb-0"><i class="bi bi-hourglass-split"></i> En attente</p>
                     </div>
                 </div>
             </div>
@@ -178,7 +178,7 @@ include '../includes/header.php';
                 <div class="card text-center bg-success text-white">
                     <div class="card-body">
                         <h3><?= $stats['approuve'] ?></h3>
-                        <p class="mb-0">✅ Approuvés</p>
+                        <p class="mb-0"><i class="bi bi-check-lg"></i> Approuvés</p>
                     </div>
                 </div>
             </div>
@@ -279,9 +279,9 @@ include '../includes/header.php';
                                     'rejete' => 'danger'
                                 ];
                                 $label = [
-                                    'en_attente' => '⏳ Attente',
-                                    'approuve' => '✅ Approuvé',
-                                    'rejete' => '❌ Rejeté'
+                                    'en_attente' => '<i class="bi bi-hourglass-split"></i> Attente',
+                                    'approuve' => '<i class="bi bi-check-lg"></i> Approuvé',
+                                    'rejete' => '<i class="bi bi-x-lg"></i>Rejeté'
                                 ];
                                 ?>
                                 <span class="badge bg-<?= $badge[$avis['statut']] ?? 'secondary' ?>">
@@ -294,19 +294,19 @@ include '../includes/header.php';
                             <td>
                                 <a href="avis_view.php?id=<?= $avis['id_avis'] ?>" 
                                    class="btn btn-sm btn-info" title="Voir détails">
-                                    👁️
+                                    <i class="bi bi-eye"></i>
                                 </a>
                                 
                                 <?php if ($avis['statut'] === 'en_attente'): ?>
                                     <a href="avis_approve.php?id=<?= $avis['id_avis'] ?>" 
                                        class="btn btn-sm btn-success" title="Approuver"
                                        onclick="return confirm('Approuver cet avis ?')">
-                                        ✓
+                                        <i class="bi bi-check-lg"></i>
                                     </a>
                                     <a href="avis_reject.php?id=<?= $avis['id_avis'] ?>" 
                                        class="btn btn-sm btn-warning" title="Rejeter"
                                        onclick="return confirm('Rejeter cet avis ?')">
-                                        ✗
+                                        <i class="bi bi-x-lg"></i>
                                     </a>
                                 <?php endif; ?>
                                 
